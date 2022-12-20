@@ -114,6 +114,27 @@ public class EventMapper {
                 .build();
     }
 
+    public EventPublicSearch toEventPublicSearch(EventPublicSearchDto searchDto){
+        return EventPublicSearch.builder()
+                .categories(searchDto.getCategories())
+                .onlyAvailable(searchDto.getOnlyAvailable())
+                .paid(searchDto.getPaid())
+                .rangeStart(toLocalDateTime(searchDto.getRangeStart()))
+                .rangeEnd(toLocalDateTime(searchDto.getRangeEnd()))
+                .text(searchDto.getText().toUpperCase())
+                .build();
+    }
+
+    public EventAdminSearch toEventPublicSearch(EventAdminSearchDto searchDto){
+        return EventAdminSearch.builder()
+                .users(searchDto.getUsers())
+                .states(searchDto.getStates())
+                .categories(searchDto.getCategories())
+                .rangeStart(toLocalDateTime(searchDto.getRangeStart()))
+                .rangeEnd(toLocalDateTime(searchDto.getRangeEnd()))
+                .build();
+    }
+
     private String dateTimeToString(LocalDateTime dateTime) {
         if (dateTime == null) {
             return null;

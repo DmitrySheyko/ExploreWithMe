@@ -1,7 +1,6 @@
 package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
-import ru.practicum.mainservice.event.model.State;
 
 @Getter
 @Setter
@@ -9,11 +8,10 @@ import ru.practicum.mainservice.event.model.State;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EventPublicSearchDto {
-    private String text;
+public class EventAdminSearchDto {
+    private Long[] users;
+    private String[] states;
     private Long[] categories;
-    private Boolean paid;
     private String rangeStart;
     private String rangeEnd;
-    private Boolean onlyAvailable;
 }

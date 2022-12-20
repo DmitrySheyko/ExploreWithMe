@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
 import ru.practicum.mainservice.request.service.privareRequest.PrivateRequestService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/users/{userId}/request")
 @AllArgsConstructor
@@ -12,8 +14,19 @@ public class PrivateRequestController {
     PrivateRequestService service;
 
     @PostMapping
-    public ParticipationRequestDto add (@PathVariable ("userId") Long userId,
-                                        @RequestParam("eventId") Long eventId){
+    public ParticipationRequestDto add(@PathVariable("userId") Long userId,
+                                       @RequestParam("eventId") Long eventId) {
         return service.add(userId, eventId);
+    }
+
+    @PatchMapping("/{requestId}/cancel")
+    public ParticipationRequestDto cancel(@PathVariable("userId") Long userId,
+                                          @RequestParam("requestId") Long requestId) {
+        return service.cancel(userId, requestId);
+    }
+
+    @GetMapping
+    public List<ParticipationRequestDto> getAllByUserId(@PathVariable("userId") Long userId) {
+        return service.getAllByUserId(userId);
     }
 }

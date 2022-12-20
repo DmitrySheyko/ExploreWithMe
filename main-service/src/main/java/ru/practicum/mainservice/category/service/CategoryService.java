@@ -9,6 +9,7 @@ import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.category.repository.CategoryRepository;
 import ru.practicum.mainservice.exceptions.NotFoundException;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -20,6 +21,10 @@ public class CategoryService {
 
     public Category save(Category category) {
         return repository.save(category);
+    }
+
+    public List<Category> findAll() {
+        return repository.findAll();
     }
 
     public Page<Category> findAll(Pageable pageable) {

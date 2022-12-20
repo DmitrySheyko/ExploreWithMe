@@ -3,8 +3,13 @@ package ru.practicum.mainservice.event.controller.adminController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.event.dto.AdminUpdateEventDto;
+import ru.practicum.mainservice.event.dto.EventAdminSearchDto;
 import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.service.adminService.EventAdminService;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/events")
@@ -12,16 +17,24 @@ import ru.practicum.mainservice.event.service.adminService.EventAdminService;
 public class EventAdminController {
     private final EventAdminService service;
 
-//    @GetMapping
-//    public List<EventFullDto> search(@RequestParam("users") Integer[] users,
-//                                     @RequestParam("states") String[] states,
-//                                     @RequestParam("categories") Integer[] categories,
-//                                     @RequestParam("rangeStart") String rangeStart,
-//                                     @RequestParam("rangeEnd") String rangeEnd,
-//                                     @RequestParam("from") Integer from,
-//                                     @RequestParam("size") Integer size) {
-//        return service.serach(users, states, categories, rangeStart, rangeEnd, from,size);
-//    }
+    @GetMapping
+    public List<EventFullDto> search(@RequestParam("users") Long[] users,
+                                     @RequestParam("states") String[] states,
+                                     @RequestParam("categories") Long[] categories,
+                                     @RequestParam("rangeStart") String rangeStart,
+                                     @RequestParam("rangeEnd") String rangeEnd,
+                                     @Valid @RequestParam(value = "from", required = false, defaultValue = "0") @Min(0) Integer from,
+                                     @Valid @RequestParam(value = "size", required = false, defaultValue = "1") @Min(1) Integer size) {
+        EventAdminSearchDto searchDto = EventAdminSearchDto.builder()
+                .users(users)
+                .states(states)
+                .categories(categories)
+                .rangeStart(rangeStart)
+                .rangeEnd(rangeEnd)
+                .build();
+
+        return service.serach(searchDto, from, size);
+    }
 
     @PutMapping("/{eventId}")
     public EventFullDto update(@PathVariable("eventId") Long eventId,

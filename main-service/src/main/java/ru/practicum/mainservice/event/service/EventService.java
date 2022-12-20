@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.practicum.mainservice.event.dto.EventPublicSearch;
 import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
 import ru.practicum.mainservice.event.repository.EventRepository;
 import ru.practicum.mainservice.exceptions.NotFoundException;
 import ru.practicum.mainservice.exceptions.ValidationException;
+import ru.practicum.mainservice.request.model.Status;
 import ru.practicum.mainservice.user.service.UserService;
 
 import java.time.Duration;
@@ -49,21 +51,17 @@ public class EventService {
         return repository.save(oldEvent);
     }
 
-//    public Event update(Long userId, Event event) {
-//        userService.checkIsObjectInStorage(userId);
-//        checkIsObjectInStorage(event);
-//        Event oldEvent = findById(event.getId());
-//        event.setAnnotation(Optional.ofNullable(event.getAnnotation()).orElse(oldEvent.getAnnotation()));
-//        event.setCategory(Optional.ofNullable(event.getCategory()).orElse(oldEvent.getCategory()));
-//        event.setDescription(Optional.ofNullable(event.getDescription()).orElse(oldEvent.getDescription()));
-//        event.setEventDate(Optional.ofNullable(event.getEventDate()).orElse(oldEvent.getEventDate()));
-//        event.setPaid(Optional.ofNullable(event.getPaid()).orElse(oldEvent.getPaid()));
-//        event.setParticipantLimit(Optional.ofNullable(event.getParticipantLimit()).orElse(oldEvent.getParticipantLimit()));
-//        event.setRequestModeration(Optional.ofNullable(event.getRequestModeration()).orElse(oldEvent.getRequestModeration()));
-//        event.setTitle(Optional.ofNullable(event.getTitle()).orElse(oldEvent.getTitle()));
-//        checkEventDate(event.getEventDate(), event.getCreatedOn());
-//        return repository.save(event);
-//    }
+    public Page<Event> searchAvailable(EventPublicSearch eventPublicSearch, Pageable pageable) {
+        return repository.searchAvailable(eventPublicSearch.getText(), eventPublicSearch.getCategories(),
+                eventPublicSearch.getPaid(), eventPublicSearch.getRangeStart(),
+                eventPublicSearch.getRangeEnd(), Status.APPROVED.ordinal(), pageable);
+    }
+
+    public Page<Event> searchAll(EventPublicSearch eventPublicSearch, Pageable pageable) {
+        return repository.searchAll(eventPublicSearch.getText(), eventPublicSearch.getCategories(),
+                eventPublicSearch.getPaid(), eventPublicSearch.getRangeStart(),
+                eventPublicSearch.getRangeEnd(), pageable);
+    }
 
     public Event findById(Long eventId) {
         Optional<Event> optionalEvent = repository.findById(eventId);

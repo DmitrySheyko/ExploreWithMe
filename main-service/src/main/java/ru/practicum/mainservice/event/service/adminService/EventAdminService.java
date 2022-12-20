@@ -4,12 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.mainservice.event.dto.AdminUpdateEventDto;
+import ru.practicum.mainservice.event.dto.EventAdminSearch;
+import ru.practicum.mainservice.event.dto.EventAdminSearchDto;
 import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.eventMapper.EventMapper;
 import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
 import ru.practicum.mainservice.event.service.EventService;
 import ru.practicum.mainservice.exceptions.ValidationException;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -52,5 +56,9 @@ public class EventAdminService {
         EventFullDto eventFullDto = mapper.toFullDto(event);
         log.info("Event eventId={} successfully canceled", event.getId());
         return eventFullDto;
+    }
+
+    public List<EventFullDto> search(EventAdminSearchDto searchDto, int from, int size){
+        EventAdminSearch eventSearch = mapper.
     }
 }

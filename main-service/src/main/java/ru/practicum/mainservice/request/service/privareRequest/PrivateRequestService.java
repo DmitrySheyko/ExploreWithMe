@@ -15,6 +15,7 @@ import ru.practicum.mainservice.request.service.RequestService;
 import ru.practicum.mainservice.user.service.UserService;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -59,7 +60,7 @@ public class PrivateRequestService {
                 .event(event)
                 .requester(userId)
                 .build();
-        if(event.getRequestModeration()){
+        if (event.getRequestModeration()) {
             request.setStatus(Status.PENDING);
             request = service.save(request);
         } else {
@@ -69,5 +70,26 @@ public class PrivateRequestService {
         ParticipationRequestDto requestDto = mapper.toDto(request);
         log.info("Participation request id={} from user id={} for event id{}", request.getId(), userId, eventId);
         return requestDto;
+    }
+
+    public ParticipationRequestDto cancel(Long userId, Long requestId) {
+        userService.checkIsObjectInStorage(userId);
+        service.checkIsObjectInStorage(requestId);
+        Request request = service.findById(requestId);
+        request.setStatus(Status.CANCELED);
+        request = service.save(request);
+        ParticipationRequestDto requestDto = mapper.toDto(request);
+        log.info("Request id={} successfully canceled", requestId);
+        return requestDto;
+    }
+
+    public List<ParticipationRequestDto> getAllByUserId(Long userId) {
+        userService.checkIsObjectInStorage(userId);
+        List<Request> requestsList = service.findAllByUserId(userId);
+        List<ParticipationRequestDto> requestDtoList = requestsList.stream()
+                .map(mapper::toDto)
+                .collect(Collectors.toList());
+        log.info("Requests of user id={} successfully received", userId);
+        return requestDtoList;
     }
 }
