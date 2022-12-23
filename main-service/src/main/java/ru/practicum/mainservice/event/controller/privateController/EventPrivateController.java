@@ -9,6 +9,7 @@ import ru.practicum.mainservice.event.dto.NewEventDto;
 import ru.practicum.mainservice.event.dto.PrivateUpdateEventDto;
 import ru.practicum.mainservice.event.service.privateService.EventPrivateService;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
 
@@ -21,7 +22,8 @@ public class EventPrivateController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public EventFullDto add(@PathVariable("userId") Long userId,
-                            @RequestBody NewEventDto newEventDto) {
+                            @Valid @RequestBody NewEventDto newEventDto) {
+        System.out.println(newEventDto);
         return service.add(userId, newEventDto);
     }
 
@@ -38,12 +40,12 @@ public class EventPrivateController {
         return service.getAllByUserId(userId, from, size);
     }
 
-    @GetMapping("/{eventId")
+    @GetMapping("/{eventId}")
     public EventFullDto getById (@PathVariable("userId") Long userId, @PathVariable("eventId") Long eventId){
         return service.getById(userId, eventId);
     }
 
-    @PatchMapping("/{eventId")
+    @PatchMapping("/{eventId}")
     public EventFullDto cancelEvent(@PathVariable("userId") Long userId, @PathVariable("eventId") Long eventId){
         return service.cancelEvent(userId, eventId);
     }

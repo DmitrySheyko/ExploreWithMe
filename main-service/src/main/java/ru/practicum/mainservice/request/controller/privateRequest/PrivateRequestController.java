@@ -8,14 +8,15 @@ import ru.practicum.mainservice.request.service.privareRequest.PrivateRequestSer
 import java.util.List;
 
 @RestController
-@RequestMapping("/users/{userId}/request")
+@RequestMapping("/users/{userId}/requests")
 @AllArgsConstructor
 public class PrivateRequestController {
     PrivateRequestService service;
 
     @PostMapping
-    public ParticipationRequestDto add(@PathVariable("userId") Long userId,
-                                       @RequestParam("eventId") Long eventId) {
+    public ParticipationRequestDto add(@PathVariable(value = "userId", required = true) Long userId,
+                                       @RequestParam(value = "eventId", required = true) Long eventId) {
+        System.out.println("Этой строки быть не должно");
         return service.add(userId, eventId);
     }
 

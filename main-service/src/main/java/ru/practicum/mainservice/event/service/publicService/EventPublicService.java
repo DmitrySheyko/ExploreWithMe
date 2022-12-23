@@ -32,17 +32,17 @@ public class EventPublicService {
     //TODO сделать енум возможных полей для сортировки
     public List<EventShortDto> search(EventPublicSearchDto searchDto, int from, int size, String sort) {
         int page = from / size;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
         EventPublicSearch eventPublicSearch = mapper.toEventPublicSearch(searchDto);
         if (eventPublicSearch.getCategories() == null) {
             Long[] categoriesArray = categoryService.findAll().stream().map(Category::getId).toArray(Long[]::new);
             eventPublicSearch.setCategories(categoriesArray);
         }
         if (eventPublicSearch.getRangeStart() == null) {
-            eventPublicSearch.setRangeStart(LocalDateTime.now());
+            eventPublicSearch.setRangeStart(LocalDateTime.MIN);
         }
         if (eventPublicSearch.getRangeEnd() == null) {
-            eventPublicSearch.setRangeStart(LocalDateTime.MAX);
+            eventPublicSearch.setRangeEnd(LocalDateTime.MAX);
         }
         Page<Event> eventsPage;
         if (eventPublicSearch.getOnlyAvailable()) {

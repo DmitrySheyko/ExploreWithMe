@@ -36,7 +36,7 @@ public class UserAdminService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
         Page<User> usersPage = service.findAll(pageable);
         List<UserDto> usersList = usersPage.stream().map(mapper::toDto).collect(Collectors.toList());
-        log.info("Получен список пользователей, страница: {}, размер страницы: {}", page, size);
+        log.info("List of users successfully received , page: {}, size: {}", page, size);
         return usersList;
     }
 

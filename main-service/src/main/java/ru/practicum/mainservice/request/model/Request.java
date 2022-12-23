@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 public class Request {
     @Column(name = "created")
     private LocalDateTime created;
-    @Column(name = "event_id")
     @ManyToOne
     @JoinColumn(name="event_id", nullable=false)
     private Event event;

@@ -1,6 +1,8 @@
 package ru.practicum.mainservice.exceptions;
 
+import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -33,8 +35,40 @@ public class ErrorHandler {
                 .build();
     }
 
+    @ExceptionHandler(JdbcSQLIntegrityConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ErrorResponse handlerJdbcSQLIntegrityConstraintViolationException(final JdbcSQLIntegrityConstraintViolationException e) {
+        return ErrorResponse.builder()
+                .message(e.getMessage())
+                .reason(HttpStatus.CONFLICT.getReasonPhrase())
+                .status(HttpStatus.CONFLICT.toString())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
 
 
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleIllegalArgumentException(IllegalArgumentException e) {
+        return ErrorResponse.builder()
+                .message(e.getMessage())
+                .reason(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .status(HttpStatus.BAD_REQUEST.toString())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleMissingParams(MissingServletRequestParameterException e) {
+        return ErrorResponse.builder()
+                .message(e.getMessage())
+                .reason(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .status(HttpStatus.BAD_REQUEST.toString())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
 
 //    @ExceptionHandler(Exception.class)
 //    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

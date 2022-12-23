@@ -6,6 +6,7 @@ import ru.practicum.mainservice.category.dto.CategoryDto;
 import ru.practicum.mainservice.category.dto.NewCategoryDto;
 import ru.practicum.mainservice.category.service.adminService.CategoryAdminService;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @RestController
@@ -15,12 +16,12 @@ public class CategoryAdminController {
     CategoryAdminService categoryAdminService;
 
     @PostMapping
-    public CategoryDto add(@RequestBody NewCategoryDto newCategoryDto) {
+    public CategoryDto add(@Valid @RequestBody NewCategoryDto newCategoryDto) {
         return categoryAdminService.add(newCategoryDto);
     }
 
     @PatchMapping
-    public CategoryDto update(@RequestBody CategoryDto categoryDto) {
+    public CategoryDto update(@Valid @RequestBody CategoryDto categoryDto) {
         return categoryAdminService.update(categoryDto);
     }
 

@@ -9,7 +9,9 @@ import ru.practicum.mainservice.event.service.adminService.EventAdminService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import java.nio.file.OpenOption;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin/events")
@@ -18,11 +20,11 @@ public class EventAdminController {
     private final EventAdminService service;
 
     @GetMapping
-    public List<EventFullDto> search(@RequestParam("users") Long[] users,
-                                     @RequestParam("states") String[] states,
-                                     @RequestParam("categories") Long[] categories,
-                                     @RequestParam("rangeStart") String rangeStart,
-                                     @RequestParam("rangeEnd") String rangeEnd,
+    public List<EventFullDto> search(@RequestParam(value = "users", required = false) Long[] users,
+                                     @RequestParam(value = "states", required = false) String[] states,
+                                     @RequestParam(value = "categories", required = false) Long[] categories,
+                                     @RequestParam(value = "rangeStart", required = false) String rangeStart,
+                                     @RequestParam(value = "rangeEnd", required = false) String rangeEnd,
                                      @Valid @RequestParam(value = "from", required = false, defaultValue = "0") @Min(0) Integer from,
                                      @Valid @RequestParam(value = "size", required = false, defaultValue = "1") @Min(1) Integer size) {
         EventAdminSearchDto searchDto = EventAdminSearchDto.builder()
@@ -32,8 +34,7 @@ public class EventAdminController {
                 .rangeStart(rangeStart)
                 .rangeEnd(rangeEnd)
                 .build();
-
-        return service.serach(searchDto, from, size);
+        return service.search(searchDto, from, size);
     }
 
     @PutMapping("/{eventId}")
@@ -48,7 +49,7 @@ public class EventAdminController {
         return service.publish(eventId);
     }
 
-    @PatchMapping("/{eventId}/publish")
+    @PatchMapping("/{eventId}/reject")
     public EventFullDto reject (@PathVariable("eventId") Long eventId){
         return service.reject(eventId);
     }

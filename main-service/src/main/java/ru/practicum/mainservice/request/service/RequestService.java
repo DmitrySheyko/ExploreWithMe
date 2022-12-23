@@ -2,10 +2,11 @@ package ru.practicum.mainservice.request.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.exceptions.NotFoundException;
 import ru.practicum.mainservice.request.model.Request;
+import ru.practicum.mainservice.request.model.Status;
 import ru.practicum.mainservice.request.repository.RequestRepository;
-import ru.practicum.mainservice.user.model.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,8 +29,8 @@ public class RequestService {
                 "The required object was not found.");
     }
 
-    public List<Request> findAllByUserId (Long userId){
-        return  repository.findAllByRequesterOrderById(userId);
+    public List<Request> findAllByUserId(Long userId) {
+        return repository.findAllByRequesterOrderById(userId);
     }
 
     public void checkIsObjectInStorage(Request request) {
@@ -46,4 +47,8 @@ public class RequestService {
         }
     }
 
+    public Integer getConfirmedRequests(Event event) {
+        List<Request> requestList = repository.findAllByEventAndStatus(event, Status.APPROVED);
+        return requestList.size();
+    }
 }

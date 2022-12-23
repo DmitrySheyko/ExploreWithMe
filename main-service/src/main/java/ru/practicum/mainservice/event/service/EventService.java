@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.practicum.mainservice.event.dto.EventAdminSearch;
 import ru.practicum.mainservice.event.dto.EventPublicSearch;
 import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
@@ -15,6 +16,7 @@ import ru.practicum.mainservice.user.service.UserService;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,11 +31,10 @@ public class EventService {
     public Event save(Long userId, Event event) {
         userService.checkIsObjectInStorage(userId);
         event.setInitiator(userService.findById(userId));
-        event.setConfirmedRequests(0);
         event.setCreatedOn(LocalDateTime.now());
         event.setPublishedOn(null);
         event.setState(State.PENDING);
-        event.setViews(0);
+//        event.setViews(0);
         return repository.save(event);
     }
 
@@ -61,6 +62,18 @@ public class EventService {
         return repository.searchAll(eventPublicSearch.getText(), eventPublicSearch.getCategories(),
                 eventPublicSearch.getPaid(), eventPublicSearch.getRangeStart(),
                 eventPublicSearch.getRangeEnd(), pageable);
+    }
+
+    public Page<Event> searchByUsersSet(EventAdminSearch eventAdminSearch, Pageable pageable) {
+        return repository.searchByUsersSet(eventAdminSearch.getUsers(), eventAdminSearch.getStates(),
+                eventAdminSearch.getCategories(), eventAdminSearch.getRangeStart(), eventAdminSearch.getRangeEnd(),
+                pageable);
+    }
+
+    public Page<Event> searchForAllUsers(EventAdminSearch eventAdminSearch, Pageable pageable) {
+        return repository.searchForAllUsers(eventAdminSearch.getStates(),
+                eventAdminSearch.getCategories(), eventAdminSearch.getRangeStart(), eventAdminSearch.getRangeEnd(),
+                pageable);
     }
 
     public Event findById(Long eventId) {

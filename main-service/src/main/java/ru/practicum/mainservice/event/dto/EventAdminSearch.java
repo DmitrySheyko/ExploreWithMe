@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EventAdminSearch {
     private Long[] users;
-    private String[] states;
+    private Integer[] states;
     private Long[] categories;
     private LocalDateTime rangeStart;
     private LocalDateTime rangeEnd;

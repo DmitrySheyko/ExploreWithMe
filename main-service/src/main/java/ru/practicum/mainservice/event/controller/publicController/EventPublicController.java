@@ -19,7 +19,7 @@ public class EventPublicController {
     EventPublicService service;
 
     @GetMapping
-    public List<EventShortDto> search(@RequestParam("text") @NotBlank String text,
+    public List<EventShortDto> search(@RequestParam(value = "text") @NotBlank String text,
                                       @RequestParam(value = "categories", required = false) Long[] categories,
                                       @RequestParam(value = "paid", required = false, defaultValue = "false") Boolean paid,
                                       @RequestParam(value = "rangeStart", required = false) String rangeStart,

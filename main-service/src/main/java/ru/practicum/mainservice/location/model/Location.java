@@ -1,6 +1,7 @@
 package ru.practicum.mainservice.location.model;
 
 import lombok.*;
+import ru.practicum.mainservice.event.model.Event;
 
 import javax.persistence.*;
 
@@ -17,4 +18,13 @@ public class Location {
     private Long id;
     private Float lat;
     private Float lon;
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "id=" + id +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                '}';
+    }
 }

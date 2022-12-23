@@ -14,33 +14,52 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
 
     @Query(value = "WITH participants AS " +
-            "SELECT COUNT(r.id) " +
+            "(SELECT COUNT(r.id) " +
             "FROM requests r " +
             "WHERE r.status = ?6 " +
-            "GROUP BY r.id " +
-            "SELECT e " +
+            "GROUP BY r.id) " +
+            "SELECT e.* " +
             "FROM events e " +
-            "WHERE ((UPPER (e.annotation) LIKE UPPER(CONCAT('%', ?1, '1')))" +
-            "OR (UPPER (e.description) LIKE UPPER(CONCAT('%', ?1, '1'))))" +
+            "WHERE ((UPPER (e.annotation) LIKE UPPER(CONCAT('%', ?1, '%')))" +
+            "OR (UPPER (e.description) LIKE UPPER(CONCAT('%', ?1, '%'))))" +
             "AND e.category_id IN (?2)" +
-            "AND e.paid = ?3 " +
-            "AND (e.event_date >= ?4 AND e.event_date <= ?5) " +
+            "AND e.is_paid = ?3 " +
+            "AND (e.event_date <= ?4 AND e.event_date >= ?5) " +
             "AND e.participant_limit > participants " +
-            "SORT BY e.id ", nativeQuery = true)
+            "ORDER BY e.id ", nativeQuery = true)
     Page<Event> searchAvailable(String text, Long[] categories, Boolean paid, LocalDateTime rangeStart,
                                 LocalDateTime rangeEnd, Integer status, Pageable pageable);
 
-    @Query(value = "SELECT e " +
+    @Query(value = "SELECT e.* " +
             "FROM events e " +
-            "WHERE ((UPPER (e.annotation) LIKE UPPER(CONCAT('%', ?1, '1')))" +
-            "OR (UPPER (e.description) LIKE UPPER(CONCAT('%', ?1, '1'))))" +
+            "WHERE ((UPPER (e.annotation) LIKE UPPER(CONCAT('%', ?1, '%')))" +
+            "OR (UPPER (e.description) LIKE UPPER(CONCAT('%', ?1, '%'))))" +
             "AND e.category_id IN (?2)" +
-            "AND e.paid = ?3 " +
-            "AND (e.event_date >= ?4 AND e.event_date <= ?5) " +
-            "AND e.participant_limit > participants " +
-            "SORT BY e.id ", nativeQuery = true)
+            "AND e.is_paid = ?3 " +
+            "AND (e.event_date <= ?4 AND e.event_date >= ?5) " +
+            "ORDER BY e.id ", nativeQuery = true)
     Page<Event> searchAll(String text, Long[] categories, Boolean paid, LocalDateTime rangeStart,
                           LocalDateTime rangeEnd, Pageable pageable);
+
+
+    @Query(value = "SELECT * " +
+            "FROM events e " +
+            "WHERE e.initiator_id IN (?1) " +
+            "AND e.state IN (?2) " +
+            "AND e.category_id IN (?3)" +
+            "AND (e.event_date >= ?4 AND e.event_date <= ?5) " +
+            "ORDER BY e.id ", nativeQuery = true)
+    Page<Event> searchByUsersSet(Long[] users, Integer[] states, Long[] categories, LocalDateTime rangeStart,
+                                 LocalDateTime rangeEnd, Pageable pageable);
+
+    @Query(value = "SELECT * " +
+            "FROM events e " +
+            "WHERE e.state IN (?1) " +
+            "AND e.category_id IN (?2)" +
+            "AND (e.event_date >= ?3 AND e.event_date <= ?4) " +
+            "ORDER BY e.id ", nativeQuery = true)
+    Page<Event> searchForAllUsers(Integer[] states, Long[] categories, LocalDateTime rangeStart,
+                                  LocalDateTime rangeEnd, Pageable pageable);
 }
 
 
