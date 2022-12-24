@@ -25,9 +25,10 @@ public class UserAdminController {
     }
 
     @GetMapping
-    public List<UserDto> getAll(@RequestParam(name = "from", required = false, defaultValue = "0") @Min(0) int from,
+    public List<UserDto> getAllById (@RequestParam(name = "ids") List<Long> ids,
+            @RequestParam(name = "from", required = false, defaultValue = "0") @Min(0) int from,
                              @RequestParam(name = "size", required = false, defaultValue = "10") @Min(1) int size) {
-        return userAdminService.getAll(from, size);
+        return userAdminService.getAllById (ids, from, size);
     }
 
     @DeleteMapping("/{id}")

@@ -47,6 +47,8 @@ public class EventAdminService {
         }
         service.checkEventDateForPublish(event.getEventDate());
         event.setState(State.PUBLISHED);
+        event.setPublishedOn(LocalDateTime.now());
+        event = service.update(event);
         EventFullDto eventFullDto = mapper.toFullDto(event);
         log.info("Event eventId={} successfully published", event.getId());
         return eventFullDto;
@@ -70,12 +72,16 @@ public class EventAdminService {
         Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
         EventAdminSearch eventAdminSearch = mapper.toEventAdminSearch(searchDto);
         if (eventAdminSearch.getCategories() == null) {
-            Long[] categoriesArray = categoryService.findAll().stream().map(Category::getId).toArray(Long[]::new);
-            eventAdminSearch.setCategories(categoriesArray);
+            List<Long> categoriesList = categoryService.findAll().stream()
+                    .map(Category::getId)
+                    .collect(Collectors.toList());
+            eventAdminSearch.setCategories(categoriesList);
         }
         if(eventAdminSearch.getStates() == null) {
-            Integer[] statesArray = Arrays.stream(State.values()).map(Enum::ordinal).toArray(Integer[]::new);
-            eventAdminSearch.setStates(statesArray);
+            List<Integer> statesList = Arrays.stream(State.values())
+                    .map(Enum::ordinal)
+                    .collect(Collectors.toList());
+            eventAdminSearch.setStates(statesList);
         }
         if (eventAdminSearch.getRangeStart() == null) {
             eventAdminSearch.setRangeStart(LocalDateTime.now());

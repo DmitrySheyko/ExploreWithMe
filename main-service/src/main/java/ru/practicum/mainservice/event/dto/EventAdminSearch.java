@@ -1,8 +1,10 @@
 package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
+import ru.practicum.mainservice.user.model.User;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,9 +13,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventAdminSearch {
-    private Long[] users;
-    private Integer[] states;
-    private Long[] categories;
+    private List<Long> users;
+    private List<Integer> states;
+    private List<Long> categories;
     private LocalDateTime rangeStart;
     private LocalDateTime rangeEnd;
 }

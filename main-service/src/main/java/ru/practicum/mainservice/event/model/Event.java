@@ -72,16 +72,17 @@ public class Event {
     @Column(name = "title")
     @Length(min = 3, max = 120)
     private String title;
-//    private Integer views;
+    @Transient
+    private Integer views;
 
     @OneToMany(mappedBy = "event")
     private Set<Request> requestsSet;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "events_compilations",
-            joinColumns = { @JoinColumn(name = "event_id") },
-            inverseJoinColumns = { @JoinColumn(name = "compilation_id") }
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "compilation_id")}
     )
     List<Compilation> compilations = new ArrayList<>();
 
@@ -117,7 +118,9 @@ public class Event {
                 ", requestModeration=" + requestModeration +
                 ", state=" + state +
                 ", title='" + title + '\'' +
+                ", views=" + views +
                 ", requestsSet=" + requestsSet +
+                ", compilations=" + compilations +
                 '}';
     }
 }

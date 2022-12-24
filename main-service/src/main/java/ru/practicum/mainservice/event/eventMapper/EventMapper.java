@@ -3,6 +3,7 @@ package ru.practicum.mainservice.event.eventMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.mainservice.category.mapper.CategoryMapper;
+import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.category.service.CategoryService;
 import ru.practicum.mainservice.event.dto.*;
 import ru.practicum.mainservice.event.model.Event;
@@ -13,7 +14,8 @@ import ru.practicum.mainservice.user.mapper.UserMapper;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @AllArgsConstructor
@@ -100,6 +102,7 @@ public class EventMapper {
         e.setPublishedOn(dateTimeToString(event.getPublishedOn()));
         e.setRequestModeration(event.getRequestModeration());
         e.setState(event.getState());
+        e.setViews(event.getViews());
         e.setTitle(event.getTitle());
 //        return EventFullDto.builder()
 //                .annotation(event.getAnnotation())
@@ -132,7 +135,7 @@ public class EventMapper {
                 .initiator(userMapper.toShortDto(event.getInitiator()))
                 .paid(event.getPaid())
                 .title(event.getTitle())
-//                .views(event.getViews())
+                .views(event.getViews())
                 .build();
     }
 
@@ -171,18 +174,15 @@ public class EventMapper {
         return LocalDateTime.parse(dateTime, DATE_TIME_PATTERN);
     }
 
-    private Integer[] stateToInt(String[] states) {
-        if(states == null || states.length==0){
+    private List<Integer> stateToInt(List<String> states) {
+        if (states == null || states.size() == 0) {
             return null;
         }
-//        Integer[] result = new Integer[states.length];
-//        for (int i = 0; i < states.length; i++) {
-//            String stringState = states[i];
-//            State state = State.valueOf(stringState);
-//            int intState = state.ordinal();
-//            result[i] = intState;
-//        }
-//        return result;
-        return Arrays.stream(states).map(stingState -> State.valueOf(stingState).ordinal()).toArray(Integer[]::new);
+        return states.stream().map(stingState -> State.valueOf(stingState).ordinal())
+                .collect(Collectors.toList());
     }
+
+//    List<Category> getCategoryList(List<Long> categoryIdList){
+//        return categoryIdList.stream().map(categoryService::getById).collect(Collectors.toList());
+//    }
 }

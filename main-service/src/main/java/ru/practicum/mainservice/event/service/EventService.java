@@ -16,7 +16,7 @@ import ru.practicum.mainservice.user.service.UserService;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -53,15 +53,22 @@ public class EventService {
     }
 
     public Page<Event> searchAvailable(EventPublicSearch eventPublicSearch, Pageable pageable) {
-        return repository.searchAvailable(eventPublicSearch.getText(), eventPublicSearch.getCategories(),
-                eventPublicSearch.getPaid(), eventPublicSearch.getRangeStart(),
-                eventPublicSearch.getRangeEnd(), Status.APPROVED.ordinal(), pageable);
+        return repository.searchAvailable(eventPublicSearch.getText(),
+                eventPublicSearch.getCategories(),
+                eventPublicSearch.getPaid(),
+                eventPublicSearch.getRangeStart(),
+                eventPublicSearch.getRangeEnd(),
+                Status.APPROVED.ordinal(),
+                pageable);
     }
 
     public Page<Event> searchAll(EventPublicSearch eventPublicSearch, Pageable pageable) {
-        return repository.searchAll(eventPublicSearch.getText(), eventPublicSearch.getCategories(),
-                eventPublicSearch.getPaid(), eventPublicSearch.getRangeStart(),
-                eventPublicSearch.getRangeEnd(), pageable);
+        return repository.searchAll(eventPublicSearch.getText(),
+                eventPublicSearch.getCategories(),
+                eventPublicSearch.getPaid(),
+                eventPublicSearch.getRangeStart(),
+                eventPublicSearch.getRangeEnd(),
+                pageable);
     }
 
     public Page<Event> searchByUsersSet(EventAdminSearch eventAdminSearch, Pageable pageable) {
@@ -88,12 +95,13 @@ public class EventService {
     public Page<Event> findAll(Pageable pageable) {
         return repository.findAll(pageable);
     }
+    public List<Event> findAll() {
+        return repository.findAll();
+    }
 
     public Page<Event> findAllByUserId(Long userId, Pageable pageable) {
         return repository.findAllByInitiatorId(userId, pageable);
     }
-
-//    public Page<Event> search(SearchDto searchDto)
 
     public Map<String, Long> deleteById(Long eventId) {
         repository.deleteById(eventId);

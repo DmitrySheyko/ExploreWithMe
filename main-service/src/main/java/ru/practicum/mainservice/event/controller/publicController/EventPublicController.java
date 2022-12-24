@@ -20,7 +20,7 @@ public class EventPublicController {
 
     @GetMapping
     public List<EventShortDto> search(@RequestParam(value = "text") @NotBlank String text,
-                                      @RequestParam(value = "categories", required = false) Long[] categories,
+                                      @RequestParam(value = "categories", required = false) List<Long> categories,
                                       @RequestParam(value = "paid", required = false, defaultValue = "false") Boolean paid,
                                       @RequestParam(value = "rangeStart", required = false) String rangeStart,
                                       @RequestParam(value = "rangeEnd", required = false) String rangeEnd,

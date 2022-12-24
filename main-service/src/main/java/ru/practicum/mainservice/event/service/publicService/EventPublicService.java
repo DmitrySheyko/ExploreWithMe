@@ -32,11 +32,12 @@ public class EventPublicService {
     //TODO сделать енум возможных полей для сортировки
     public List<EventShortDto> search(EventPublicSearchDto searchDto, int from, int size, String sort) {
         int page = from / size;
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by("event_date")); //TODO сортировку доделать
         EventPublicSearch eventPublicSearch = mapper.toEventPublicSearch(searchDto);
+        System.out.println(eventPublicSearch);
         if (eventPublicSearch.getCategories() == null) {
-            Long[] categoriesArray = categoryService.findAll().stream().map(Category::getId).toArray(Long[]::new);
-            eventPublicSearch.setCategories(categoriesArray);
+            List<Long> categoriesList = categoryService.findAll().stream().map(Category::getId).collect(Collectors.toList());
+            eventPublicSearch.setCategories(categoriesList);
         }
         if (eventPublicSearch.getRangeStart() == null) {
             eventPublicSearch.setRangeStart(LocalDateTime.MIN);
@@ -45,11 +46,14 @@ public class EventPublicService {
             eventPublicSearch.setRangeEnd(LocalDateTime.MAX);
         }
         Page<Event> eventsPage;
+        System.out.println(service.findAll());
+
         if (eventPublicSearch.getOnlyAvailable()) {
             eventsPage = service.searchAvailable(eventPublicSearch, pageable);
         } else {
             eventsPage = service.searchAll(eventPublicSearch, pageable);
         }
+        System.out.println("Итог " + eventsPage);
         List<EventShortDto> eventDtoList = eventsPage.stream().map(mapper::toShortDto).collect(Collectors.toList());
         log.info("List of searched events successfully received");
         return eventDtoList;

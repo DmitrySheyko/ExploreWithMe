@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import ru.practicum.mainservice.event.model.Event;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
@@ -27,18 +28,17 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "AND (e.event_date <= ?4 AND e.event_date >= ?5) " +
             "AND e.participant_limit > participants " +
             "ORDER BY e.id ", nativeQuery = true)
-    Page<Event> searchAvailable(String text, Long[] categories, Boolean paid, LocalDateTime rangeStart,
+    Page<Event> searchAvailable(String text, List<Long> categories, Boolean paid, LocalDateTime rangeStart,
                                 LocalDateTime rangeEnd, Integer status, Pageable pageable);
 
     @Query(value = "SELECT e.* " +
             "FROM events e " +
-            "WHERE ((UPPER (e.annotation) LIKE UPPER(CONCAT('%', ?1, '%')))" +
-            "OR (UPPER (e.description) LIKE UPPER(CONCAT('%', ?1, '%'))))" +
-            "AND e.category_id IN (?2)" +
+            "WHERE ((UPPER (e.annotation) LIKE UPPER(CONCAT('%', ?1, '%'))) " +
+            "OR (UPPER (e.description) LIKE UPPER(CONCAT('%', ?1, '%')))) " +
+            "AND e.category_id IN (?2) " +
             "AND e.is_paid = ?3 " +
-            "AND (e.event_date <= ?4 AND e.event_date >= ?5) " +
-            "ORDER BY e.id ", nativeQuery = true)
-    Page<Event> searchAll(String text, Long[] categories, Boolean paid, LocalDateTime rangeStart,
+            "AND (e.event_date <= ?4 AND e.event_date >= ?5) " , nativeQuery = true)
+    Page<Event> searchAll(String text, List<Long> categories, Boolean paid, LocalDateTime rangeStart,
                           LocalDateTime rangeEnd, Pageable pageable);
 
 
@@ -49,8 +49,10 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "AND e.category_id IN (?3)" +
             "AND (e.event_date >= ?4 AND e.event_date <= ?5) " +
             "ORDER BY e.id ", nativeQuery = true)
-    Page<Event> searchByUsersSet(Long[] users, Integer[] states, Long[] categories, LocalDateTime rangeStart,
+    Page<Event> searchByUsersSet(List<Long> users, List<Integer> states, List<Long> categories, LocalDateTime rangeStart,
                                  LocalDateTime rangeEnd, Pageable pageable);
+
+
 
     @Query(value = "SELECT * " +
             "FROM events e " +
@@ -58,7 +60,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "AND e.category_id IN (?2)" +
             "AND (e.event_date >= ?3 AND e.event_date <= ?4) " +
             "ORDER BY e.id ", nativeQuery = true)
-    Page<Event> searchForAllUsers(Integer[] states, Long[] categories, LocalDateTime rangeStart,
+    Page<Event> searchForAllUsers(List<Integer> states, List<Long> categories, LocalDateTime rangeStart,
                                   LocalDateTime rangeEnd, Pageable pageable);
 }
 

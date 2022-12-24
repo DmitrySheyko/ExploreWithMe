@@ -16,7 +16,6 @@ public class PrivateRequestController {
     @PostMapping
     public ParticipationRequestDto add(@PathVariable(value = "userId", required = true) Long userId,
                                        @RequestParam(value = "eventId", required = true) Long eventId) {
-        System.out.println("Этой строки быть не должно");
         return service.add(userId, eventId);
     }
 

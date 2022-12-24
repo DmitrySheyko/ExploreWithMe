@@ -1,7 +1,6 @@
 package ru.practicum.mainservice.event.controller.privateController;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.dto.EventShortDto;
@@ -20,10 +19,8 @@ public class EventPrivateController {
     private final EventPrivateService service;
 
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     public EventFullDto add(@PathVariable("userId") Long userId,
                             @Valid @RequestBody NewEventDto newEventDto) {
-        System.out.println(newEventDto);
         return service.add(userId, newEventDto);
     }
 
@@ -36,17 +33,17 @@ public class EventPrivateController {
     @GetMapping
     public List<EventShortDto> getAllByUserId(@PathVariable("userId") Long userId,
                                               @RequestParam(name = "from", required = false, defaultValue = "0") @Min(0) int from,
-                                              @RequestParam(name = "size", required = false, defaultValue = "10") @Min(1) int size){
+                                              @RequestParam(name = "size", required = false, defaultValue = "10") @Min(1) int size) {
         return service.getAllByUserId(userId, from, size);
     }
 
     @GetMapping("/{eventId}")
-    public EventFullDto getById (@PathVariable("userId") Long userId, @PathVariable("eventId") Long eventId){
+    public EventFullDto getById(@PathVariable("userId") Long userId, @PathVariable("eventId") Long eventId) {
         return service.getById(userId, eventId);
     }
 
     @PatchMapping("/{eventId}")
-    public EventFullDto cancelEvent(@PathVariable("userId") Long userId, @PathVariable("eventId") Long eventId){
+    public EventFullDto cancelEvent(@PathVariable("userId") Long userId, @PathVariable("eventId") Long eventId) {
         return service.cancelEvent(userId, eventId);
     }
 

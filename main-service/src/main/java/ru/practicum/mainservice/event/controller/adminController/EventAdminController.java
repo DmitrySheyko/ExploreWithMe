@@ -2,6 +2,7 @@ package ru.practicum.mainservice.event.controller.adminController;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.event.dto.AdminUpdateEventDto;
 import ru.practicum.mainservice.event.dto.EventAdminSearchDto;
 import ru.practicum.mainservice.event.dto.EventFullDto;
@@ -20,9 +21,9 @@ public class EventAdminController {
     private final EventAdminService service;
 
     @GetMapping
-    public List<EventFullDto> search(@RequestParam(value = "users", required = false) Long[] users,
-                                     @RequestParam(value = "states", required = false) String[] states,
-                                     @RequestParam(value = "categories", required = false) Long[] categories,
+    public List<EventFullDto> search(@RequestParam(value = "users", required = false) List<Long> users,
+                                     @RequestParam(value = "states", required = false) List<String> states,
+                                     @RequestParam(value = "categories", required = false) List<Long> categories,
                                      @RequestParam(value = "rangeStart", required = false) String rangeStart,
                                      @RequestParam(value = "rangeEnd", required = false) String rangeEnd,
                                      @Valid @RequestParam(value = "from", required = false, defaultValue = "0") @Min(0) Integer from,

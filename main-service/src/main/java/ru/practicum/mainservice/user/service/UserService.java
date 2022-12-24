@@ -9,6 +9,7 @@ import ru.practicum.mainservice.exceptions.NotFoundException;
 import ru.practicum.mainservice.user.model.User;
 import ru.practicum.mainservice.user.repository.UserRepository;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,6 +25,10 @@ public class UserService {
 
     public Page<User> findAll(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    public Page<User> findAllById(List<Long> ids, Pageable pageable) {
+        return repository.findAllByIdIn(ids, pageable);
     }
 
     public User findById(Long userId) {

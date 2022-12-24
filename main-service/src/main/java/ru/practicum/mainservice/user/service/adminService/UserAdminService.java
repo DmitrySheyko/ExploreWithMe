@@ -12,6 +12,8 @@ import ru.practicum.mainservice.user.mapper.UserMapper;
 import ru.practicum.mainservice.user.model.User;
 import ru.practicum.mainservice.user.service.UserService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,10 +33,10 @@ public class UserAdminService {
         return mapper.toDto(user);
     }
 
-    public List<UserDto> getAll(int from, int size) {
+    public List<UserDto> getAllById (List<Long> ids, int from, int size) {
         int page = from / size;
         Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
-        Page<User> usersPage = service.findAll(pageable);
+        Page<User> usersPage = service.findAllById(ids, pageable);
         List<UserDto> usersList = usersPage.stream().map(mapper::toDto).collect(Collectors.toList());
         log.info("List of users successfully received , page: {}, size: {}", page, size);
         return usersList;
