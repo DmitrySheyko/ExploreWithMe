@@ -1,9 +1,6 @@
 package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
-import ru.practicum.mainservice.category.model.Category;
-import ru.practicum.mainservice.event.model.State;
-import ru.practicum.mainservice.user.model.User;
 
 import java.util.List;
 

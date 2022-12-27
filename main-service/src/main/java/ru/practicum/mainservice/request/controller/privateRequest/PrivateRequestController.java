@@ -14,14 +14,14 @@ public class PrivateRequestController {
     PrivateRequestService service;
 
     @PostMapping
-    public ParticipationRequestDto add(@PathVariable(value = "userId", required = true) Long userId,
-                                       @RequestParam(value = "eventId", required = true) Long eventId) {
+    public ParticipationRequestDto add(@PathVariable(value = "userId") Long userId,
+                                       @RequestParam(value = "eventId") Long eventId) {
         return service.add(userId, eventId);
     }
 
     @PatchMapping("/{requestId}/cancel")
     public ParticipationRequestDto cancel(@PathVariable("userId") Long userId,
-                                          @RequestParam("requestId") Long requestId) {
+                                          @PathVariable("requestId") Long requestId) {
         return service.cancel(userId, requestId);
     }
 

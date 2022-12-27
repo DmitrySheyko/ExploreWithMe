@@ -17,14 +17,13 @@ import ru.practicum.mainservice.user.service.UserService;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class EventService {
-    EventRepository repository;
-    UserService userService;
+    private final EventRepository repository;
+    private final UserService userService;
     private static final Long TIME_LAG_FOR_CREATE_NEW_EVENT = 2L;
     private static final Long TIME_LAG_FOR_PUBLISH_NEW_EVENT = 2L;
 
@@ -34,7 +33,7 @@ public class EventService {
         event.setCreatedOn(LocalDateTime.now());
         event.setPublishedOn(null);
         event.setState(State.PENDING);
-//        event.setViews(0);
+        event.setViews(0);
         return repository.save(event);
     }
 
@@ -88,13 +87,17 @@ public class EventService {
         if (optionalEvent.isPresent()) {
             return optionalEvent.get();
         }
-        throw new NotFoundException((String.format("Event with id=%s was not found.", eventId)),
-                "The required object was not found.");
+        throw new NotFoundException((String.format("Event with id=%s was not found.", eventId)));
     }
 
-    public Page<Event> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+    public Event findByIdAndPublished(Long eventId) {
+        Optional<Event> optionalEvent = repository.findByIdAndPublishedOnNot(eventId, null);
+        if (optionalEvent.isPresent()) {
+            return optionalEvent.get();
+        }
+        throw new NotFoundException((String.format("Event with id=%s was not found.", eventId)));
     }
+
     public List<Event> findAll() {
         return repository.findAll();
     }
@@ -103,38 +106,31 @@ public class EventService {
         return repository.findAllByInitiatorId(userId, pageable);
     }
 
-    public Map<String, Long> deleteById(Long eventId) {
-        repository.deleteById(eventId);
-        return Map.of("Successfully deleted event id=", eventId);
-    }
-
     public void checkIsObjectInStorage(Event event) {
         if (!repository.existsById(event.getId())) {
-            throw new NotFoundException((String.format("Event with id=%s was not found.", event.getId())),
-                    "The required object was not found.");
+            throw new NotFoundException((String.format("Event with id=%s was not found.", event.getId())));
         }
     }
 
     public void checkIsObjectInStorage(Long eventId) {
         if (!repository.existsById(eventId)) {
-            throw new NotFoundException((String.format("Event with id=%s was not found.", eventId)),
-                    "The required object was not found.");
+            throw new NotFoundException((String.format("Event with id=%s was not found.", eventId)));
         }
     }
 
     public void checkEventDateForCreate(LocalDateTime eventDate) {
         Duration duration = Duration.between(LocalDateTime.now(), eventDate);
         if (duration.toHours() < TIME_LAG_FOR_CREATE_NEW_EVENT) {
-            throw new ValidationException(String.format("Time till the event should be not less than %s hours",
-                    TIME_LAG_FOR_CREATE_NEW_EVENT), "For the requested operation the conditions are not met");
+            throw new ValidationException(String.format("Time till the new event should be not less than %s hours",
+                    TIME_LAG_FOR_CREATE_NEW_EVENT));
         }
     }
 
     public void checkEventDateForPublish(LocalDateTime eventDate) {
         Duration duration = Duration.between(LocalDateTime.now(), eventDate);
         if (duration.toHours() < TIME_LAG_FOR_PUBLISH_NEW_EVENT) {
-            throw new ValidationException(String.format("Time till the event should be not less than %s hours",
-                    TIME_LAG_FOR_PUBLISH_NEW_EVENT), "For the requested operation the conditions are not met");
+            throw new ValidationException(String.format("Time till the published event should be not less than %s hours",
+                    TIME_LAG_FOR_CREATE_NEW_EVENT));
         }
     }
 }

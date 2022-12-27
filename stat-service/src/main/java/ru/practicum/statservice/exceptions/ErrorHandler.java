@@ -1,17 +1,13 @@
-package ru.practicum.mainservice.exceptions;
+package ru.practicum.statservice.exceptions;
 
 import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
-import org.hibernate.exception.ConstraintViolationException;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.LocalDateTime;
-import java.util.stream.Collectors;
 
 @RestControllerAdvice
 public class ErrorHandler {
@@ -23,18 +19,6 @@ public class ErrorHandler {
                 .message(e.getMessage())
                 .reason(HttpStatus.NOT_FOUND.getReasonPhrase())
                 .status(HttpStatus.NOT_FOUND.toString())
-                .timestamp(LocalDateTime.now())
-                .build();
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handlerMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
-        return ErrorResponse.builder()
-                .errors(e.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList()))
-                .message(e.getMessage())
-                .reason(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                .status(HttpStatus.BAD_REQUEST.toString())
                 .timestamp(LocalDateTime.now())
                 .build();
     }
@@ -61,20 +45,10 @@ public class ErrorHandler {
                 .build();
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse handlerConstraintViolationException(final ConstraintViolationException e) {
-        return ErrorResponse.builder()
-                .message(e.getMessage())
-                .reason(HttpStatus.CONFLICT.getReasonPhrase())
-                .status(HttpStatus.CONFLICT.toString())
-                .timestamp(LocalDateTime.now())
-                .build();
-    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleIllegalArgumentException(final IllegalArgumentException e) {
+    public ErrorResponse handleIllegalArgumentException(IllegalArgumentException e) {
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.BAD_REQUEST.getReasonPhrase())
@@ -82,10 +56,11 @@ public class ErrorHandler {
                 .timestamp(LocalDateTime.now())
                 .build();
     }
+
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleMissingParams(final MissingServletRequestParameterException e) {
+    public ErrorResponse handleMissingParams(MissingServletRequestParameterException e) {
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.BAD_REQUEST.getReasonPhrase())
@@ -94,14 +69,14 @@ public class ErrorHandler {
                 .build();
     }
 
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ErrorResponse handlerExceptions(final Exception e) {
-//        return ErrorResponse.builder()
-//                .message(e.getMessage())
-//                .reason(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-//                .status(HttpStatus.INTERNAL_SERVER_ERROR.toString())
-//                .timestamp(LocalDateTime.now())
-//                .build();
-//    }
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handlerExceptions(final Exception e) {
+        return ErrorResponse.builder()
+                .message(e.getMessage())
+                .reason(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.toString())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
 }

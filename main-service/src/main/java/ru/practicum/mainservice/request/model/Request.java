@@ -14,16 +14,21 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "requests")
 public class Request {
+
     @Column(name = "created")
     private LocalDateTime created;
+
     @ManyToOne
     @JoinColumn(name="event_id", nullable=false)
     private Event event;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(name = "requester_id")
     private Long requester;
+
     @Column(name = "status")
     private Status status;
 

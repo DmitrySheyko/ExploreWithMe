@@ -3,6 +3,7 @@ package ru.practicum.statservice.Dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,6 +14,6 @@ import java.time.LocalDateTime;
 public class StatsRequest {
     LocalDateTime start;
     LocalDateTime end;
-    String[] uris;
+    List<String> uris;
     Boolean unique;
 }

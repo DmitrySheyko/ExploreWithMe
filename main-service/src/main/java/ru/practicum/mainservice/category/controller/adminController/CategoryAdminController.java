@@ -29,5 +29,4 @@ public class CategoryAdminController {
     public Map<String, Long> delete(@PathVariable("id") Long categoryId) {
         return categoryAdminService.delete(categoryId);
     }
-
 }

@@ -13,13 +13,13 @@ import ru.practicum.mainservice.location.model.Location;
 @NoArgsConstructor
 public class AdminUpdateEventDto {
     private String annotation;
-    private Category category;
+    private Long category;
     private String description;
     private String eventDate;
     private Location location;
     private Long eventId;
     private Boolean paid;
-    private Integer participantLimit;
+    private Integer participantLimit; //TODO  - означает отсутсвие огрвничений
     private Boolean requestModeration;
     private String title;
 }

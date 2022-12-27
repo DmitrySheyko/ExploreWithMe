@@ -3,8 +3,8 @@ package ru.practicum.mainservice.event.eventMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.mainservice.category.mapper.CategoryMapper;
-import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.category.service.CategoryService;
+import ru.practicum.mainservice.event.EventClient;
 import ru.practicum.mainservice.event.dto.*;
 import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
@@ -25,6 +25,7 @@ public class EventMapper {
     private final CategoryService categoryService;
     private final LocationService locationService;
     private final RequestService requestService;
+    private final EventClient eventClient;
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public Event toEvent(NewEventDto newEventDto) {
@@ -42,87 +43,65 @@ public class EventMapper {
                 .requestModeration(newEventDto.getRequestModeration())
                 .state(null)
                 .title(newEventDto.getTitle())
-//                .views(null)
                 .build();
     }
 
-    public Event toEvent(PrivateUpdateEventDto privateUpdateEventDto) {
+    public Event toEvent(PrivateUpdateEventDto updateEventDto) {
         return Event.builder()
-                .annotation(privateUpdateEventDto.getAnnotation())
-                .category(privateUpdateEventDto.getCategory())
+                .annotation(updateEventDto.getAnnotation())
+                .category(categoryService.getById(updateEventDto.getCategory()))
                 .createdOn(null)
-                .description(privateUpdateEventDto.getDescription())
-                .eventDate(toLocalDateTime(privateUpdateEventDto.getEventDate()))
-                .id(privateUpdateEventDto.getEventId())
+                .description(updateEventDto.getDescription())
+                .eventDate(toLocalDateTime(updateEventDto.getEventDate()))
+                .id(updateEventDto.getEventId())
                 .initiator(null)
                 .location(null)
-                .paid(privateUpdateEventDto.getPaid())
-                .participantLimit(privateUpdateEventDto.getParticipantLimit())
+                .paid(updateEventDto.getPaid())
+                .participantLimit(updateEventDto.getParticipantLimit())
                 .publishedOn(null)
-                .requestModeration(privateUpdateEventDto.getRequestModeration())
                 .state(null)
-                .title(privateUpdateEventDto.getTitle())
-//                .views(null)
+                .title(updateEventDto.getTitle())
                 .build();
     }
 
     public Event toEvent(AdminUpdateEventDto adminUpdateEventDto) {
         return Event.builder()
                 .annotation(adminUpdateEventDto.getAnnotation())
-                .category(adminUpdateEventDto.getCategory())
+                .category(categoryService.getById(adminUpdateEventDto.getCategory()))
                 .createdOn(null)
                 .description(adminUpdateEventDto.getDescription())
                 .eventDate(toLocalDateTime(adminUpdateEventDto.getEventDate()))
                 .id(adminUpdateEventDto.getEventId())
                 .initiator(null)
                 .location(adminUpdateEventDto.getLocation())
-                .paid(adminUpdateEventDto.getPaid())
                 .participantLimit(adminUpdateEventDto.getParticipantLimit())
+                .paid(adminUpdateEventDto.getPaid())
                 .publishedOn(null)
                 .requestModeration(adminUpdateEventDto.getRequestModeration())
                 .state(null)
                 .title(adminUpdateEventDto.getTitle())
-//                .views(null)
                 .build();
     }
 
     public EventFullDto toFullDto(Event event) {
-        EventFullDto e = new EventFullDto();
-        e.setAnnotation(event.getAnnotation());
-        e.setCategory(categoryMapper.toDto(event.getCategory()));
-        e.setConfirmedRequests(requestService.getConfirmedRequests(event));
-        e.setDescription(event.getDescription());
-        e.setCreatedOn(dateTimeToString(event.getCreatedOn()));
-        e.setEventDate(dateTimeToString(event.getEventDate()));
-        e.setId(event.getId());
-        e.setInitiator(userMapper.toShortDto(event.getInitiator()));
-        e.setLocation(event.getLocation());
-        e.setPaid(event.getPaid());
-        e.setParticipantLimit(event.getParticipantLimit());
-        e.setPublishedOn(dateTimeToString(event.getPublishedOn()));
-        e.setRequestModeration(event.getRequestModeration());
-        e.setState(event.getState());
-        e.setViews(event.getViews());
-        e.setTitle(event.getTitle());
-//        return EventFullDto.builder()
-//                .annotation(event.getAnnotation())
-//                .category(categoryMapper.toDto(event.getCategory()))
-//                .confirmedRequests(requestService.getConfirmedRequests(event.getId()))
-//                .createdOn(dateTimeToString(event.getCreatedOn()))
-//                .description(event.getDescription())
-//                .eventDate(dateTimeToString(event.getEventDate()))
-//                .id(event.getId())
-//                .initiator(userMapper.toShortDto(event.getInitiator()))
-//                .location(event.getLocation())
-//                .paid(event.getPaid())
-//                .participantLimit(event.getParticipantLimit())
-//                .publishedOn(dateTimeToString(event.getPublishedOn()))
-//                .requestModeration(event.getRequestModeration())
-//                .state(event.getState())
-//                .title(event.getTitle())
-////                .views(event.getViews())
-//                .build();
-        return e;
+        return EventFullDto.builder()
+                .annotation(event.getAnnotation())
+                .category(categoryMapper.toDto(event.getCategory()))
+                .confirmedRequests(requestService.getConfirmedRequests(event))
+                .createdOn(dateTimeToString(event.getCreatedOn()))
+                .description(event.getDescription())
+                .eventDate(dateTimeToString(event.getEventDate()))
+                .id(event.getId())
+                .initiator(userMapper.toShortDto(event.getInitiator()))
+                .location(event.getLocation())
+                .paid(event.getPaid())
+                .participantLimit(event.getParticipantLimit())
+                .publishedOn(dateTimeToString(event.getPublishedOn()))
+                .requestModeration(event.getRequestModeration())
+                .state(event.getState())
+                .title(event.getTitle())
+                .views(getViews(event.getId()))
+                .build();
     }
 
     public EventShortDto toShortDto(Event event) {
@@ -135,7 +114,7 @@ public class EventMapper {
                 .initiator(userMapper.toShortDto(event.getInitiator()))
                 .paid(event.getPaid())
                 .title(event.getTitle())
-                .views(event.getViews())
+                .views(getViews(event.getId()))
                 .build();
     }
 
@@ -174,15 +153,16 @@ public class EventMapper {
         return LocalDateTime.parse(dateTime, DATE_TIME_PATTERN);
     }
 
-    private List<Integer> stateToInt(List<String> states) {
+    private List<State> stateToInt(List<String> states) {
         if (states == null || states.size() == 0) {
             return null;
         }
-        return states.stream().map(stingState -> State.valueOf(stingState).ordinal())
+        return states.stream()
+                .map(State::valueOf)
                 .collect(Collectors.toList());
     }
 
-//    List<Category> getCategoryList(List<Long> categoryIdList){
-//        return categoryIdList.stream().map(categoryService::getById).collect(Collectors.toList());
-//    }
+    private Integer getViews(Long eventId) {
+        return eventClient.getViews(eventId);
+    }
 }

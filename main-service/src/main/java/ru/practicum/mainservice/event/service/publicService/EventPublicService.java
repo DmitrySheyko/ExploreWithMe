@@ -15,10 +15,12 @@ import ru.practicum.mainservice.event.dto.EventPublicSearch;
 import ru.practicum.mainservice.event.dto.EventShortDto;
 import ru.practicum.mainservice.event.eventMapper.EventMapper;
 import ru.practicum.mainservice.event.model.Event;
+import ru.practicum.mainservice.event.model.EventSearchSort;
 import ru.practicum.mainservice.event.service.EventService;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,23 +32,22 @@ public class EventPublicService {
     EventMapper mapper;
 
     //TODO сделать енум возможных полей для сортировки
-    public List<EventShortDto> search(EventPublicSearchDto searchDto, int from, int size, String sort) {
+    public List<EventShortDto> search(EventPublicSearchDto searchDto, int from, int size, EventSearchSort sort) {
         int page = from / size;
-        Pageable pageable = PageRequest.of(page, size, Sort.by("event_date")); //TODO сортировку доделать
+        Pageable pageable = PageRequest.of(page, size, Sort.by("eventDate"));
         EventPublicSearch eventPublicSearch = mapper.toEventPublicSearch(searchDto);
-        System.out.println(eventPublicSearch);
         if (eventPublicSearch.getCategories() == null) {
             List<Long> categoriesList = categoryService.findAll().stream().map(Category::getId).collect(Collectors.toList());
             eventPublicSearch.setCategories(categoriesList);
         }
         if (eventPublicSearch.getRangeStart() == null) {
-            eventPublicSearch.setRangeStart(LocalDateTime.MIN);
+            eventPublicSearch.setRangeStart(LocalDateTime.now());
         }
         if (eventPublicSearch.getRangeEnd() == null) {
             eventPublicSearch.setRangeEnd(LocalDateTime.MAX);
         }
         Page<Event> eventsPage;
-        System.out.println(service.findAll());
+        System.out.println("Все эвенты: " + service.findAll());
 
         if (eventPublicSearch.getOnlyAvailable()) {
             eventsPage = service.searchAvailable(eventPublicSearch, pageable);
@@ -56,6 +57,9 @@ public class EventPublicService {
         System.out.println("Итог " + eventsPage);
         List<EventShortDto> eventDtoList = eventsPage.stream().map(mapper::toShortDto).collect(Collectors.toList());
         log.info("List of searched events successfully received");
+        if(Objects.equals(sort.name(), "VIEWS")){
+            return eventsPage.stream().map(mapper::toShortDto).sorted().collect(Collectors.toList());
+        }
         return eventDtoList;
     }
 
@@ -63,9 +67,9 @@ public class EventPublicService {
     //TODO добавить проверку что событие опубликовано
     public EventFullDto getById(Long eventId) {
         service.checkIsObjectInStorage(eventId);
-        Event event = service.findById(eventId);
+        Event event = service.findByIdAndPublished(eventId);
         EventFullDto eventDto = mapper.toFullDto(event);
-        log.info("Event id={} successfully received", eventDto);
+        log.info("Event id={} successfully received", eventDto.getId());
         return eventDto;
     }
 }

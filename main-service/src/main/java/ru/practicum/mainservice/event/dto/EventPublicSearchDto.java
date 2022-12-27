@@ -1,7 +1,6 @@
 package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
-import ru.practicum.mainservice.event.model.State;
 
 import java.util.List;
 

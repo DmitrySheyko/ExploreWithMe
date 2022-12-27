@@ -36,8 +36,7 @@ public class CategoryService {
         if (optionalCategory.isPresent()) {
             return optionalCategory.get();
         }
-        throw new NotFoundException((String.format("Category with id=%s was not found.", categoryId)),
-                "The required object was not found.");
+        throw new NotFoundException((String.format("Category with id=%s was not found.", categoryId)));
     }
 
     public Map<String, Long> deleteById(Long categoryId) {
@@ -48,8 +47,7 @@ public class CategoryService {
     public void checkIsObjectInStorage(Long categoryId) {
         if (!repository.existsById(categoryId)) {
             log.warn("Category with id={}} was not found.", categoryId);
-            throw new NotFoundException((String.format("Category with id=%s was not found.", categoryId)),
-                    "The required object was not found.");
+            throw new NotFoundException((String.format("Category with id=%s was not found.", categoryId)));
         }
     }
 }

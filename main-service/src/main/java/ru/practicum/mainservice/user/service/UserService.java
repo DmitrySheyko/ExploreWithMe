@@ -37,8 +37,7 @@ public class UserService {
             return optionalUser.get();
         }
         log.warn("Information about user id={} is empty", userId);
-        throw new NotFoundException((String.format("User with id=%s was not found.", userId)),
-                "The required object was not found.");
+        throw new NotFoundException((String.format("User with id=%s was not found.", userId)));
     }
 
     public Map<String, Long> deleteById(Long userId) {
@@ -49,16 +48,14 @@ public class UserService {
     public void checkIsObjectInStorage(User user) {
         if (!repository.existsById(user.getId())) {
             log.warn("User id={} not found", user.getId());
-            throw new NotFoundException((String.format("User with id=%s was not found.", user.getId())),
-                    "The required object was not found.");
+            throw new NotFoundException((String.format("User with id=%s was not found.", user.getId())));
         }
     }
 
     public void checkIsObjectInStorage(Long userId) {
         if (!repository.existsById(userId)) {
             log.warn("User id={} not found", userId);
-            throw new NotFoundException((String.format("User with id=%s was not found.", userId)),
-                    "The required object was not found.");
+            throw new NotFoundException((String.format("User with id=%s was not found.", userId)));
         }
     }
 }

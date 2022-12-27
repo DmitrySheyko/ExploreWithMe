@@ -35,25 +35,24 @@ public class PrivateRequestService {
         if (event.getInitiator().getId().equals(userId)) {
             log.warn("Initiator of event can't create participation requests. Request didn't created");
             throw new ValidationException("Initiator of event can't create participation requests. Request didn't " +
-                    "created", "For the requested operation the conditions are not met.");
+                    "created");
         }
         if (!event.getState().equals(State.PUBLISHED)) {
             log.warn("Request can be created only for published status events. Request didn't created");
             throw new ValidationException("Request can be created only for published status events. Request didn't " +
-                    "created", "For the requested operation the conditions are not met.");
+                    "created");
         }
         if (event.getRequestsSet().stream()
                 .filter(request -> request.getStatus().equals(Status.APPROVED))
                 .collect(Collectors.toSet()).size() >= event.getParticipantLimit()) {
             log.warn("Participants limit is full. Request didn't created");
-            throw new ValidationException("Participants limit is full. Request didn't " +
-                    "created", "For the requested operation the conditions are not met.");
+            throw new ValidationException("Participants limit is full. Request didn't created");
         }
         if (event.getRequestsSet().stream()
                 .anyMatch(request -> request.getRequester().equals(userId))) {
             log.warn("User id={} already participant of this event . Request didn't created", userId);
             throw new ValidationException(String.format("User id=%s already participant of this event. " +
-                    "Request didn't created", userId), "For the requested operation the conditions are not met.");
+                    "Request didn't created", userId));
         }
         Request request = Request.builder()
                 .created(LocalDateTime.now())

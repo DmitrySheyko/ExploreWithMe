@@ -21,31 +21,29 @@ public class CompilationAdminController {
     }
 
     @DeleteMapping("/{compId}")
-    Map<String, Long> deleteCompilation(@PathVariable("compId") Long compilationId) {
+    public Map<String, Long> deleteCompilation(@PathVariable("compId") Long compilationId) {
         return service.deleteCompilation(compilationId);
     }
 
-    @DeleteMapping("{compId}/events/{eventId}")
-    Map<String, Long> deleteEventFromCompilation(@PathVariable("compId") Long compilationId,
-                                                 @PathVariable("eventId") Long eventId) {
+    @DeleteMapping("/{compId}/events/{eventId}")
+    public Map<String, Long> deleteEventFromCompilation(@PathVariable("compId") Long compilationId,
+                                                        @PathVariable("eventId") Long eventId) {
         return service.deleteEventFromCompilation(compilationId, eventId);
     }
 
-    @PatchMapping("{compId}/events/{eventId}")
-    Map<String, Long> addEventToCompilation(@PathVariable("compId") Long compilationId,
-                                            @PathVariable("eventId") Long eventId) {
+    @PatchMapping("/{compId}/events/{eventId}")
+    public Map<String, Long> addEventToCompilation(@PathVariable("compId") Long compilationId,
+                                                   @PathVariable("eventId") Long eventId) {
         return service.addEventToCompilation(compilationId, eventId);
     }
 
     @DeleteMapping("{compId}/pin")
-    Map<String, Long> unPinCompilation (@PathVariable("compId") Long compilationId,
-                                                 @PathVariable("eventId") Long eventId) {
-        return service.unPinCompilation(compilationId, eventId);
+    public Map<String, Long> unPinCompilation(@PathVariable("compId") Long compilationId) {
+        return service.unPinCompilation(compilationId);
     }
 
     @PatchMapping("{compId}/pin")
-    Map<String, Long> pinCompilation(@PathVariable("compId") Long compilationId,
-                                            @PathVariable("eventId") Long eventId) {
-        return service.pinCompilation(compilationId, eventId);
+    public Map<String, Long> pinCompilation(@PathVariable("compId") Long compilationId) {
+        return service.pinCompilation(compilationId);
     }
 }

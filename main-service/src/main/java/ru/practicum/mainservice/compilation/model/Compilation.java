@@ -15,13 +15,48 @@ import java.util.List;
 @Entity
 @Table(name = "compilations")
 public class Compilation {
-    @ManyToMany(mappedBy = "compilations")
+
+//    @ManyToMany(mappedBy = "compilations")
+@ManyToMany(cascade = {CascadeType.ALL})
+@JoinTable(
+        name = "events_compilations",
+        joinColumns = {@JoinColumn(name = "compilation_id")},
+        inverseJoinColumns = {@JoinColumn(name = "event_id")}
+)
     List<Event> events = new ArrayList<>();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
     @Column(name = "is_pinned")
     Boolean pinned;
+
     @Column(name = "title")
     String title;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Compilation that = (Compilation) o;
+
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Compilation{" +
+                "events=" + events +
+                ", id=" + id +
+                ", pinned=" + pinned +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

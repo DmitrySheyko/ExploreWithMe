@@ -26,7 +26,9 @@ public class CompilationAdminService {
     private final CompilationMapper mapper;
 
     public CompilationDto add(NewCompilationDto newCompilationDto) {
-        checkIsEventsExist(newCompilationDto.getEvents());
+        if(newCompilationDto.getEvents() != null && ! newCompilationDto.getEvents().isEmpty()) {
+            checkIsEventsExist(newCompilationDto.getEvents());
+        }
         Compilation compilation = mapper.toCompilation(newCompilationDto);
         compilation = service.save(compilation);
         CompilationDto compilationDto = mapper.toDto(compilation);
@@ -41,32 +43,29 @@ public class CompilationAdminService {
     public Map<String, Long> deleteEventFromCompilation(Long compilationId, Long eventId) {
         service.checkIsObjectInStorage(compilationId);
         service.checkIsEventInCompilation(compilationId, eventId);
-        List<Event> eventsList = service.findById(compilationId).getEvents();
+        Compilation compilation = service.findById(compilationId);
         Event event = eventService.findById(eventId);
-        if (eventsList.remove(event)) {
-            service.update(CompilationUpdateDto.builder()
-                    .events(eventsList)
-                    .build());
+        if (compilation.getEvents().remove(event)) {
+            service.update(compilation);
             log.info("Successfully edited compilation id={}, deleted event id={}", compilationId, eventId);
             return Map.of("Successfully edited compilation id=", compilationId,
                     " Successfully deleted event id=", eventId);
         }
         throw new NotFoundException(String.format("Event id=%s didn't found in compilation id=%s", eventId,
-                compilationId), "The required object was not found.");
+                compilationId));
     }
 
     public Map<String, Long> addEventToCompilation(Long compilationId, Long eventId) {
         service.checkIsObjectInStorage(compilationId);
-        List<Event> eventsList = service.findById(compilationId).getEvents();
+        eventService.checkIsObjectInStorage(eventId);
+        Compilation compilation = service.findById(compilationId);
         Event event = eventService.findById(eventId);
-        if (eventsList.contains(event)) {
-            throw new NotFoundException(String.format("Event id=%s already exist in compilation id=%s", eventId,
-                    compilationId), "The required object was not found.");
+        if (compilation.getEvents().contains(event)) {
+            throw new ValidationException(String.format("Event id=%s already add in compilation id=%s", eventId,
+                    compilationId));
         } else {
-            eventsList.add(event);
-            service.update(CompilationUpdateDto.builder()
-                    .events(eventsList)
-                    .build());
+            compilation.getEvents().add(event);
+            service.update(compilation);
             log.info("Successfully edited compilation id={}, add event id={}", compilationId, eventId);
             return Map.of("Successfully edited compilation id=", compilationId,
                     " Successfully add event id=", eventId);
@@ -74,30 +73,28 @@ public class CompilationAdminService {
     }
 
 
-    public Map<String, Long> unPinCompilation(Long compilationId, Long eventId) {
+    public Map<String, Long> unPinCompilation(Long compilationId) {
         service.checkIsObjectInStorage(compilationId);
-        if (service.findById(compilationId).getPinned()) {
-            service.update(CompilationUpdateDto.builder()
-                    .pinned(false)
-                    .build());
+        Compilation compilation = service.findById(compilationId);
+        if (compilation.getPinned()) {
+            compilation.setPinned(false);
+            service.update(compilation);
             log.info("Successfully unpinned compilation id={}, ", compilationId);
             return Map.of("Successfully unpinned compilation id=", compilationId);
         }
-        throw new ValidationException(String.format("Compilation id=%s unpinned already", compilationId),
-                "For the requested operation the conditions are not met.");
+        throw new ValidationException(String.format("Compilation id=%s unpinned already", compilationId));
     }
 
-    public Map<String, Long> pinCompilation(Long compilationId, Long eventId) {
+    public Map<String, Long> pinCompilation(Long compilationId) {
         service.checkIsObjectInStorage(compilationId);
-        if (!service.findById(compilationId).getPinned()) {
-            service.update(CompilationUpdateDto.builder()
-                    .pinned(true)
-                    .build());
+        Compilation compilation = service.findById(compilationId);
+        if (!compilation.getPinned()) {
+            compilation.setPinned(true);
+            service.update(compilation);
             log.info("Successfully pinned compilation id={}, ", compilationId);
             return Map.of("Successfully pinned compilation id=", compilationId);
         }
-        throw new ValidationException(String.format("Compilation id=%s pinned already", compilationId),
-                "For the requested operation the conditions are not met.");
+        throw new ValidationException(String.format("Compilation id=%s pinned already", compilationId));
     }
 
     public void checkIsEventsExist(List<Long> compilationsList) {

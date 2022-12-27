@@ -25,7 +25,6 @@ public class LocationService {
             return optionalLocation.get();
         }
         log.warn("Information about location id={} is empty", locationId);
-        throw new NotFoundException((String.format("Location with id=%s was not found.", locationId)),
-                "The required object was not found.");
+        throw new NotFoundException((String.format("Location with id=%s was not found.", locationId)));
     }
 }

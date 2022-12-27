@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "statistics")
+@Table(name = "endpointhits")
 public class EndPointHit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "application")
+    @Column(name = "app")
     private String app;
     @Column(name = "uri")
     private String uri;

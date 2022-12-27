@@ -25,25 +25,25 @@ public class RequestService {
         if (optionalRequest.isPresent()) {
             return optionalRequest.get();
         }
-        throw new NotFoundException((String.format("Request id=%s was not found.", requestId)),
-                "The required object was not found.");
+        throw new NotFoundException((String.format("Request id=%s was not found.", requestId)));
     }
 
     public List<Request> findAllByUserId(Long userId) {
         return repository.findAllByRequesterOrderById(userId);
     }
+    public List<Request> findAllByEvent(Event event){
+        return repository.findAllByEvent(event);
+    }
 
     public void checkIsObjectInStorage(Request request) {
         if (!repository.existsById(request.getId())) {
-            throw new NotFoundException((String.format("Request with id=%s was not found.", request.getId())),
-                    "The required object was not found.");
+            throw new NotFoundException((String.format("Request with id=%s was not found.", request.getId())));
         }
     }
 
     public void checkIsObjectInStorage(Long requestId) {
         if (!repository.existsById(requestId)) {
-            throw new NotFoundException((String.format("Request id=%s was not found.", requestId)),
-                    "The required object was not found.");
+            throw new NotFoundException((String.format("Request id=%s was not found.", requestId)));
         }
     }
 

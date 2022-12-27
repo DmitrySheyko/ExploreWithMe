@@ -5,10 +5,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.statservice.Dto.NewEndPointHitDto;
 import ru.practicum.statservice.Dto.StatRequestDto;
-import ru.practicum.statservice.model.StatsResponce;
+import ru.practicum.statservice.model.StatsResponse;
 import ru.practicum.statservice.service.StatService;
 
-import java.util.Map;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @AllArgsConstructor
@@ -16,22 +19,24 @@ public class StatController {
     private final StatService service;
 
     @PostMapping("/hit")
-    public Map<String, Long> add(@RequestBody NewEndPointHitDto newDto) {
+    public String add(@RequestBody NewEndPointHitDto newDto) {
+        System.out.println("Вот что получил запрос добавления hit: " + newDto);
         return service.add(newDto);
     }
 
 
     @GetMapping("/stats")
-    public StatsResponce get(@RequestParam(value = "start") String start,
-                             @RequestParam(value = "end") String end,
-                             @RequestParam(value = "uris", required = false) String[] uris,
-                             @RequestParam(value = "unique", required = false) Boolean unique) {
+    public List<StatsResponse> get(@RequestParam(value = "start") String start,
+                                   @RequestParam(value = "end") String end,
+                                   @RequestParam(value = "uris", required = false) List<String> uris,
+                                   @RequestParam(value = "unique", required = false, defaultValue = "false") String unique) {
         StatRequestDto statRequestDto = StatRequestDto.builder()
-                .start(start)
-                .end(end)
-                .uris(uris)
-                .unique(unique)
+                .start(URLDecoder.decode(start, StandardCharsets.UTF_8))
+                .end(URLDecoder.decode(end, StandardCharsets.UTF_8))
+                .uris(uris.stream().map(uri->URLDecoder.decode(uri, StandardCharsets.UTF_8)).collect(Collectors.toList()))
+                .unique(Boolean.valueOf(URLDecoder.decode(unique, StandardCharsets.UTF_8)))
                 .build();
+        System.out.println("Вот что получил запрос статистики: " + statRequestDto);
         return service.get(statRequestDto);
     }
 }

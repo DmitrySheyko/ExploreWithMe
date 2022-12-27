@@ -42,6 +42,6 @@ public class StatMapper {
         if (dateTime == null) {
             return null;
         }
-        return LocalDateTime.parse(dateTime, DATE_TIME_PATTERN);
+        return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }

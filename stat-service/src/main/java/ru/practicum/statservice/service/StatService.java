@@ -8,10 +8,11 @@ import ru.practicum.statservice.Dto.StatRequestDto;
 import ru.practicum.statservice.Dto.StatsRequest;
 import ru.practicum.statservice.mapper.StatMapper;
 import ru.practicum.statservice.model.EndPointHit;
-import ru.practicum.statservice.model.StatsResponce;
+import ru.practicum.statservice.model.StatsResponse;
 import ru.practicum.statservice.repository.StatRepository;
 
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -20,31 +21,34 @@ public class StatService {
     private final StatRepository repository;
     private final StatMapper mapper;
 
-    public Map<String, Long> add(NewEndPointHitDto newDto) {
+    public String add(NewEndPointHitDto newDto) {
         EndPointHit endPointHit = mapper.toEndPointHit(newDto);
+        if (endPointHit.getTimeStamp() == null) {
+            endPointHit.setTimeStamp(LocalDateTime.now());
+        }
         endPointHit = repository.save(endPointHit);
         log.info("New EndPointHit id={} successfully add", endPointHit.getId());
-        return Map.of("Successfully add new endPointHit id=", endPointHit.getId());
+        return String.format("Successfully add new endPointHit id=%s", endPointHit.getId());
     }
 
-    public StatsResponce get(StatRequestDto requestDto) {
+    public List<StatsResponse> get(StatRequestDto requestDto) {
         StatsRequest statsRequest = mapper.toStatRequest(requestDto);
-        StatsResponce statsResponce = null;
-        if (requestDto.getUris() == null && requestDto.getUnique() == null) {
-            statsResponce = repository.findByPeriod(statsRequest.getStart(), statsRequest.getEnd());
+        List<StatsResponse> statsResponse = null;
+        if (statsRequest.getUris() == null && !requestDto.getUnique()) {
+            statsResponse = repository.findByPeriod(statsRequest.getStart(), statsRequest.getEnd());
         }
-        if (requestDto.getUris() != null && requestDto.getUnique() == null) {
-            statsResponce = repository.findByPeriodAndUris(statsRequest.getStart(), statsRequest.getEnd(), statsRequest.getUris());
+        if (statsRequest.getUris() != null && !requestDto.getUnique()) {
+                        statsResponse = repository.findByPeriodAndUris(statsRequest.getStart(), statsRequest.getEnd(), statsRequest.getUris());
         }
-        if (requestDto.getUris() == null && requestDto.getUnique() != null) {
-            statsResponce = repository.findByPeriodAndUnique(statsRequest.getStart(), statsRequest.getEnd(), statsRequest.getUnique());
+        if (statsRequest.getUris() == null && requestDto.getUnique()) {
+            statsResponse = repository.findByPeriodAndUnique(statsRequest.getStart(), statsRequest.getEnd());
         }
-        if (requestDto.getUris() != null && requestDto.getUnique() != null) {
-            statsResponce = repository.findByPeriodAndUrisAndUnique(statsRequest.getStart(), statsRequest.getEnd(),
-                    statsRequest.getUris(), statsRequest.getUnique());
+        if (statsRequest.getUris() != null && requestDto.getUnique()) {
+            statsResponse = repository.findByPeriodAndUrisAndUnique(statsRequest.getStart(), statsRequest.getEnd(),
+                    statsRequest.getUris());
         }
-        log.info("StatResponce successfully received");
-        return statsResponce;
+        log.info("Statistic successfully sent from stat-service");
+        System.out.println("Stat-Response: " + statsResponse);
+        return statsResponse;
     }
-
 }

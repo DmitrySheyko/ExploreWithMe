@@ -16,6 +16,11 @@ import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
 import ru.practicum.mainservice.event.service.EventService;
 import ru.practicum.mainservice.exceptions.ValidationException;
+import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
+import ru.practicum.mainservice.request.mapper.RequestMapper;
+import ru.practicum.mainservice.request.model.Request;
+import ru.practicum.mainservice.request.model.Status;
+import ru.practicum.mainservice.request.service.RequestService;
 import ru.practicum.mainservice.user.service.UserService;
 
 import java.util.List;
@@ -28,7 +33,9 @@ import java.util.stream.Collectors;
 public class EventPrivateService {
     private final EventService service;
     private final UserService userService;
+    private final RequestService requestService;
     private final EventMapper mapper;
+    private final RequestMapper requestMapper;
 
     public EventFullDto add(Long userId, NewEventDto newEventDto) {
         Event event = mapper.toEvent(newEventDto);
@@ -55,8 +62,7 @@ public class EventPrivateService {
         service.checkIsObjectInStorage(eventId);
         Event event = service.findById(eventId);
         if (!Objects.equals(userId, event.getInitiator().getId())) {
-            throw new ValidationException((String.format("User id=%s don't have accesses to full information about event id=%s", userId, eventId)),
-                    "For the requested operation the conditions are not met.");
+            throw new ValidationException((String.format("User id=%s don't have accesses to full information about event id=%s", userId, eventId)));
         }
         EventFullDto eventFullDto = mapper.toFullDto(event);
         log.info("Received event id={}", eventId);
@@ -78,8 +84,7 @@ public class EventPrivateService {
         Event event = service.findById(eventId);
         if (!Objects.equals(State.PENDING, event.getState())) {
             log.warn("Event id=%s not canceled because canceling is possible only in PENDING status", eventId);
-            throw new ValidationException((String.format("Event id=%s not canceled because canceling is possible only in PENDING status", eventId)),
-                    "For the requested operation the conditions are not met.");
+            throw new ValidationException((String.format("Event id=%s not canceled because canceling is possible only in PENDING status", eventId)));
         }
         event.setState(State.CANCELED);
         EventFullDto eventFullDto = mapper.toFullDto(event);
@@ -87,4 +92,36 @@ public class EventPrivateService {
         return eventFullDto;
     }
 
+    public List<ParticipationRequestDto> getRequestsToEventsOfUser(Long userId, Long eventId) {
+        service.checkIsObjectInStorage(eventId);
+        userService.checkIsObjectInStorage(userId);
+        Event event = service.findById(eventId);
+        if (!event.getInitiator().getId().equals(userId)) {
+            log.warn("User id={} don't have access to participation requests of event id={}", userId, event);
+            throw new ValidationException(String.format("User id=%s don't have access to participation requests of event id=%s", userId, event));
+        }
+        List<Request> requestsList = requestService.findAllByEvent(event);
+        List<ParticipationRequestDto> requestDtoList = requestsList.stream()
+                .map(requestMapper::toDto)
+                .collect(Collectors.toList());
+        log.info("List of participation requests for event id={} successfully received", eventId);
+        return requestDtoList;
+    }
+
+    public ParticipationRequestDto changeStatusOfParticipationRequest(Long userId, Long eventId, Long requestId,
+                                                                      Status status) {
+        service.checkIsObjectInStorage(eventId);
+        userService.checkIsObjectInStorage(userId);
+        Event event = service.findById(eventId);
+        if (!event.getInitiator().getId().equals(userId)) {
+            log.warn("User id={} don't have access to participation requests of event id={}", userId, event);
+            throw new ValidationException(String.format("User id=%s don't have access to participation requests of event id=%s", userId, event));
+        }
+        Request request = requestService.findById(requestId);
+        request.setStatus(status);
+        request = requestService.save(request);
+        ParticipationRequestDto requestDto = requestMapper.toDto(request);
+        log.info("Participation requests id={} for event id={} got status {}", requestId, eventId, status.toString());
+        return requestDto;
+    }
 }

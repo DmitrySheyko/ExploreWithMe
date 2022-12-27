@@ -2,7 +2,6 @@ package ru.practicum.mainservice.event.model;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.format.annotation.DateTimeFormat;
 import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.compilation.model.Compilation;
 import ru.practicum.mainservice.location.model.Location;
@@ -39,7 +38,6 @@ public class Event {
     private String description;
 
     @Column(name = "event_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime eventDate;
 
     @Id
@@ -72,18 +70,14 @@ public class Event {
     @Column(name = "title")
     @Length(min = 3, max = 120)
     private String title;
+
     @Transient
     private Integer views;
 
     @OneToMany(mappedBy = "event")
     private Set<Request> requestsSet;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "events_compilations",
-            joinColumns = {@JoinColumn(name = "event_id")},
-            inverseJoinColumns = {@JoinColumn(name = "compilation_id")}
-    )
+    @ManyToMany(mappedBy = "events")
     List<Compilation> compilations = new ArrayList<>();
 
     @Override

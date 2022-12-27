@@ -1,6 +1,7 @@
 package ru.practicum.mainservice.event.controller.adminController;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.event.dto.AdminUpdateEventDto;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@Slf4j
 @RequestMapping("/admin/events")
 @AllArgsConstructor
 public class EventAdminController {
@@ -35,6 +37,7 @@ public class EventAdminController {
                 .rangeStart(rangeStart)
                 .rangeEnd(rangeEnd)
                 .build();
+        log.info("Получен запрос админ евент серч");
         return service.search(searchDto, from, size);
     }
 
@@ -42,16 +45,19 @@ public class EventAdminController {
     public EventFullDto update(@PathVariable("eventId") Long eventId,
                                @RequestBody AdminUpdateEventDto eventDto) {
         eventDto.setEventId(eventId);
+        log.info("Получен запрос админ евент апдейт");
         return service.update(eventDto);
     }
 
     @PatchMapping("/{eventId}/publish")
     public EventFullDto publish (@PathVariable("eventId") Long eventId){
+        log.info("Получен запрос админ евент паблиш");
         return service.publish(eventId);
     }
 
     @PatchMapping("/{eventId}/reject")
     public EventFullDto reject (@PathVariable("eventId") Long eventId){
+        log.info("Получен запрос админ евент reject");
         return service.reject(eventId);
     }
 }

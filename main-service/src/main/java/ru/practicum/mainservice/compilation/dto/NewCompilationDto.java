@@ -16,4 +16,13 @@ public class NewCompilationDto {
     Boolean pinned;
     @NotBlank
     String title;
+
+    @Override
+    public String toString() {
+        return "NewCompilationDto{" +
+                "events=" + events +
+                ", pinned=" + pinned +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }
