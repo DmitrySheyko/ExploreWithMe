@@ -18,16 +18,4 @@ public class EventPublicSearch {
     private LocalDateTime rangeStart;
     private LocalDateTime rangeEnd;
     private String text;
-
-    @Override
-    public String toString() {
-        return "EventPublicSearch{" +
-                "categories=" + categories +
-                ", onlyAvailable=" + onlyAvailable +
-                ", paid=" + paid +
-                ", rangeStart=" + rangeStart +
-                ", rangeEnd=" + rangeEnd +
-                ", text='" + text + '\'' +
-                '}';
-    }
 }

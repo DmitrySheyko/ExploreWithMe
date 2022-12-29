@@ -21,9 +21,8 @@ public class EventShortDto implements Comparable<EventShortDto> {
     private String title;
     private Integer views;
 
-
     @Override
     public int compareTo(EventShortDto o) {
-        return this.views - o.views;
+        return Integer.compare(getViews(), o.views);
     }
 }

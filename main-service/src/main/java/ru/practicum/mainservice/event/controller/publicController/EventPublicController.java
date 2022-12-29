@@ -1,14 +1,13 @@
 package ru.practicum.mainservice.event.controller.publicController;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.mainservice.event.EventClient;
+import ru.practicum.mainservice.event.client.EventClient;
 import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.dto.EventPublicSearchDto;
 import ru.practicum.mainservice.event.dto.EventShortDto;
 import ru.practicum.mainservice.event.model.EventSearchSort;
-import ru.practicum.mainservice.event.service.publicService.EventPublicService;
+import ru.practicum.mainservice.event.service.EventServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -18,12 +17,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@Slf4j
 @RequestMapping("/events")
 @AllArgsConstructor
 public class EventPublicController {
-    EventPublicService service;
-    EventClient eventClient;
+    private final EventServiceImpl service;
+    private final EventClient eventClient;
 
     @GetMapping
     public List<EventShortDto> search(@RequestParam(value = "text", required = false) @NotBlank String text,
@@ -44,7 +42,6 @@ public class EventPublicController {
                 .rangeEnd(rangeEnd)
                 .onlyAvailable(onlyAvailable)
                 .build();
-        log.info("Получен запрос паблик эвент search");
         eventClient.addEndPointHit(request.getRemoteAddr(), request.getRequestURI(), LocalDateTime.now());
         return service.search(searchDto, from, size, EventSearchSort.valueOf(sort));
     }
@@ -52,7 +49,6 @@ public class EventPublicController {
     @GetMapping("/{id}")
     public EventFullDto getById(@PathVariable("id") Long eventId, HttpServletRequest request) {
         eventClient.addEndPointHit(request.getRemoteAddr(), request.getRequestURI(), LocalDateTime.now());
-        log.info("Получен запрос паблик эвент getById");
         return service.getById(eventId);
     }
 }

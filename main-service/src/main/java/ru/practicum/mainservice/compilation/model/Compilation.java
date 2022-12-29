@@ -16,13 +16,12 @@ import java.util.List;
 @Table(name = "compilations")
 public class Compilation {
 
-//    @ManyToMany(mappedBy = "compilations")
-@ManyToMany(cascade = {CascadeType.ALL})
-@JoinTable(
-        name = "events_compilations",
-        joinColumns = {@JoinColumn(name = "compilation_id")},
-        inverseJoinColumns = {@JoinColumn(name = "event_id")}
-)
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "events_compilations",
+            joinColumns = {@JoinColumn(name = "compilation_id")},
+            inverseJoinColumns = {@JoinColumn(name = "event_id")}
+    )
     List<Event> events = new ArrayList<>();
 
     @Id
@@ -48,15 +47,5 @@ public class Compilation {
     @Override
     public int hashCode() {
         return id.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "Compilation{" +
-                "events=" + events +
-                ", id=" + id +
-                ", pinned=" + pinned +
-                ", title='" + title + '\'' +
-                '}';
     }
 }

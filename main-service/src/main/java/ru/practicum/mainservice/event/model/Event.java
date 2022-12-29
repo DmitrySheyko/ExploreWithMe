@@ -12,7 +12,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -22,6 +21,7 @@ import java.util.Set;
 @Entity
 @Table(name = "events")
 public class Event {
+
     @Column(name = "annotation")
     @Length(min = 20, max = 2000)
     private String annotation;
@@ -75,7 +75,7 @@ public class Event {
     private Integer views;
 
     @OneToMany(mappedBy = "event")
-    private Set<Request> requestsSet;
+    private List<Request> requestsSet = new ArrayList<>();
 
     @ManyToMany(mappedBy = "events")
     List<Compilation> compilations = new ArrayList<>();
@@ -93,28 +93,5 @@ public class Event {
     @Override
     public int hashCode() {
         return id.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "annotation='" + annotation + '\'' +
-                ", category=" + category +
-                ", createdOn=" + createdOn +
-                ", description='" + description + '\'' +
-                ", eventDate=" + eventDate +
-                ", id=" + id +
-                ", initiator=" + initiator +
-                ", location=" + location +
-                ", paid=" + paid +
-                ", participantLimit=" + participantLimit +
-                ", publishedOn=" + publishedOn +
-                ", requestModeration=" + requestModeration +
-                ", state=" + state +
-                ", title='" + title + '\'' +
-                ", views=" + views +
-                ", requestsSet=" + requestsSet +
-                ", compilations=" + compilations +
-                '}';
     }
 }

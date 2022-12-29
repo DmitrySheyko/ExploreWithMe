@@ -3,13 +3,14 @@ package ru.practicum.mainservice.event.eventMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.mainservice.category.mapper.CategoryMapper;
-import ru.practicum.mainservice.category.service.CategoryService;
-import ru.practicum.mainservice.event.EventClient;
+import ru.practicum.mainservice.category.service.CategoryServiceImpl;
+import ru.practicum.mainservice.event.client.EventClient;
 import ru.practicum.mainservice.event.dto.*;
 import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
-import ru.practicum.mainservice.location.service.LocationService;
-import ru.practicum.mainservice.request.service.RequestService;
+import ru.practicum.mainservice.location.service.LocationServiceImpl;
+import ru.practicum.mainservice.request.model.Request;
+import ru.practicum.mainservice.request.model.Status;
 import ru.practicum.mainservice.user.mapper.UserMapper;
 
 import java.time.LocalDateTime;
@@ -20,23 +21,22 @@ import java.util.stream.Collectors;
 @Component
 @AllArgsConstructor
 public class EventMapper {
-    private final UserMapper userMapper;
+    private final CategoryServiceImpl categoryServiceImpl;
+    private final LocationServiceImpl locationServiceImpl;
     private final CategoryMapper categoryMapper;
-    private final CategoryService categoryService;
-    private final LocationService locationService;
-    private final RequestService requestService;
+    private final UserMapper userMapper;
     private final EventClient eventClient;
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public Event toEvent(NewEventDto newEventDto) {
         return Event.builder()
                 .annotation(newEventDto.getAnnotation())
-                .category(categoryService.getById(newEventDto.getCategory()))
+                .category(categoryServiceImpl.findById(newEventDto.getCategory()))
                 .createdOn(null)
                 .description(newEventDto.getDescription())
                 .eventDate(toLocalDateTime(newEventDto.getEventDate()))
                 .initiator(null)
-                .location(locationService.save(newEventDto.getLocation()))
+                .location(locationServiceImpl.save(newEventDto.getLocation()))
                 .paid(newEventDto.getPaid())
                 .participantLimit(newEventDto.getParticipantLimit())
                 .publishedOn(null)
@@ -49,7 +49,7 @@ public class EventMapper {
     public Event toEvent(PrivateUpdateEventDto updateEventDto) {
         return Event.builder()
                 .annotation(updateEventDto.getAnnotation())
-                .category(categoryService.getById(updateEventDto.getCategory()))
+                .category(categoryServiceImpl.findById(updateEventDto.getCategory()))
                 .createdOn(null)
                 .description(updateEventDto.getDescription())
                 .eventDate(toLocalDateTime(updateEventDto.getEventDate()))
@@ -67,7 +67,7 @@ public class EventMapper {
     public Event toEvent(AdminUpdateEventDto adminUpdateEventDto) {
         return Event.builder()
                 .annotation(adminUpdateEventDto.getAnnotation())
-                .category(categoryService.getById(adminUpdateEventDto.getCategory()))
+                .category(categoryServiceImpl.findById(adminUpdateEventDto.getCategory()))
                 .createdOn(null)
                 .description(adminUpdateEventDto.getDescription())
                 .eventDate(toLocalDateTime(adminUpdateEventDto.getEventDate()))
@@ -87,7 +87,7 @@ public class EventMapper {
         return EventFullDto.builder()
                 .annotation(event.getAnnotation())
                 .category(categoryMapper.toDto(event.getCategory()))
-                .confirmedRequests(requestService.getConfirmedRequests(event))
+                .confirmedRequests(getConfirmedRequests(event.getRequestsSet()))
                 .createdOn(dateTimeToString(event.getCreatedOn()))
                 .description(event.getDescription())
                 .eventDate(dateTimeToString(event.getEventDate()))
@@ -108,7 +108,7 @@ public class EventMapper {
         return EventShortDto.builder()
                 .annotation(event.getAnnotation())
                 .category(categoryMapper.toDto(event.getCategory()))
-                .confirmedRequests(requestService.getConfirmedRequests(event))
+                .confirmedRequests(getConfirmedRequests(event.getRequestsSet()))
                 .eventDate(dateTimeToString(event.getEventDate()))
                 .id(event.getId())
                 .initiator(userMapper.toShortDto(event.getInitiator()))
@@ -164,5 +164,15 @@ public class EventMapper {
 
     private Integer getViews(Long eventId) {
         return eventClient.getViews(eventId);
+    }
+
+    private Integer getConfirmedRequests(List<Request> requestList) {
+        if (requestList == null || requestList.isEmpty()) {
+            return 0;
+        }
+        return requestList.stream().
+                filter(request -> request.getStatus().equals(Status.CONFIRMED)).
+                collect(Collectors.toSet()).
+                size();
     }
 }

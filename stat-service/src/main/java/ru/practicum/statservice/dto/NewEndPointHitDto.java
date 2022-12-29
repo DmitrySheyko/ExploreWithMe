@@ -1,4 +1,4 @@
-package ru.practicum.mainservice.event.dto;
+package ru.practicum.statservice.dto;
 
 import lombok.*;
 
@@ -7,7 +7,8 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NewEndPointHit {
+public class NewEndPointHitDto {
+    private Long id;
     private final String app = "ewm-main-service";
     private String uri;
     private String ip;

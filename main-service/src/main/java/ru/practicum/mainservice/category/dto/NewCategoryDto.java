@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewCategoryDto {
+
     @NotBlank
     private String name;
 }

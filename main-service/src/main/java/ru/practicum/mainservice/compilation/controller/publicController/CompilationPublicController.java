@@ -3,7 +3,7 @@ package ru.practicum.mainservice.compilation.controller.publicController;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.compilation.dto.CompilationDto;
-import ru.practicum.mainservice.compilation.service.publicService.CompilationPublicService;
+import ru.practicum.mainservice.compilation.service.CompilationServiceImpl;
 
 import javax.validation.constraints.Min;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/compilations")
 @AllArgsConstructor
 public class CompilationPublicController {
-    private final CompilationPublicService service;
+    private final CompilationServiceImpl service;
 
     @GetMapping
     public List<CompilationDto> getAll(@RequestParam(value = "pinned", required = false, defaultValue = "true") Boolean pinned,

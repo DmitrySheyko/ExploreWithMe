@@ -3,9 +3,7 @@ package ru.practicum.mainservice.exceptions;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.tomcat.util.bcel.classfile.Constant;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package ru.practicum.statservice.Dto;
+package ru.practicum.statservice.dto;
 
 import lombok.*;
 

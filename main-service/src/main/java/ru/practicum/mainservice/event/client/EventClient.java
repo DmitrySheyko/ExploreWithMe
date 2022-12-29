@@ -1,4 +1,4 @@
-package ru.practicum.mainservice.event;
+package ru.practicum.mainservice.event.client;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +10,6 @@ import ru.practicum.mainservice.event.dto.NewEndPointHit;
 import ru.practicum.mainservice.event.dto.StatsResponseDto;
 import ru.practicum.mainservice.exceptions.NotFoundException;
 
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -21,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 @AllArgsConstructor
 public class EventClient {
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private static final LocalDateTime START_TIME = LocalDateTime.of(2020, 1, 1, 0, 0, 1);
 
     public void addEndPointHit(String ip, String uri, LocalDateTime timeStamp) {
         RestTemplate restTemplate = new RestTemplate();
@@ -30,10 +30,8 @@ public class EventClient {
                 .ip(ip)
                 .timeStamp(dateTimeToSting(timeStamp))
                 .build();
-        System.out.println("Вот что отправили в статистику: " + newDto);
         HttpEntity<NewEndPointHit> request = new HttpEntity<>(newDto);
         String response = restTemplate.postForObject(resourceUrl, request, String.class);
-        System.out.println("Вот что пришло: " + response);
         if (response == null || response.isBlank() || !response.toLowerCase().contains("successfully".toLowerCase())) {
             log.warn("Statistic don't updated");
         } else {
@@ -45,13 +43,11 @@ public class EventClient {
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://localhost:9090/stats";
         StringBuilder param = new StringBuilder("?");
-        param.append("start=" + URLEncoder.encode(dateTimeToSting(LocalDateTime.of(2020, 1, 1, 0, 0, 1)), StandardCharsets.UTF_8) + "&");
-        param.append("end=" + URLEncoder.encode(dateTimeToSting(LocalDateTime.now().plusHours(1L)), StandardCharsets.UTF_8) + "&");
+        param.append("start=" + URLEncoder.encode(dateTimeToSting(START_TIME), StandardCharsets.UTF_8) + "&");
+        param.append("end=" + URLEncoder.encode(dateTimeToSting(LocalDateTime.now()), StandardCharsets.UTF_8) + "&");
         param.append("uris=" + URLEncoder.encode(("/events/" + eventId), StandardCharsets.UTF_8) + "&");
         param.append("unique=" + URLEncoder.encode("false", StandardCharsets.UTF_8));
         String resourceUrl = url + param;
-        System.out.println("Url: " + resourceUrl);
-        System.out.println("Url декодированый : " + URLDecoder.decode(resourceUrl, StandardCharsets.UTF_8));
         ResponseEntity<StatsResponseDto[]> responseEntity =
                 restTemplate.getForEntity(resourceUrl, StatsResponseDto[].class);
         if (responseEntity == null) {

@@ -9,13 +9,10 @@ import ru.practicum.mainservice.event.model.State;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
 
     Page<Event> findAllByInitiatorId(Long InitiatorId, Pageable pageable);
-
-    Optional<Event> findByIdAndPublishedOnNot(Long eventId, LocalDateTime dateTime);
 
     @Query("SELECT e " +
             "FROM Event e " +

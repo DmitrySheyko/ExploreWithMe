@@ -13,13 +13,18 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ParticipationRequestDto {
+
     private LocalDateTime created;
+
     @NotNull
     private Long event;
+
     @NotNull
     private long id;
+
     @NotNull
     private Long requester;
+
     @NotNull
     private Status status;
 }

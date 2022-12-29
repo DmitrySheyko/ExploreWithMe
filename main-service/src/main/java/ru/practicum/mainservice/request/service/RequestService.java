@@ -1,54 +1,25 @@
 package ru.practicum.mainservice.request.service;
 
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 import ru.practicum.mainservice.event.model.Event;
-import ru.practicum.mainservice.exceptions.NotFoundException;
+import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
 import ru.practicum.mainservice.request.model.Request;
-import ru.practicum.mainservice.request.model.Status;
-import ru.practicum.mainservice.request.repository.RequestRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-@AllArgsConstructor
-public class RequestService {
-    RequestRepository repository;
+public interface RequestService {
+    ParticipationRequestDto add(Long userId, Long eventId);
 
-    public Request save(Request request) {
-        return repository.save(request);
-    }
+    ParticipationRequestDto cancel(Long userId, Long requestId);
 
-    public Request findById(Long requestId) {
-        Optional<Request> optionalRequest = repository.findById(requestId);
-        if (optionalRequest.isPresent()) {
-            return optionalRequest.get();
-        }
-        throw new NotFoundException((String.format("Request id=%s was not found.", requestId)));
-    }
+    List<ParticipationRequestDto> getAllByUserId(Long userId);
 
-    public List<Request> findAllByUserId(Long userId) {
-        return repository.findAllByRequesterOrderById(userId);
-    }
-    public List<Request> findAllByEvent(Event event){
-        return repository.findAllByEvent(event);
-    }
+    Request findById(Long requestId);
 
-    public void checkIsObjectInStorage(Request request) {
-        if (!repository.existsById(request.getId())) {
-            throw new NotFoundException((String.format("Request with id=%s was not found.", request.getId())));
-        }
-    }
+    List<Request> findAllByEvent(Event event);
 
-    public void checkIsObjectInStorage(Long requestId) {
-        if (!repository.existsById(requestId)) {
-            throw new NotFoundException((String.format("Request id=%s was not found.", requestId)));
-        }
-    }
+    Request save(Request request);
 
-    public Integer getConfirmedRequests(Event event) {
-        List<Request> requestList = repository.findAllByEventAndStatus(event, Status.APPROVED);
-        return requestList.size();
-    }
+    Event findEventById(Long eventId);
+
+    void checkIsObjectInStorage(Long requestId);
 }

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.category.dto.CategoryDto;
 import ru.practicum.mainservice.category.dto.NewCategoryDto;
-import ru.practicum.mainservice.category.service.adminService.CategoryAdminService;
+import ru.practicum.mainservice.category.service.CategoryServiceImpl;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -13,20 +13,20 @@ import java.util.Map;
 @RequestMapping("/admin/categories")
 @AllArgsConstructor
 public class CategoryAdminController {
-    CategoryAdminService categoryAdminService;
+    private final CategoryServiceImpl categoryServiceImpl;
 
     @PostMapping
     public CategoryDto add(@Valid @RequestBody NewCategoryDto newCategoryDto) {
-        return categoryAdminService.add(newCategoryDto);
+        return categoryServiceImpl.add(newCategoryDto);
     }
 
     @PatchMapping
     public CategoryDto update(@Valid @RequestBody CategoryDto categoryDto) {
-        return categoryAdminService.update(categoryDto);
+        return categoryServiceImpl.update(categoryDto);
     }
 
     @DeleteMapping("/{id}")
     public Map<String, Long> delete(@PathVariable("id") Long categoryId) {
-        return categoryAdminService.delete(categoryId);
+        return categoryServiceImpl.delete(categoryId);
     }
 }

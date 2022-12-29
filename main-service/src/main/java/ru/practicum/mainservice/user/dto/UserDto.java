@@ -13,10 +13,13 @@ import javax.validation.constraints.Positive;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
+
     @Positive
     private Long id;
+
     @NotBlank
     private String name;
+
     @NonNull
     @Email
     private String email;

@@ -1,9 +1,9 @@
 package ru.practicum.statservice.mapper;
 
 import org.springframework.stereotype.Component;
-import ru.practicum.statservice.Dto.NewEndPointHitDto;
-import ru.practicum.statservice.Dto.StatRequestDto;
-import ru.practicum.statservice.Dto.StatsRequest;
+import ru.practicum.statservice.dto.NewEndPointHitDto;
+import ru.practicum.statservice.dto.StatRequestDto;
+import ru.practicum.statservice.dto.StatsRequest;
 import ru.practicum.statservice.model.EndPointHit;
 
 import java.time.LocalDateTime;
@@ -31,17 +31,10 @@ public class StatMapper {
                 .build();
     }
 
-    private String dateTimeToString(LocalDateTime dateTime) {
-        if (dateTime == null) {
-            return null;
-        }
-        return dateTime.format(DATE_TIME_PATTERN);
-    }
-
     private LocalDateTime toLocalDateTime(String dateTime) {
         if (dateTime == null) {
             return null;
         }
-        return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return LocalDateTime.parse(dateTime, DATE_TIME_PATTERN);
     }
 }

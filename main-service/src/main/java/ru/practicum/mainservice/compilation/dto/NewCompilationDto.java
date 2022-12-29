@@ -12,17 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class NewCompilationDto {
-    List<Long> events;
-    Boolean pinned;
-    @NotBlank
-    String title;
 
-    @Override
-    public String toString() {
-        return "NewCompilationDto{" +
-                "events=" + events +
-                ", pinned=" + pinned +
-                ", title='" + title + '\'' +
-                '}';
-    }
+    private List<Long> events;
+
+    private Boolean pinned;
+
+    @NotBlank
+    private String title;
 }

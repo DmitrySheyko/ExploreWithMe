@@ -13,15 +13,20 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "endpointhits")
 public class EndPointHit {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "app")
     private String app;
+
     @Column(name = "uri")
     private String uri;
+
     @Column(name = "ip")
     private String ip;
+
     @Column(name = "request_time")
     private LocalDateTime timeStamp;
 
