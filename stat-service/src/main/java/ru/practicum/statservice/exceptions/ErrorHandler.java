@@ -1,6 +1,5 @@
 package ru.practicum.statservice.exceptions;
 
-import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -33,18 +32,6 @@ public class ErrorHandler {
                 .timestamp(LocalDateTime.now())
                 .build();
     }
-
-    @ExceptionHandler(JdbcSQLIntegrityConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse handlerJdbcSQLIntegrityConstraintViolationException(final JdbcSQLIntegrityConstraintViolationException e) {
-        return ErrorResponse.builder()
-                .message(e.getMessage())
-                .reason(HttpStatus.CONFLICT.getReasonPhrase())
-                .status(HttpStatus.CONFLICT.toString())
-                .timestamp(LocalDateTime.now())
-                .build();
-    }
-
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
