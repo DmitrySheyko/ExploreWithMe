@@ -1,6 +1,5 @@
 package ru.practicum.mainservice.exceptions;
 
-import org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -50,17 +49,6 @@ public class ErrorHandler {
                 .build();
     }
 
-    @ExceptionHandler(JdbcSQLIntegrityConstraintViolationException.class)
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse handlerJdbcSQLIntegrityConstraintViolationException(final JdbcSQLIntegrityConstraintViolationException e) {
-        return ErrorResponse.builder()
-                .message(e.getMessage())
-                .reason(HttpStatus.CONFLICT.getReasonPhrase())
-                .status(HttpStatus.CONFLICT.toString())
-                .timestamp(LocalDateTime.now())
-                .build();
-    }
-
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handlerConstraintViolationException(final ConstraintViolationException e) {
@@ -93,15 +81,4 @@ public class ErrorHandler {
                 .timestamp(LocalDateTime.now())
                 .build();
     }
-
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ErrorResponse handlerExceptions(final Exception e) {
-//        return ErrorResponse.builder()
-//                .message(e.getMessage())
-//                .reason(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-//                .status(HttpStatus.INTERNAL_SERVER_ERROR.toString())
-//                .timestamp(LocalDateTime.now())
-//                .build();
-//    }
 }
