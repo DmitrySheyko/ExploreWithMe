@@ -11,13 +11,13 @@ services:
       - POSTGRES_USER=stat
       - POSTGRES_PASSWORD=stat
       - DB_HOST=stats-db
-      - DB_PORT=5433
+      - DB_PORT=5432
 
   stats-db:
     image: postgres:14-alpine
     container_name: stat_db
     ports:
-      - "6541:5433"
+      - "6541:5432"
     environment:
       - POSTGRES_DB=statDb
       - POSTGRES_USER=stat
