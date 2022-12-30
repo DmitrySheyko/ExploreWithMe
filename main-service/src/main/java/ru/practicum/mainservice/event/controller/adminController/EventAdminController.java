@@ -34,7 +34,7 @@ public class EventAdminController {
                 .rangeStart(rangeStart)
                 .rangeEnd(rangeEnd)
                 .build();
-        return service.search(searchDto, from, size);
+        return service.adminSearch(searchDto, from, size);
     }
 
     @PutMapping("/{eventId}")

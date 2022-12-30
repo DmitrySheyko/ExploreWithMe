@@ -125,7 +125,7 @@ public class EventMapper {
                 .paid(searchDto.getPaid())
                 .rangeStart(toLocalDateTime(searchDto.getRangeStart()))
                 .rangeEnd(toLocalDateTime(searchDto.getRangeEnd()))
-                .text(searchDto.getText().toUpperCase())
+                .text(searchDto.getText())
                 .build();
     }
 

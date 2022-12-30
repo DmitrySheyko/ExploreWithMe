@@ -1,6 +1,8 @@
 package ru.practicum.mainservice.event.client;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +19,19 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 @Slf4j
-@AllArgsConstructor
 public class EventClient {
+    private final String STAT_SERVER_URL;
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final LocalDateTime START_TIME = LocalDateTime.of(2020, 1, 1, 0, 0, 1);
 
+    @Autowired
+    public EventClient(@Value("${STAT_SERVER_URL}") String statServerUrl) {
+        STAT_SERVER_URL = statServerUrl;
+    }
+
     public void addEndPointHit(String ip, String uri, LocalDateTime timeStamp) {
         RestTemplate restTemplate = new RestTemplate();
-        String resourceUrl = "http://localhost:9090/hit";
+        String resourceUrl = STAT_SERVER_URL + "/hit";
         NewEndPointHit newDto = NewEndPointHit.builder()
                 .uri(uri)
                 .ip(ip)

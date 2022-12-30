@@ -18,7 +18,7 @@ public interface EventService {
 
     EventFullDto reject(Long eventId);
 
-    List<EventFullDto> search(EventAdminSearchDto searchDto, int from, int size);
+    List<EventFullDto> adminSearch(EventAdminSearchDto searchDto, int from, int size);
 
     EventFullDto add(Long userId, NewEventDto newEventDto);
 
@@ -32,7 +32,7 @@ public interface EventService {
 
     List<ParticipationRequestDto> getRequestsToEventsOfUser(Long userId, Long eventId);
 
-    List<EventShortDto> search(EventPublicSearchDto searchDto, int from, int size, EventSearchSort sort);
+    List<EventShortDto> publicSearch(EventPublicSearchDto searchDto, int from, int size, EventSearchSort sort);
 
     EventFullDto getById(Long eventId);
 

@@ -96,7 +96,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventFullDto> search(EventAdminSearchDto searchDto, int from, int size) {
+    public List<EventFullDto> adminSearch(EventAdminSearchDto searchDto, int from, int size) {
         int page = from / size;
         Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
         EventAdminSearch eventAdminSearch = mapper.toEventAdminSearch(searchDto);
@@ -109,7 +109,7 @@ public class EventServiceImpl implements EventService {
         eventAdminSearch.setRangeStart(Optional.ofNullable(eventAdminSearch.getRangeStart())
                 .orElse(LocalDateTime.now()));
         eventAdminSearch.setRangeEnd(Optional.ofNullable(eventAdminSearch.getRangeEnd())
-                .orElse(LocalDateTime.MAX));
+                .orElse(LocalDateTime.now().plusYears(100)));
         Page<Event> eventsPage;
         if (eventAdminSearch.getUsers() == null) {
             eventsPage = repository.searchForAllUsers(eventAdminSearch.getStates(),
@@ -207,7 +207,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventShortDto> search(EventPublicSearchDto searchDto, int from, int size, EventSearchSort sort) {
+    public List<EventShortDto> publicSearch(EventPublicSearchDto searchDto, int from, int size, EventSearchSort sort) {
         int page = from / size;
         Pageable pageable = PageRequest.of(page, size, Sort.by("eventDate"));
         EventPublicSearch eventPublicSearch = mapper.toEventPublicSearch(searchDto);
@@ -216,7 +216,7 @@ public class EventServiceImpl implements EventService {
         eventPublicSearch.setRangeStart(Optional.ofNullable(eventPublicSearch.getRangeStart())
                 .orElse(LocalDateTime.now()));
         eventPublicSearch.setRangeEnd(Optional.ofNullable(eventPublicSearch.getRangeEnd())
-                .orElse(LocalDateTime.MAX));
+                .orElse(LocalDateTime.now().minusYears(100)));
         Page<Event> eventsPage;
         if (eventPublicSearch.getOnlyAvailable()) {
             eventsPage = repository.searchAvailable(eventPublicSearch.getText(), eventPublicSearch.getCategories(),

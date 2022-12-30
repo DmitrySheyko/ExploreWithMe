@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS events
     location_id          BIGINT                      NOT NULL,
     is_paid              BOOLEAN                     NOT NULL,
     participant_limit    INT                         NOT NULL,
-    published_on         TIMESTAMP WITHOUT TIME ZONE,
+    published_on         TIMESTAMP WITHOUT TIME ZONE NULL,
     is_request_moderated BOOLEAN                     NOT NULL,
     state                INT                         NOT NULL,
     title                VARCHAR(120)                NOT NULL,

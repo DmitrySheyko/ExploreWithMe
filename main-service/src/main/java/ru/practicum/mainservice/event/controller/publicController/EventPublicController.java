@@ -43,7 +43,7 @@ public class EventPublicController {
                 .onlyAvailable(onlyAvailable)
                 .build();
         eventClient.addEndPointHit(request.getRemoteAddr(), request.getRequestURI(), LocalDateTime.now());
-        return service.search(searchDto, from, size, EventSearchSort.valueOf(sort));
+        return service.publicSearch(searchDto, from, size, EventSearchSort.valueOf(sort));
     }
 
     @GetMapping("/{id}")

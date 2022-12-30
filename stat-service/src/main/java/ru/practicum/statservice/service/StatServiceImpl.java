@@ -40,7 +40,8 @@ public class StatServiceImpl implements StatService {
             statsResponse = repository.findByPeriod(statsRequest.getStart(), statsRequest.getEnd());
         }
         if (statsRequest.getUris() != null && !requestDto.getUnique()) {
-            statsResponse = repository.findByPeriodAndUris(statsRequest.getStart(), statsRequest.getEnd(), statsRequest.getUris());
+            statsResponse = repository.findByPeriodAndUris(statsRequest.getStart(), statsRequest.getEnd(),
+                    statsRequest.getUris());
         }
         if (statsRequest.getUris() == null && requestDto.getUnique()) {
             statsResponse = repository.findByPeriodAndUnique(statsRequest.getStart(), statsRequest.getEnd());
