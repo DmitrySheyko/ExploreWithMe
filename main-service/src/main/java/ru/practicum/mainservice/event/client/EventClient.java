@@ -1,6 +1,5 @@
 package ru.practicum.mainservice.event.client;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -48,13 +47,14 @@ public class EventClient {
 
     public Integer getViews(Long eventId) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "http://localhost:9090/stats";
+        String url = STAT_SERVER_URL + "/stats";
         StringBuilder param = new StringBuilder("?");
         param.append("start=" + URLEncoder.encode(dateTimeToSting(START_TIME), StandardCharsets.UTF_8) + "&");
         param.append("end=" + URLEncoder.encode(dateTimeToSting(LocalDateTime.now()), StandardCharsets.UTF_8) + "&");
         param.append("uris=" + URLEncoder.encode(("/events/" + eventId), StandardCharsets.UTF_8) + "&");
         param.append("unique=" + URLEncoder.encode("false", StandardCharsets.UTF_8));
         String resourceUrl = url + param;
+        System.out.println("URL " + resourceUrl);
         ResponseEntity<StatsResponseDto[]> responseEntity =
                 restTemplate.getForEntity(resourceUrl, StatsResponseDto[].class);
         if (responseEntity == null) {
