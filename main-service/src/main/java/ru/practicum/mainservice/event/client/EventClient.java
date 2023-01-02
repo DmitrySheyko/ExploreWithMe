@@ -24,7 +24,7 @@ public class EventClient {
     private static final LocalDateTime START_TIME = LocalDateTime.of(2020, 1, 1, 0, 0, 1);
 
     @Value("${STAT_SERVER_URL}")
-    public void setStatServerUrl(String statServerUrl) {
+    public synchronized void  setStatServerUrl(String statServerUrl) {
         EventClient.STAT_SERVER_URL = statServerUrl;
     }
 
