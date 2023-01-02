@@ -166,9 +166,9 @@ public class EventMapper {
         if (requestList == null || requestList.isEmpty()) {
             return 0;
         }
-        return requestList.stream().
-                filter(request -> request.getStatus().equals(Status.CONFIRMED)).
-                collect(Collectors.toSet()).
-                size();
+        return requestList.stream()
+                .filter(request -> request.getStatus().equals(Status.CONFIRMED))
+                .collect(Collectors.toSet())
+                .size();
     }
 }

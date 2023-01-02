@@ -13,7 +13,7 @@ import java.util.Set;
 
 public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPredicateExecutor<Event> {
 
-    Page<Event> findAllByInitiatorId(Long InitiatorId, Pageable pageable);
+    Page<Event> findAllByInitiatorId(Long initiatorId, Pageable pageable);
 
     @Query("SELECT e " +
             "FROM Event e " +
