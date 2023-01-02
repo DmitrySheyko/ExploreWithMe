@@ -18,10 +18,15 @@ import java.time.format.DateTimeFormatter;
 @Component
 @Slf4j
 public class EventClient {
-    @Value("${STAT_SERVER_URL}")
+
     private static String STAT_SERVER_URL;
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final LocalDateTime START_TIME = LocalDateTime.of(2020, 1, 1, 0, 0, 1);
+
+    @Value("${STAT_SERVER_URL}")
+    public void setStatServerUrl(String statServerUrl) {
+        EventClient.STAT_SERVER_URL = statServerUrl;
+    }
 
     public void addEndPointHit(String ip, String uri, LocalDateTime timeStamp) {
         RestTemplate restTemplate = new RestTemplate();
