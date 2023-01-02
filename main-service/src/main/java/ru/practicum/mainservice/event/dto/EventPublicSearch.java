@@ -3,7 +3,7 @@ package ru.practicum.mainservice.event.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventPublicSearch {
-    private List<Long> categories;
+    private Set<Long> categories;
     private Boolean onlyAvailable;
     private Boolean paid;
     private LocalDateTime rangeStart;

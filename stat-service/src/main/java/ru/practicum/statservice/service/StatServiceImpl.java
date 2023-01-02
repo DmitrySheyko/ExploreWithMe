@@ -1,6 +1,6 @@
 package ru.practicum.statservice.service;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.statservice.dto.NewEndPointHitDto;
@@ -16,14 +16,13 @@ import java.util.List;
 
 @Service
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class StatServiceImpl implements StatService {
     private final StatRepository repository;
-    private final StatMapper mapper;
 
     @Override
     public String add(NewEndPointHitDto newDto) {
-        EndPointHit endPointHit = mapper.toEndPointHit(newDto);
+        EndPointHit endPointHit = StatMapper.toEndPointHit(newDto);
         if (endPointHit.getTimeStamp() == null) {
             endPointHit.setTimeStamp(LocalDateTime.now());
         }
@@ -34,7 +33,7 @@ public class StatServiceImpl implements StatService {
 
     @Override
     public List<StatsResponse> get(StatRequestDto requestDto) {
-        StatsRequest statsRequest = mapper.toStatRequest(requestDto);
+        StatsRequest statsRequest = StatMapper.toStatRequest(requestDto);
         List<StatsResponse> statsResponse = null;
         if (statsRequest.getUris() == null && !requestDto.getUnique()) {
             statsResponse = repository.findByPeriod(statsRequest.getStart(), statsRequest.getEnd());

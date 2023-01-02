@@ -4,7 +4,6 @@ import lombok.*;
 import ru.practicum.mainservice.request.model.Status;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

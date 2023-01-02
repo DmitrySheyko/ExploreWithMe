@@ -1,6 +1,6 @@
 package ru.practicum.mainservice.event.controller.adminController;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.event.dto.AdminUpdateEventDto;
 import ru.practicum.mainservice.event.dto.EventAdminSearchDto;
@@ -10,23 +10,22 @@ import ru.practicum.mainservice.event.service.EventServiceImpl;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/admin/events")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EventAdminController {
     private final EventServiceImpl service;
 
     @GetMapping
-    public List<EventFullDto> search(@RequestParam(value = "users", required = false) List<Long> users,
-                                     @RequestParam(value = "states", required = false) List<String> states,
-                                     @RequestParam(value = "categories", required = false) List<Long> categories,
+    public List<EventFullDto> search(@RequestParam(value = "users", required = false) Set<Long> users,
+                                     @RequestParam(value = "states", required = false) Set<String> states,
+                                     @RequestParam(value = "categories", required = false) Set<Long> categories,
                                      @RequestParam(value = "rangeStart", required = false) String rangeStart,
                                      @RequestParam(value = "rangeEnd", required = false) String rangeEnd,
-                                     @Valid @RequestParam(value = "from", required = false, defaultValue = "0")
-                                     @Min(0) Integer from,
-                                     @Valid @RequestParam(value = "size", required = false, defaultValue = "1")
-                                     @Min(1) Integer size) {
+                                     @Valid @RequestParam(value = "from", defaultValue = "0") @Min(0) Integer from,
+                                     @Valid @RequestParam(value = "size", defaultValue = "10") @Min(1) Integer size) {
         EventAdminSearchDto searchDto = EventAdminSearchDto.builder()
                 .users(users)
                 .states(states)

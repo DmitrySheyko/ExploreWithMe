@@ -1,6 +1,6 @@
 package ru.practicum.mainservice.compilation.controller.adminController;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.compilation.dto.CompilationDto;
 import ru.practicum.mainservice.compilation.dto.NewCompilationDto;
@@ -9,7 +9,7 @@ import ru.practicum.mainservice.compilation.service.CompilationServiceImpl;
 import javax.validation.Valid;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("admin/compilations")
 public class CompilationAdminController {
     private final CompilationServiceImpl service;
@@ -38,11 +38,11 @@ public class CompilationAdminController {
 
     @DeleteMapping("{compId}/pin")
     public String unPinCompilation(@PathVariable("compId") Long compilationId) {
-        return service.unPinCompilation(compilationId);
+        return service.changePinnedForCompilation(compilationId, false);
     }
 
     @PatchMapping("{compId}/pin")
     public String pinCompilation(@PathVariable("compId") Long compilationId) {
-        return service.pinCompilation(compilationId);
+        return service.changePinnedForCompilation(compilationId, true);
     }
 }

@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 @Component
 @Slf4j
 public class EventClient {
-    private final String STAT_SERVER_URL;
+    private static String STAT_SERVER_URL;
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final LocalDateTime START_TIME = LocalDateTime.of(2020, 1, 1, 0, 0, 1);
 
@@ -38,14 +38,14 @@ public class EventClient {
                 .build();
         HttpEntity<NewEndPointHit> request = new HttpEntity<>(newDto);
         String response = restTemplate.postForObject(resourceUrl, request, String.class);
-        if (response == null || response.isBlank() || !response.toLowerCase().contains("successfully".toLowerCase())) {
+        if (response == null || !response.toLowerCase().contains("successfully".toLowerCase())) {
             log.warn("Statistic don't updated");
         } else {
             log.info("Statistic successfully updated");
         }
     }
 
-    public Integer getViews(Long eventId) {
+    public static Integer getViews(Long eventId) {
         RestTemplate restTemplate = new RestTemplate();
         String url = STAT_SERVER_URL + "/stats";
         StringBuilder param = new StringBuilder("?");
@@ -54,14 +54,14 @@ public class EventClient {
         param.append("uris=" + URLEncoder.encode(("/events/" + eventId), StandardCharsets.UTF_8) + "&");
         param.append("unique=" + URLEncoder.encode("false", StandardCharsets.UTF_8));
         String resourceUrl = url + param;
-        System.out.println("URL " + resourceUrl);
+        log.info("Prepared URL for stat request, URL={}", resourceUrl);
         ResponseEntity<StatsResponseDto[]> responseEntity =
                 restTemplate.getForEntity(resourceUrl, StatsResponseDto[].class);
-        if (responseEntity == null) {
+        StatsResponseDto[] result = responseEntity.getBody();
+        if (result == null) {
             throw new NotFoundException(String.format("Gotten null value of view statistic from stat-service for " +
                     "event id=%s", eventId));
         }
-        StatsResponseDto[] result = responseEntity.getBody();
         if (result.length == 0) {
             return 0;
         }
@@ -70,7 +70,7 @@ public class EventClient {
         return statsResponseDto.getHits();
     }
 
-    private String dateTimeToSting(LocalDateTime dateTime) {
+    private static String dateTimeToSting(LocalDateTime dateTime) {
         return dateTime.format(DATE_TIME_PATTERN);
     }
 }

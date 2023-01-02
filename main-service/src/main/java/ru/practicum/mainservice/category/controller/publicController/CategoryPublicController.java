@@ -1,6 +1,6 @@
 package ru.practicum.mainservice.category.controller.publicController;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.category.dto.CategoryDto;
 import ru.practicum.mainservice.category.service.CategoryServiceImpl;
@@ -10,9 +10,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CategoryPublicController {
-    CategoryServiceImpl categoryServiceImpl;
+    private final CategoryServiceImpl categoryServiceImpl;
 
     @GetMapping
     public List<CategoryDto> getAll(@RequestParam(name = "from", required = false, defaultValue = "0") @Min(0) int from,

@@ -1,8 +1,9 @@
 package ru.practicum.mainservice.request.service;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
 import ru.practicum.mainservice.event.repository.EventRepository;
@@ -16,21 +17,20 @@ import ru.practicum.mainservice.request.repository.RequestRepository;
 import ru.practicum.mainservice.user.service.UserServiceImpl;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RequestServiceImpl implements RequestService {
     private final UserServiceImpl userServiceImpl;
-    private final RequestMapper mapper;
     private final RequestRepository repository;
     private final EventRepository eventRepository;
 
     @Override
+    @Transactional
     public ParticipationRequestDto add(Long userId, Long eventId) {
         userServiceImpl.checkIsObjectInStorage(userId);
         Event event = findEventById(eventId);
@@ -46,35 +46,37 @@ public class RequestServiceImpl implements RequestService {
             request.setStatus(Status.CONFIRMED);
         }
         request = repository.save(request);
-        ParticipationRequestDto requestDto = mapper.toDto(request);
-        log.info("Participation request id={} from user id={} for event id{}", request.getId(), userId, eventId);
+        ParticipationRequestDto requestDto = RequestMapper.toDto(request);
+        log.info("Created participation request id={} from user id={} for event id{}", request.getId(), userId, eventId);
         return requestDto;
     }
 
     @Override
+    @Transactional
     public ParticipationRequestDto cancel(Long userId, Long requestId) {
         userServiceImpl.checkIsObjectInStorage(userId);
-        checkIsObjectInStorage(requestId);
         Request request = findById(requestId);
         request.setStatus(Status.CANCELED);
         request = repository.save(request);
-        ParticipationRequestDto requestDto = mapper.toDto(request);
+        ParticipationRequestDto requestDto = RequestMapper.toDto(request);
         log.info("Request id={} successfully canceled", requestId);
         return requestDto;
     }
 
     @Override
+    @Transactional
     public List<ParticipationRequestDto> getAllByUserId(Long userId) {
         userServiceImpl.checkIsObjectInStorage(userId);
         List<Request> requestsList = repository.findAllByRequesterOrderById(userId);
         List<ParticipationRequestDto> requestDtoList = requestsList.stream()
-                .map(mapper::toDto)
+                .map(RequestMapper::toDto)
                 .collect(Collectors.toList());
         log.info("Requests of user id={} successfully received", userId);
         return requestDtoList;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Request findById(Long requestId) {
         Optional<Request> optionalRequest = repository.findById(requestId);
         if (optionalRequest.isPresent()) {
@@ -84,29 +86,25 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Request> findAllByEvent(Event event) {
         return repository.findAllByEvent(event);
     }
 
     @Override
+    @Transactional
     public Request save(Request request) {
         return repository.save(request);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Event findEventById(Long eventId) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if (optionalEvent.isPresent()) {
             return optionalEvent.get();
         }
         throw new NotFoundException((String.format("Event with id=%s was not found.", eventId)));
-    }
-
-    @Override
-    public void checkIsObjectInStorage(Long requestId) {
-        if (!repository.existsById(requestId)) {
-            throw new NotFoundException((String.format("Request id=%s was not found.", requestId)));
-        }
     }
 
     private void checkTermsForNewRequest(Long userId, Event event) {

@@ -2,7 +2,7 @@ package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class EventPublicSearchDto {
     private String text;
-    private List<Long> categories;
+    private Set<Long> categories;
     private Boolean paid;
     private String rangeStart;
     private String rangeEnd;

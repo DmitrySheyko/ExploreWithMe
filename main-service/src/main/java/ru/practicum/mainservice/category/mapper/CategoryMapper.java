@@ -8,19 +8,13 @@ import ru.practicum.mainservice.category.model.Category;
 @Component
 public class CategoryMapper {
 
-    public Category toEntity(NewCategoryDto newCategoryDto) {
+    public static Category toEntity(NewCategoryDto newCategoryDto) {
         return Category.builder()
                 .name(newCategoryDto.getName())
                 .build();
     }
 
-    public Category toEntity(CategoryDto categoryDto) {
-        return Category.builder()
-                .name(categoryDto.getName())
-                .build();
-    }
-
-    public CategoryDto toDto(Category category) {
+    public static CategoryDto toDto(Category category) {
         return CategoryDto.builder()
                 .id(category.getId())
                 .name(category.getName())

@@ -1,17 +1,16 @@
 package ru.practicum.mainservice.category.controller.adminController;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.category.dto.CategoryDto;
 import ru.practicum.mainservice.category.dto.NewCategoryDto;
 import ru.practicum.mainservice.category.service.CategoryServiceImpl;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/categories")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CategoryAdminController {
     private final CategoryServiceImpl categoryServiceImpl;
 
@@ -26,7 +25,7 @@ public class CategoryAdminController {
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Long> delete(@PathVariable("id") Long categoryId) {
+    public String delete(@PathVariable("id") Long categoryId) {
         return categoryServiceImpl.delete(categoryId);
     }
 }

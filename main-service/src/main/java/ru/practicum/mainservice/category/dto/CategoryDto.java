@@ -3,6 +3,7 @@ package ru.practicum.mainservice.category.dto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CategoryDto {
 
+    @NotNull
     private Long id;
 
     @NotBlank

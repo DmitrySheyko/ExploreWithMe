@@ -4,7 +4,7 @@ import lombok.*;
 import ru.practicum.mainservice.event.model.State;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,9 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventAdminSearch {
-    private List<Long> users;
-    private List<State> states;
-    private List<Long> categories;
+    private Set<Long> users;
+    private Set<State> states;
+    private Set<Long> categories;
     private LocalDateTime rangeStart;
     private LocalDateTime rangeEnd;
 }

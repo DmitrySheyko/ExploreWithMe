@@ -7,10 +7,9 @@ import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
 import ru.practicum.mainservice.request.model.Status;
 
 import java.util.List;
+import java.util.Set;
 
 public interface EventService {
-
-    Event save(Long userId, Event event);
 
     EventFullDto update(AdminUpdateEventDto eventDto);
 
@@ -41,5 +40,5 @@ public interface EventService {
 
     Event findById(Long eventId);
 
-    void checkIsObjectInStorage(Long eventId);
+    void checkIsObjectInStorage(Set<Long> eventSet);
 }

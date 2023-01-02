@@ -12,8 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StatsRequest {
-    LocalDateTime start;
-    LocalDateTime end;
-    List<String> uris;
-    Boolean unique;
+    private LocalDateTime start;
+    private LocalDateTime end;
+    private List<String> uris;
+    private Boolean unique;
 }

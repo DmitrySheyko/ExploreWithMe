@@ -20,6 +20,4 @@ public interface RequestService {
     Request save(Request request);
 
     Event findEventById(Long eventId);
-
-    void checkIsObjectInStorage(Long requestId);
 }

@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 @RestControllerAdvice
 public class ErrorHandler {
 
-    @ExceptionHandler(NotFoundException.class)
+    @ExceptionHandler(StatNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handlerNotFoundException(final NotFoundException e) {
+    public ErrorResponse handlerNotFoundException(final StatNotFoundException e) {
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.NOT_FOUND.getReasonPhrase())
@@ -22,9 +22,9 @@ public class ErrorHandler {
                 .build();
     }
 
-    @ExceptionHandler(ValidationException.class)
+    @ExceptionHandler(StatValidationException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ErrorResponse handlerValidationException(final ValidationException e) {
+    public ErrorResponse handlerValidationException(final StatValidationException e) {
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.FORBIDDEN.getReasonPhrase())

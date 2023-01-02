@@ -2,7 +2,7 @@ package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -11,9 +11,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventAdminSearchDto {
-    private List<Long> users;
-    private List<String> states;
-    private List<Long> categories;
+    private Set<Long> users;
+    private Set<String> states;
+    private Set<Long> categories;
     private String rangeStart;
     private String rangeEnd;
 }

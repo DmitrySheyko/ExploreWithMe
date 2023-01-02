@@ -1,7 +1,6 @@
 package ru.practicum.statservice.controller;
 
-
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.statservice.dto.NewEndPointHitDto;
 import ru.practicum.statservice.dto.StatRequestDto;
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class StatController {
     private final StatServiceImpl service;
 

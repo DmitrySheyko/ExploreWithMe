@@ -1,6 +1,6 @@
 package ru.practicum.mainservice.event.controller.privateController;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.dto.EventShortDto;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users/{userId}/events")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EventPrivateController {
     private final EventServiceImpl service;
 
@@ -28,16 +28,14 @@ public class EventPrivateController {
 
     @PatchMapping
     public EventFullDto update(@PathVariable("userId") Long userId,
-                               @RequestBody PrivateUpdateEventDto privateUpdateEventDto) {
+                               @Valid @RequestBody PrivateUpdateEventDto privateUpdateEventDto) {
         return service.update(userId, privateUpdateEventDto);
     }
 
     @GetMapping
     public List<EventShortDto> getAllByUserId(@PathVariable("userId") Long userId,
-                                              @RequestParam(name = "from", required = false, defaultValue = "0")
-                                              @Min(0) int from,
-                                              @RequestParam(name = "size", required = false, defaultValue = "10")
-                                              @Min(1) int size) {
+                                              @RequestParam(name = "from", defaultValue = "0") @Min(0) int from,
+                                              @RequestParam(name = "size", defaultValue = "10") @Min(1) int size) {
         return service.getAllByUserId(userId, from, size);
     }
 

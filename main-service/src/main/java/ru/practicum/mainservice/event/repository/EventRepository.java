@@ -9,7 +9,7 @@ import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 
 public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPredicateExecutor<Event> {
 
@@ -27,7 +27,7 @@ public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPre
             "FROM Request r " +
             "WHERE r.status = ?6 " +
             "GROUP BY r.id) ")
-    Page<Event> searchAvailable(String text, List<Long> categories, Boolean paid, LocalDateTime rangeStart,
+    Page<Event> searchAvailable(String text, Set<Long> categories, Boolean paid, LocalDateTime rangeStart,
                                 LocalDateTime rangeEnd, Integer status, Pageable pageable);
 
     @Query("SELECT e " +
@@ -38,7 +38,8 @@ public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPre
             "AND e.paid = ?3 " +
             "AND e.eventDate BETWEEN ?4 AND ?5 " +
             "AND e.publishedOn > ?4 ")
-    Page<Event> searchAll(String text, List<Long> categories, Boolean paid, LocalDateTime rangeStart, LocalDateTime rangeEnd, Pageable pageable);
+    Page<Event> searchAll(String text, Set<Long> categories, Boolean paid, LocalDateTime rangeStart,
+                          LocalDateTime rangeEnd, Pageable pageable);
 
     @Query("SELECT e " +
             "FROM Event e " +
@@ -46,7 +47,7 @@ public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPre
             "AND e.state IN ?2 " +
             "AND e.category.id IN (?3) " +
             "AND e.eventDate BETWEEN ?4 AND ?5 ")
-    Page<Event> searchByUsersSet(List<Long> users, List<State> states, List<Long> categories, LocalDateTime rangeStart,
+    Page<Event> searchByUsersSet(Set<Long> users, Set<State> states, Set<Long> categories, LocalDateTime rangeStart,
                                  LocalDateTime rangeEnd, Pageable pageable);
 
     @Query("SELECT e " +
@@ -54,6 +55,6 @@ public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPre
             "WHERE e.state IN (?1) " +
             "AND e.category.id IN (?2) " +
             "AND e.eventDate BETWEEN ?3 AND ?4 ")
-    Page<Event> searchForAllUsers(List<State> states, List<Long> categories, LocalDateTime rangeStart,
+    Page<Event> searchForAllUsers(Set<State> states, Set<Long> categories, LocalDateTime rangeStart,
                                   LocalDateTime rangeEnd, Pageable pageable);
 }

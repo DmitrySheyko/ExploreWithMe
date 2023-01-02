@@ -1,6 +1,6 @@
 package ru.practicum.mainservice.user.controller.adminController;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.user.dto.UserDto;
@@ -12,7 +12,7 @@ import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/admin/users")
 @Validated
 public class UserAdminController {
@@ -25,10 +25,8 @@ public class UserAdminController {
 
     @GetMapping
     public List<UserDto> getAllById(@RequestParam(name = "ids") List<Long> ids,
-                                    @RequestParam(name = "from", required = false, defaultValue = "0")
-                                    @Min(0) int from,
-                                    @RequestParam(name = "size", required = false, defaultValue = "10")
-                                    @Min(1) int size) {
+                                    @RequestParam(name = "from", defaultValue = "0") @Min(0) int from,
+                                    @RequestParam(name = "size", defaultValue = "10") @Min(1) int size) {
         return userServiceImpl.getAllById(ids, from, size);
     }
 

@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class StatMapper {
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public EndPointHit toEndPointHit(NewEndPointHitDto dto) {
+    public static EndPointHit toEndPointHit(NewEndPointHitDto dto) {
         return EndPointHit.builder()
                 .app(dto.getApp())
                 .uri(dto.getUri())
@@ -22,7 +22,7 @@ public class StatMapper {
                 .build();
     }
 
-    public StatsRequest toStatRequest(StatRequestDto dto) {
+    public static StatsRequest toStatRequest(StatRequestDto dto) {
         return StatsRequest.builder()
                 .start(toLocalDateTime(dto.getStart()))
                 .end(toLocalDateTime(dto.getEnd()))
@@ -31,7 +31,7 @@ public class StatMapper {
                 .build();
     }
 
-    private LocalDateTime toLocalDateTime(String dateTime) {
+    private static LocalDateTime toLocalDateTime(String dateTime) {
         if (dateTime == null) {
             return null;
         }

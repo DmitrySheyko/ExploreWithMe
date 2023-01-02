@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class RequestMapper {
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public ParticipationRequestDto toDto(Request request) {
+    public static ParticipationRequestDto toDto(Request request) {
         return ParticipationRequestDto.builder()
                 .created(dateTimeToString(request.getCreated()))
                 .event(request.getEvent().getId())
@@ -21,7 +21,7 @@ public class RequestMapper {
                 .build();
     }
 
-    private String dateTimeToString(LocalDateTime dateTime) {
+    private static String dateTimeToString(LocalDateTime dateTime) {
         if (dateTime == null) {
             return null;
         }

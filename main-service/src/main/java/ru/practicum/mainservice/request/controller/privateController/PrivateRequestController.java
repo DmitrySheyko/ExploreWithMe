@@ -1,6 +1,6 @@
 package ru.practicum.mainservice.request.controller.privateController;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
 import ru.practicum.mainservice.request.service.RequestServiceImpl;
@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users/{userId}/requests")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PrivateRequestController {
     private final RequestServiceImpl service;
 

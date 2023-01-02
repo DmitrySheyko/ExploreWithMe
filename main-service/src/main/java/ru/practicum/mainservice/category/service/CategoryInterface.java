@@ -5,7 +5,6 @@ import ru.practicum.mainservice.category.dto.NewCategoryDto;
 import ru.practicum.mainservice.category.model.Category;
 
 import java.util.List;
-import java.util.Map;
 
 public interface CategoryInterface {
 
@@ -13,7 +12,7 @@ public interface CategoryInterface {
 
     CategoryDto update(CategoryDto categoryDto);
 
-    Map<String, Long> delete(Long categoryId);
+    String delete(Long categoryId);
 
     List<CategoryDto> getAll(int from, int size);
 
@@ -22,8 +21,4 @@ public interface CategoryInterface {
     List<Category> findAll();
 
     Category findById(Long categoryId);
-
-    Map<String, Long> deleteById(Long categoryId);
-
-    void checkIsObjectInStorage(Long categoryId);
 }

@@ -1,14 +1,14 @@
 package ru.practicum.mainservice.event.eventMapper;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.mainservice.category.mapper.CategoryMapper;
-import ru.practicum.mainservice.category.service.CategoryServiceImpl;
+import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.event.client.EventClient;
 import ru.practicum.mainservice.event.dto.*;
 import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
-import ru.practicum.mainservice.location.service.LocationServiceImpl;
+import ru.practicum.mainservice.location.model.Location;
 import ru.practicum.mainservice.request.model.Request;
 import ru.practicum.mainservice.request.model.Status;
 import ru.practicum.mainservice.user.mapper.UserMapper;
@@ -16,27 +16,23 @@ import ru.practicum.mainservice.user.mapper.UserMapper;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class EventMapper {
-    private final CategoryServiceImpl categoryServiceImpl;
-    private final LocationServiceImpl locationServiceImpl;
-    private final CategoryMapper categoryMapper;
-    private final UserMapper userMapper;
-    private final EventClient eventClient;
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public Event toEvent(NewEventDto newEventDto) {
+    public static Event toEvent(NewEventDto newEventDto, Category category, Location location) {
         return Event.builder()
                 .annotation(newEventDto.getAnnotation())
-                .category(categoryServiceImpl.findById(newEventDto.getCategory()))
+                .category(category)
                 .createdOn(null)
                 .description(newEventDto.getDescription())
                 .eventDate(toLocalDateTime(newEventDto.getEventDate()))
                 .initiator(null)
-                .location(locationServiceImpl.save(newEventDto.getLocation()))
+                .location(location)
                 .paid(newEventDto.getPaid())
                 .participantLimit(newEventDto.getParticipantLimit())
                 .publishedOn(null)
@@ -46,10 +42,10 @@ public class EventMapper {
                 .build();
     }
 
-    public Event toEvent(PrivateUpdateEventDto updateEventDto) {
+    public static Event toEvent(PrivateUpdateEventDto updateEventDto, Category category) {
         return Event.builder()
                 .annotation(updateEventDto.getAnnotation())
-                .category(categoryServiceImpl.findById(updateEventDto.getCategory()))
+                .category(category)
                 .createdOn(null)
                 .description(updateEventDto.getDescription())
                 .eventDate(toLocalDateTime(updateEventDto.getEventDate()))
@@ -64,10 +60,10 @@ public class EventMapper {
                 .build();
     }
 
-    public Event toEvent(AdminUpdateEventDto adminUpdateEventDto) {
+    public static Event toEvent(AdminUpdateEventDto adminUpdateEventDto, Category category) {
         return Event.builder()
                 .annotation(adminUpdateEventDto.getAnnotation())
-                .category(categoryServiceImpl.findById(adminUpdateEventDto.getCategory()))
+                .category(category)
                 .createdOn(null)
                 .description(adminUpdateEventDto.getDescription())
                 .eventDate(toLocalDateTime(adminUpdateEventDto.getEventDate()))
@@ -83,16 +79,16 @@ public class EventMapper {
                 .build();
     }
 
-    public EventFullDto toFullDto(Event event) {
+    public static EventFullDto toFullDto(Event event) {
         return EventFullDto.builder()
                 .annotation(event.getAnnotation())
-                .category(categoryMapper.toDto(event.getCategory()))
+                .category(CategoryMapper.toDto(event.getCategory()))
                 .confirmedRequests(getConfirmedRequests(event.getRequestsSet()))
                 .createdOn(dateTimeToString(event.getCreatedOn()))
                 .description(event.getDescription())
                 .eventDate(dateTimeToString(event.getEventDate()))
                 .id(event.getId())
-                .initiator(userMapper.toShortDto(event.getInitiator()))
+                .initiator(UserMapper.toShortDto(event.getInitiator()))
                 .location(event.getLocation())
                 .paid(event.getPaid())
                 .participantLimit(event.getParticipantLimit())
@@ -104,21 +100,21 @@ public class EventMapper {
                 .build();
     }
 
-    public EventShortDto toShortDto(Event event) {
+    public static EventShortDto toShortDto(Event event) {
         return EventShortDto.builder()
                 .annotation(event.getAnnotation())
-                .category(categoryMapper.toDto(event.getCategory()))
+                .category(CategoryMapper.toDto(event.getCategory()))
                 .confirmedRequests(getConfirmedRequests(event.getRequestsSet()))
                 .eventDate(dateTimeToString(event.getEventDate()))
                 .id(event.getId())
-                .initiator(userMapper.toShortDto(event.getInitiator()))
+                .initiator(UserMapper.toShortDto(event.getInitiator()))
                 .paid(event.getPaid())
                 .title(event.getTitle())
                 .views(getViews(event.getId()))
                 .build();
     }
 
-    public EventPublicSearch toEventPublicSearch(EventPublicSearchDto searchDto) {
+    public static EventPublicSearch toEventPublicSearch(EventPublicSearchDto searchDto) {
         return EventPublicSearch.builder()
                 .categories(searchDto.getCategories())
                 .onlyAvailable(searchDto.getOnlyAvailable())
@@ -129,7 +125,7 @@ public class EventMapper {
                 .build();
     }
 
-    public EventAdminSearch toEventAdminSearch(EventAdminSearchDto searchDto) {
+    public static EventAdminSearch toEventAdminSearch(EventAdminSearchDto searchDto) {
         return EventAdminSearch.builder()
                 .users(searchDto.getUsers())
                 .states(stateToInt(searchDto.getStates()))
@@ -139,34 +135,34 @@ public class EventMapper {
                 .build();
     }
 
-    private String dateTimeToString(LocalDateTime dateTime) {
+    private static String dateTimeToString(LocalDateTime dateTime) {
         if (dateTime == null) {
             return null;
         }
         return dateTime.format(DATE_TIME_PATTERN);
     }
 
-    private LocalDateTime toLocalDateTime(String dateTime) {
+    private static LocalDateTime toLocalDateTime(String dateTime) {
         if (dateTime == null) {
             return null;
         }
         return LocalDateTime.parse(dateTime, DATE_TIME_PATTERN);
     }
 
-    private List<State> stateToInt(List<String> states) {
+    private static Set<State> stateToInt(Set<String> states) {
         if (states == null || states.size() == 0) {
             return null;
         }
         return states.stream()
                 .map(State::valueOf)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    private Integer getViews(Long eventId) {
-        return eventClient.getViews(eventId);
+    private static Integer getViews(Long eventId) {
+        return EventClient.getViews(eventId);
     }
 
-    private Integer getConfirmedRequests(List<Request> requestList) {
+    private static Integer getConfirmedRequests(List<Request> requestList) {
         if (requestList == null || requestList.isEmpty()) {
             return 0;
         }
