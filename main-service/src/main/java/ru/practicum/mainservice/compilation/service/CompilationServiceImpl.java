@@ -14,13 +14,13 @@ import ru.practicum.mainservice.compilation.dto.NewCompilationDto;
 import ru.practicum.mainservice.compilation.mapper.CompilationMapper;
 import ru.practicum.mainservice.compilation.model.Compilation;
 import ru.practicum.mainservice.event.model.Event;
-import ru.practicum.mainservice.event.service.EventServiceImpl;
+import ru.practicum.mainservice.event.repository.EventRepository;
 import ru.practicum.mainservice.exceptions.NotFoundException;
 import ru.practicum.mainservice.exceptions.ValidationException;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @RequiredArgsConstructor
 public class CompilationServiceImpl implements CompilationService {
-    private final EventServiceImpl eventServiceImpl;
+    private final EventRepository eventRepository;
     private final CompilationRepository repository;
 
     @Override
@@ -38,7 +38,7 @@ public class CompilationServiceImpl implements CompilationService {
         if (newCompilationDto.getEvents() == null || newCompilationDto.getEvents().isEmpty()) {
             eventSet = Collections.emptySet();
         } else
-            eventSet = eventServiceImpl.findAllById(newCompilationDto.getEvents());
+            eventSet = new HashSet<>(eventRepository.findAllById(newCompilationDto.getEvents()));
         Compilation compilation = CompilationMapper.toCompilation(newCompilationDto, eventSet);
         compilation = repository.save(compilation);
         CompilationDto compilationDto = CompilationMapper.toDto(compilation);
@@ -56,10 +56,12 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public String deleteEventFromCompilation(Long compilationId, Long eventId) {
-        Compilation compilation = findById(compilationId);
-        Event event = eventServiceImpl.findById(eventId);
+        Compilation compilation = repository.findById(compilationId)
+                .orElseThrow(() -> new NotFoundException(String.format("Compilation id=%s not found", compilationId)));
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new NotFoundException(String.format("Event id=%s not found", eventId)));
         if (compilation.getEvents().remove(event)) {
-            update(compilation);
+            repository.save(compilation);
             log.info("Successfully edited compilation id={}, deleted event id={}", compilationId, eventId);
             return String.format("Successfully edited compilation id=%s, successfully deleted event id=%s",
                     compilationId, eventId);
@@ -71,14 +73,16 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public String addEventToCompilation(Long compilationId, Long eventId) {
-        Compilation compilation = findById(compilationId);
-        Event event = eventServiceImpl.findById(eventId);
+        Compilation compilation = repository.findById(compilationId)
+                .orElseThrow(() -> new NotFoundException(String.format("Compilation id=%s not found", compilationId)));
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new NotFoundException(String.format("Event id=%s not found", eventId)));
         if (compilation.getEvents().contains(event)) {
             throw new ValidationException(String.format("Event id=%s already add in compilation id=%s", eventId,
                     compilationId));
         } else {
             compilation.getEvents().add(event);
-            update(compilation);
+            repository.save(compilation);
             log.info("Successfully edited compilation id={}, add event id={}", compilationId, eventId);
             return String.format("Successfully edited compilation id=%s Successfully add event id=%s",
                     compilationId, eventId);
@@ -88,10 +92,11 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public String changePinnedForCompilation(Long compilationId, boolean isPinned) {
-        Compilation compilation = findById(compilationId);
+        Compilation compilation = repository.findById(compilationId)
+                .orElseThrow(() -> new NotFoundException(String.format("Compilation id=%s not found", compilationId)));
         if (compilation.getPinned() != isPinned) {
             compilation.setPinned(isPinned);
-            update(compilation);
+            repository.save(compilation);
             log.info("Successfully updated compilation id={}, pinned={} ", compilationId, isPinned);
             return String.format("Successfully unpinned compilation id=%s, pinned=%s", compilationId, isPinned);
         }
@@ -119,31 +124,10 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional(readOnly = true)
     public CompilationDto getById(Long compilationId) {
-        Compilation compilation = findById(compilationId);
+        Compilation compilation = repository.findById(compilationId)
+                .orElseThrow(() -> new NotFoundException(String.format("Compilation id=%s not found", compilationId)));
         CompilationDto compilationDto = CompilationMapper.toDto(compilation);
         log.info("Compilations id={} successfully received", compilationId);
         return compilationDto;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Compilation findById(Long compilationId) {
-        Optional<Compilation> optionalCompilation = repository.findById(compilationId);
-        if (optionalCompilation.isPresent()) {
-            return optionalCompilation.get();
-        }
-        log.warn("Information about compilation id={} is empty", compilationId);
-        throw new NotFoundException((String.format("Compilation with id=%s was not found.", compilationId)));
-    }
-
-    private void update(Compilation compilation) {
-        Compilation oldCompilation = findById(compilation.getId());
-        if (compilation.getEvents() != null) {
-            oldCompilation.setEvents(compilation.getEvents());
-        }
-        if (compilation.getPinned() != null) {
-            oldCompilation.setPinned(compilation.getPinned());
-        }
-        repository.save(oldCompilation);
     }
 }

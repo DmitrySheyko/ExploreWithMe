@@ -9,6 +9,7 @@ import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.State;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Set;
 
 public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPredicateExecutor<Event> {
@@ -57,4 +58,6 @@ public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPre
             "AND e.eventDate BETWEEN ?3 AND ?4 ")
     Page<Event> searchForAllUsers(Set<State> states, Set<Long> categories, LocalDateTime rangeStart,
                                   LocalDateTime rangeEnd, Pageable pageable);
+
+    Optional<Event> findByIdAndInitiatorId(Long eventId, Long userId);
 }

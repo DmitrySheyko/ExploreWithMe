@@ -15,31 +15,32 @@ import ru.practicum.mainservice.request.model.Request;
 import ru.practicum.mainservice.request.model.Status;
 import ru.practicum.mainservice.request.repository.RequestRepository;
 import ru.practicum.mainservice.user.model.User;
-import ru.practicum.mainservice.user.service.UserServiceImpl;
+import ru.practicum.mainservice.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class RequestServiceImpl implements RequestService {
-    private final UserServiceImpl userServiceImpl;
     private final RequestRepository repository;
+    private final UserRepository userRepository;
     private final EventRepository eventRepository;
 
     @Override
     @Transactional
     public ParticipationRequestDto add(Long userId, Long eventId) {
-        User requester = userServiceImpl.findById(userId);
+        User requester = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException((String.format("User with id=%s was not found.", userId))));
         if (repository.findByRequesterAndEventId(requester, eventId).isPresent()) {
             throw new ValidationException(String.format("Request from user id=%s, to event id==%s already exist", userId,
                     eventId));
         }
-        Event event = findEventById(eventId);
-        checkTermsForNewRequest(userId, event);
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new NotFoundException((String.format("Event id=%s was not found.", eventId))));
+        checkTermsForNewRequest(requester, event);
         Request request = Request.builder()
                 .created(LocalDateTime.now())
                 .event(event)
@@ -59,7 +60,8 @@ public class RequestServiceImpl implements RequestService {
     @Override
     @Transactional
     public ParticipationRequestDto cancel(Long userId, Long requestId) {
-        User user = userServiceImpl.findById(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException((String.format("User with id=%s was not found.", userId))));
         Request request = repository.findByIdAndRequester(requestId, user)
                 .orElseThrow(() -> new NotFoundException(String.format("Request from user id=%s to event=%s not found",
                         userId, requestId)));
@@ -73,7 +75,8 @@ public class RequestServiceImpl implements RequestService {
     @Override
     @Transactional
     public List<ParticipationRequestDto> getAllByUserId(Long userId) {
-        User user = userServiceImpl.findById(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException((String.format("User with id=%s was not found.", userId))));
         List<Request> requestsList = repository.findAllByRequesterOrderById(user);
         List<ParticipationRequestDto> requestDtoList = requestsList.stream()
                 .map(RequestMapper::toDto)
@@ -82,40 +85,8 @@ public class RequestServiceImpl implements RequestService {
         return requestDtoList;
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public Request findById(Long requestId) {
-        Optional<Request> optionalRequest = repository.findById(requestId);
-        if (optionalRequest.isPresent()) {
-            return optionalRequest.get();
-        }
-        throw new NotFoundException((String.format("Request id=%s was not found.", requestId)));
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Request> findAllByEvent(Event event) {
-        return repository.findAllByEvent(event);
-    }
-
-    @Override
-    @Transactional
-    public Request save(Request request) {
-        return repository.save(request);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Event findEventById(Long eventId) {
-        Optional<Event> optionalEvent = eventRepository.findById(eventId);
-        if (optionalEvent.isPresent()) {
-            return optionalEvent.get();
-        }
-        throw new NotFoundException((String.format("Event with id=%s was not found.", eventId)));
-    }
-
-    private void checkTermsForNewRequest(Long userId, Event event) {
-        if (event.getInitiator().getId().equals(userId)) {
+    private void checkTermsForNewRequest(User requester, Event event) {
+        if (event.getInitiator().equals(requester)) {
             log.warn("Initiator of event can't create participation requests. Request didn't created");
             throw new ValidationException("Initiator of event can't create participation requests. Request didn't " +
                     "created");
@@ -132,10 +103,10 @@ public class RequestServiceImpl implements RequestService {
             throw new ValidationException("Participants limit is full. Request didn't created");
         }
         if (event.getRequestsSet().stream()
-                .anyMatch(request -> request.getRequester().equals(userId))) {
-            log.warn("User id={} already participant of this event . Request didn't created", userId);
-            throw new ValidationException(String.format("User id=%s already participant of this event. " +
-                    "Request didn't created", userId));
+                .anyMatch(request -> request.getRequester().equals(requester))) {
+            log.warn("User id={} already made request to this event . Request didn't created", requester);
+            throw new ValidationException(String.format("User id=%s already made request to this event. " +
+                    "Request didn't created", requester));
         }
     }
 }

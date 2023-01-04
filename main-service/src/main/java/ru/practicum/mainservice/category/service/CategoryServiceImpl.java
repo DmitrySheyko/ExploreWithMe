@@ -16,7 +16,6 @@ import ru.practicum.mainservice.category.repository.CategoryRepository;
 import ru.practicum.mainservice.exceptions.NotFoundException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +37,9 @@ public class CategoryServiceImpl implements CategoryInterface {
     @Override
     @Transactional
     public CategoryDto update(CategoryDto categoryDto) {
-        Category category = findById(categoryDto.getId());
+        Long categoryId = categoryDto.getId();
+        Category category = repository.findById(categoryId)
+                .orElseThrow(() -> new NotFoundException(String.format("Category id=%s not found", categoryId)));
         category.setName(categoryDto.getName());
         category = repository.save(category);
         categoryDto = CategoryMapper.toDto(category);
@@ -62,26 +63,11 @@ public class CategoryServiceImpl implements CategoryInterface {
     @Override
     @Transactional(readOnly = true)
     public CategoryDto getById(Long categoryId) {
-        Category category = findById(categoryId);
+        Category category = repository.findById(categoryId)
+                .orElseThrow(() -> new NotFoundException(String.format("Category id=%s not found", categoryId)));
         CategoryDto categoryDto = CategoryMapper.toDto(category);
         log.info("Category id={} successfully received", categoryId);
         return categoryDto;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Category> findAll() {
-        return repository.findAll();
-    }
-
-    @Override //TODO заменить на getById
-    @Transactional(readOnly = true)
-    public Category findById(Long categoryId) {
-        Optional<Category> optionalCategory = repository.findById(categoryId);
-        if (optionalCategory.isPresent()) {
-            return optionalCategory.get();
-        }
-        throw new NotFoundException((String.format("Category id=%s was not found.", categoryId)));
     }
 
     @Override

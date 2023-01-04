@@ -1,13 +1,11 @@
 package ru.practicum.mainservice.event.service;
 
 import ru.practicum.mainservice.event.dto.*;
-import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.EventSearchSort;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
 import ru.practicum.mainservice.request.model.Status;
 
 import java.util.List;
-import java.util.Set;
 
 public interface EventService {
 
@@ -37,10 +35,4 @@ public interface EventService {
 
     ParticipationRequestDto changeStatusOfParticipationRequest(Long userId, Long eventId, Long requestId,
                                                                Status status);
-
-    Event findById(Long eventId);
-
-    Set<Event> findAllById(Set<Long> idList);
-
-//    void checkIsObjectInStorage(Set<Long> eventSet);
 }

@@ -7,7 +7,6 @@ import ru.practicum.mainservice.event.dto.EventAdminSearchDto;
 import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.service.EventServiceImpl;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Set;
@@ -24,8 +23,8 @@ public class EventAdminController {
                                      @RequestParam(value = "categories", required = false) Set<Long> categories,
                                      @RequestParam(value = "rangeStart", required = false) String rangeStart,
                                      @RequestParam(value = "rangeEnd", required = false) String rangeEnd,
-                                     @Valid @RequestParam(value = "from", defaultValue = "0") @Min(0) Integer from,
-                                     @Valid @RequestParam(value = "size", defaultValue = "10") @Min(1) Integer size) {
+                                     @RequestParam(value = "from", defaultValue = "0") @Min(0) Integer from,
+                                     @RequestParam(value = "size", defaultValue = "10") @Min(1) Integer size) {
         EventAdminSearchDto searchDto = EventAdminSearchDto.builder()
                 .users(users)
                 .states(states)
