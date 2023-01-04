@@ -14,6 +14,7 @@ import ru.practicum.mainservice.request.mapper.RequestMapper;
 import ru.practicum.mainservice.request.model.Request;
 import ru.practicum.mainservice.request.model.Status;
 import ru.practicum.mainservice.request.repository.RequestRepository;
+import ru.practicum.mainservice.user.model.User;
 import ru.practicum.mainservice.user.service.UserServiceImpl;
 
 import java.time.LocalDateTime;
@@ -32,13 +33,17 @@ public class RequestServiceImpl implements RequestService {
     @Override
     @Transactional
     public ParticipationRequestDto add(Long userId, Long eventId) {
-        userServiceImpl.checkIsObjectInStorage(userId);
+        User requester = userServiceImpl.findById(userId);
+        if (repository.findByRequesterAndEventId(requester, eventId).isPresent()) {
+            throw new ValidationException(String.format("Request from user id=%s, to event id==%s already exist", userId,
+                    eventId));
+        }
         Event event = findEventById(eventId);
         checkTermsForNewRequest(userId, event);
         Request request = Request.builder()
                 .created(LocalDateTime.now())
                 .event(event)
-                .requester(userId)
+                .requester(requester)
                 .build();
         if (event.getRequestModeration()) {
             request.setStatus(Status.PENDING);
@@ -54,8 +59,10 @@ public class RequestServiceImpl implements RequestService {
     @Override
     @Transactional
     public ParticipationRequestDto cancel(Long userId, Long requestId) {
-        userServiceImpl.checkIsObjectInStorage(userId);
-        Request request = findById(requestId);
+        User user = userServiceImpl.findById(userId);
+        Request request = repository.findByIdAndRequester(requestId, user)
+                .orElseThrow(() -> new NotFoundException(String.format("Request from user id=%s to event=%s not found",
+                        userId, requestId)));
         request.setStatus(Status.CANCELED);
         request = repository.save(request);
         ParticipationRequestDto requestDto = RequestMapper.toDto(request);
@@ -66,8 +73,8 @@ public class RequestServiceImpl implements RequestService {
     @Override
     @Transactional
     public List<ParticipationRequestDto> getAllByUserId(Long userId) {
-        userServiceImpl.checkIsObjectInStorage(userId);
-        List<Request> requestsList = repository.findAllByRequesterOrderById(userId);
+        User user = userServiceImpl.findById(userId);
+        List<Request> requestsList = repository.findAllByRequesterOrderById(user);
         List<ParticipationRequestDto> requestDtoList = requestsList.stream()
                 .map(RequestMapper::toDto)
                 .collect(Collectors.toList());

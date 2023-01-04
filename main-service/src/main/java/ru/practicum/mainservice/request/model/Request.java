@@ -2,12 +2,14 @@ package ru.practicum.mainservice.request.model;
 
 import lombok.*;
 import ru.practicum.mainservice.event.model.Event;
+import ru.practicum.mainservice.user.model.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,24 +28,10 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "requester_id")
-    private Long requester;
+    @ManyToOne
+    @JoinColumn(name = "requester_id", nullable = false)
+    private User requester;
 
     @Column(name = "status")
     private Status status;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Request request = (Request) o;
-
-        return id == request.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return (int) (id ^ (id >>> 32));
-    }
 }

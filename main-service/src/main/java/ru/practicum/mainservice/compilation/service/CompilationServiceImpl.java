@@ -34,16 +34,11 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public CompilationDto add(NewCompilationDto newCompilationDto) {
-        if (newCompilationDto.getEvents() != null && !newCompilationDto.getEvents().isEmpty()) {
-            eventServiceImpl.checkIsObjectInStorage(newCompilationDto.getEvents());
-        }
         Set<Event> eventSet;
         if (newCompilationDto.getEvents() == null || newCompilationDto.getEvents().isEmpty()) {
             eventSet = Collections.emptySet();
         } else
-            eventSet = newCompilationDto.getEvents().stream()
-                    .map(eventServiceImpl::findById)
-                    .collect(Collectors.toSet());
+            eventSet = eventServiceImpl.findAllById(newCompilationDto.getEvents());
         Compilation compilation = CompilationMapper.toCompilation(newCompilationDto, eventSet);
         compilation = repository.save(compilation);
         CompilationDto compilationDto = CompilationMapper.toDto(compilation);

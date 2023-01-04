@@ -74,7 +74,7 @@ public class CategoryServiceImpl implements CategoryInterface {
         return repository.findAll();
     }
 
-    @Override
+    @Override //TODO заменить на getById
     @Transactional(readOnly = true)
     public Category findById(Long categoryId) {
         Optional<Category> optionalCategory = repository.findById(categoryId);

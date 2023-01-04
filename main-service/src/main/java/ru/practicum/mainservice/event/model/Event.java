@@ -15,6 +15,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -79,19 +80,4 @@ public class Event {
 
     @ManyToMany(mappedBy = "events")
     List<Compilation> compilations = new ArrayList<>();
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Event event = (Event) o;
-
-        return id.equals(event.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 }

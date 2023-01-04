@@ -1,11 +1,15 @@
 package ru.practicum.mainservice.user.model;
 
 import lombok.*;
+import ru.practicum.mainservice.request.model.Request;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,18 +26,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        return id.equals(user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
+    @OneToMany(mappedBy = "requester")
+    private List<Request> requestsSet = new ArrayList<>();
 }

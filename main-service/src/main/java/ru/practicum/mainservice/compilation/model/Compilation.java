@@ -9,6 +9,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,19 +34,4 @@ public class Compilation {
 
     @Column(name = "title")
     String title;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Compilation that = (Compilation) o;
-
-        return id.equals(that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 }

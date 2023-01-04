@@ -10,7 +10,6 @@ import ru.practicum.mainservice.event.model.EventSearchSort;
 import ru.practicum.mainservice.event.service.EventServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,8 +30,8 @@ public class EventPublicController {
                                       @RequestParam(value = "rangeEnd", required = false) String rangeEnd,
                                       @RequestParam(value = "onlyAvailable", defaultValue = "false") Boolean onlyAvailable,
                                       @RequestParam(value = "sort", defaultValue = "EVENT_DATE") String sort,
-                                      @Valid @RequestParam(value = "from", defaultValue = "0") @Min(0) Integer from,
-                                      @Valid @RequestParam(value = "size", defaultValue = "1") @Min(1) Integer size,
+                                      @RequestParam(value = "from", defaultValue = "0") @Min(0) Integer from,
+                                      @RequestParam(value = "size", defaultValue = "10") @Min(1) Integer size,
                                       HttpServletRequest request) {
         EventPublicSearchDto searchDto = EventPublicSearchDto.builder()
                 .text(text)

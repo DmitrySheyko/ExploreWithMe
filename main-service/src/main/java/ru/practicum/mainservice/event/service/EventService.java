@@ -40,5 +40,7 @@ public interface EventService {
 
     Event findById(Long eventId);
 
-    void checkIsObjectInStorage(Set<Long> eventSet);
+    Set<Event> findAllById(Set<Long> idList);
+
+//    void checkIsObjectInStorage(Set<Long> eventSet);
 }

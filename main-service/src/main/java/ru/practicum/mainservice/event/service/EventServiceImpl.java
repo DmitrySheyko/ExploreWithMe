@@ -286,16 +286,16 @@ public class EventServiceImpl implements EventService {
         throw new NotFoundException((String.format("Event with id=%s was not found.", eventId)));
     }
 
-    @Override
-    @Transactional(readOnly = true)
-    public void checkIsObjectInStorage(Set<Long> eventSet) {
-        for (Long eventId : eventSet) {
-            if (!repository.existsById(eventId)) {
-                log.warn("Event id={} was not found", eventId);
-                throw new NotFoundException((String.format("Event id=%s was not found.", eventId)));
-            }
-        }
-    }
+//    @Override  //TODO возможно убрать
+//    @Transactional(readOnly = true)
+//    public void checkIsObjectInStorage(Set<Long> eventSet) {
+//        for (Long eventId : eventSet) {
+//            if (!repository.existsById(eventId)) {
+//                log.warn("Event id={} was not found", eventId);
+//                throw new NotFoundException((String.format("Event id=%s was not found.", eventId)));
+//            }
+//        }
+//    }
 
     private Event update(Event event) {
         Event oldEvent = findById(event.getId());
@@ -309,6 +309,10 @@ public class EventServiceImpl implements EventService {
         oldEvent.setRequestModeration(Optional.ofNullable(event.getRequestModeration()).orElse(oldEvent.getRequestModeration()));
         oldEvent.setTitle(Optional.ofNullable(event.getTitle()).orElse(oldEvent.getTitle()));
         return repository.save(oldEvent);
+    }
+
+    public Set<Event> findAllById(Set<Long> idList){
+       return new HashSet<>(repository.findAllById(idList));
     }
 
     private void checkEventDateForCreate(LocalDateTime eventDate) {
