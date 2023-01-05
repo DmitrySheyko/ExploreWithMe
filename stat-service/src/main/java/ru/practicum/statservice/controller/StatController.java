@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.statservice.dto.NewEndPointHitDto;
 import ru.practicum.statservice.dto.StatRequestDto;
 import ru.practicum.statservice.model.StatsResponse;
-import ru.practicum.statservice.service.StatServiceImpl;
+import ru.practicum.statservice.service.StatService;
 
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 public class StatController {
-    private final StatServiceImpl service;
+    private final StatService service;
 
     @PostMapping("/hit")
     public String add(@RequestBody NewEndPointHitDto newDto) {

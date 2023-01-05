@@ -5,7 +5,6 @@ import ru.practicum.mainservice.location.model.Location;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

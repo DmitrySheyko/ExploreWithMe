@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.event.dto.AdminUpdateEventDto;
 import ru.practicum.mainservice.event.dto.EventAdminSearchDto;
 import ru.practicum.mainservice.event.dto.EventFullDto;
-import ru.practicum.mainservice.event.service.EventServiceImpl;
+import ru.practicum.mainservice.event.service.EventService;
 
 import javax.validation.constraints.Min;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Set;
 @RequestMapping("/admin/events")
 @RequiredArgsConstructor
 public class EventAdminController {
-    private final EventServiceImpl service;
+    private final EventService service;
 
     @GetMapping
     public List<EventFullDto> search(@RequestParam(value = "users", required = false) Set<Long> users,

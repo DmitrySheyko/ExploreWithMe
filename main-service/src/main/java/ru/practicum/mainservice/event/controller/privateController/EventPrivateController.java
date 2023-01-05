@@ -6,9 +6,8 @@ import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.dto.EventShortDto;
 import ru.practicum.mainservice.event.dto.NewEventDto;
 import ru.practicum.mainservice.event.dto.PrivateUpdateEventDto;
-import ru.practicum.mainservice.event.service.EventServiceImpl;
+import ru.practicum.mainservice.event.service.EventService;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
-import ru.practicum.mainservice.request.model.Status;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -18,7 +17,7 @@ import java.util.List;
 @RequestMapping("/users/{userId}/events")
 @RequiredArgsConstructor
 public class EventPrivateController {
-    private final EventServiceImpl service;
+    private final EventService service;
 
     @PostMapping
     public EventFullDto add(@PathVariable("userId") Long userId,
@@ -59,13 +58,13 @@ public class EventPrivateController {
     public ParticipationRequestDto confirmParticipationRequest(@PathVariable("userId") Long userId,
                                                                @PathVariable("eventId") Long eventId,
                                                                @PathVariable("reqId") Long requestId) {
-        return service.changeStatusOfParticipationRequest(userId, eventId, requestId, Status.CONFIRMED);
+        return service.confirmParticipationRequest(userId, eventId, requestId);
     }
 
     @PatchMapping("/{eventId}/requests/{reqId}/reject")
     public ParticipationRequestDto rejectParticipationRequest(@PathVariable("userId") Long userId,
                                                               @PathVariable("eventId") Long eventId,
                                                               @PathVariable("reqId") Long requestId) {
-        return service.changeStatusOfParticipationRequest(userId, eventId, requestId, Status.REJECTED);
+        return service.rejectParticipationRequest(userId, eventId, requestId);
     }
 }

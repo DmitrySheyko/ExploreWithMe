@@ -203,7 +203,6 @@ public class EventServiceImpl implements EventService {
                 .orElseThrow(() -> new NotFoundException(String.format("Event id=%s with initiator id=%s not found",
                         eventId, userId)));
         if (!Objects.equals(State.PENDING, event.getState())) {
-            log.warn("Event id={} not canceled because canceling is possible only in PENDING status", eventId);
             throw new ValidationException((String.format("Event id=%s not canceled because canceling is possible " +
                     "only in PENDING status", eventId)));
         }
@@ -264,7 +263,6 @@ public class EventServiceImpl implements EventService {
         Event event = repository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException((String.format("Event id=%s was not found.", eventId))));
         if (event.getPublishedOn() == null) {
-            log.info("Not found published event id={}", eventId);
             throw new NotFoundException(String.format("Not found published event id=%s", eventId));
         }
         EventFullDto eventDto = EventMapper.toFullDto(event);
@@ -274,17 +272,65 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public ParticipationRequestDto changeStatusOfParticipationRequest(Long userId, Long eventId, Long requestId,
-                                                                      Status status) {
+    public ParticipationRequestDto confirmParticipationRequest(Long userId, Long eventId, Long requestId) {
+        Event event = repository.findByIdAndInitiatorId(eventId, userId)
+                .orElseThrow(() -> new NotFoundException(String.format("Event id=%s with initiator id=%s not found",
+                        eventId, userId)));
+        Request request = requestRepository.findById(requestId)
+                .orElseThrow(() -> new NotFoundException(String.format("Request id=%s not found", requestId)));
+        if (!Objects.equals(eventId, request.getEvent().getId())) {
+            throw new ValidationException(String.format("Request id=%s don't linked with event id=%s", requestId, eventId));
+        }
+        if (!Objects.equals(request.getStatus(), Status.PENDING)) {
+            throw new ValidationException(String.format("Request id=%s has status - %s, for confirmation should be " +
+                    "status PENDING", requestId, request.getStatus().name()));
+        }
+        ParticipationRequestDto requestDto;
+        long numberOfConfirmedRequests = event.getRequestsSet().stream()
+                .filter(req -> req.getStatus().equals(Status.CONFIRMED))
+                .count();
+        if (event.getParticipantLimit() == 0 || numberOfConfirmedRequests < event.getParticipantLimit()) {
+            request.setStatus(Status.CONFIRMED);
+            request = requestRepository.save(request);
+            requestDto = RequestMapper.toDto(request);
+            log.info("Participation requests id={} for event id={} successfully confirmed", requestId, eventId);
+            return requestDto;
+        }
+        request.setStatus(Status.REJECTED);
+        request = requestRepository.save(request);
+        requestDto = RequestMapper.toDto(request);
+        List<Request> rejectedRequestsList = event.getRequestsSet().stream()
+                .filter(req -> req.getStatus().equals(Status.PENDING))
+                .peek(req -> req.setStatus(Status.REJECTED))
+                .collect(Collectors.toList());
+        requestRepository.saveAll(rejectedRequestsList);
+        List<Long> rejectedRequestsIdList = rejectedRequestsList.stream()
+                .map(Request::getId)
+                .collect(Collectors.toList());
+        log.info("Request id={} rejected because participants limit is full. Automatically were rejected all " +
+                "not confirmed requests, list of id:{}", requestId, rejectedRequestsIdList);
+        return requestDto;
+    }
+
+    @Override
+    @Transactional
+    public ParticipationRequestDto rejectParticipationRequest(Long userId, Long eventId, Long requestId) {
         repository.findByIdAndInitiatorId(eventId, userId)
                 .orElseThrow(() -> new NotFoundException(String.format("Event id=%s with initiator id=%s not found",
                         eventId, userId)));
         Request request = requestRepository.findById(requestId)
                 .orElseThrow(() -> new NotFoundException(String.format("Request id=%s not found", requestId)));
-        request.setStatus(status);
+        if (!Objects.equals(eventId, request.getEvent().getId())) {
+            throw new ValidationException(String.format("Request id=%s don't linked with event id=%s", requestId, eventId));
+        }
+        if (!Objects.equals(request.getStatus(), Status.PENDING)) {
+            throw new ValidationException(String.format("Request id=%s has status - %s, for rejection should be " +
+                    "status PENDING", requestId, request.getStatus().name()));
+        }
+        request.setStatus(Status.REJECTED);
         request = requestRepository.save(request);
         ParticipationRequestDto requestDto = RequestMapper.toDto(request);
-        log.info("Participation requests id={} for event id={} got status {}", requestId, eventId, status.toString());
+        log.info("Participation requests id={} for event id={} rejected", requestId, eventId);
         return requestDto;
     }
 

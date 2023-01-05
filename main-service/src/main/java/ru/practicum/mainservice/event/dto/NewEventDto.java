@@ -11,7 +11,6 @@ import javax.validation.constraints.PositiveOrZero;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

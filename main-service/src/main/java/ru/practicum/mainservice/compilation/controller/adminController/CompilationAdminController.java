@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.compilation.dto.CompilationDto;
 import ru.practicum.mainservice.compilation.dto.NewCompilationDto;
-import ru.practicum.mainservice.compilation.service.CompilationServiceImpl;
+import ru.practicum.mainservice.compilation.service.CompilationService;
 
 import javax.validation.Valid;
 
@@ -12,7 +12,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping("admin/compilations")
 public class CompilationAdminController {
-    private final CompilationServiceImpl service;
+    private final CompilationService service;
 
     @PostMapping
     public CompilationDto add(@Valid @RequestBody NewCompilationDto newCompilationDto) {

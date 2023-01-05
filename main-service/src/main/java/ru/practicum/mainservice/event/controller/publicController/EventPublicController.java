@@ -7,7 +7,7 @@ import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.dto.EventPublicSearchDto;
 import ru.practicum.mainservice.event.dto.EventShortDto;
 import ru.practicum.mainservice.event.model.EventSearchSort;
-import ru.practicum.mainservice.event.service.EventServiceImpl;
+import ru.practicum.mainservice.event.service.EventService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.Min;
@@ -19,7 +19,7 @@ import java.util.Set;
 @RequestMapping("/events")
 @RequiredArgsConstructor
 public class EventPublicController {
-    private final EventServiceImpl service;
+    private final EventService service;
     private final EventClient eventClient;
 
     @GetMapping

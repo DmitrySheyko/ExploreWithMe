@@ -3,7 +3,7 @@ package ru.practicum.mainservice.request.controller.privateController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
-import ru.practicum.mainservice.request.service.RequestServiceImpl;
+import ru.practicum.mainservice.request.service.RequestService;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/users/{userId}/requests")
 @RequiredArgsConstructor
 public class PrivateRequestController {
-    private final RequestServiceImpl service;
+    private final RequestService service;
 
     @PostMapping
     public ParticipationRequestDto add(@PathVariable(value = "userId") Long userId,

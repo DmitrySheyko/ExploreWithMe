@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class CategoryServiceImpl implements CategoryInterface {
+public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository repository;
 
     @Override

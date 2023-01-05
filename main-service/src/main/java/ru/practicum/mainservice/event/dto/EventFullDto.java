@@ -8,7 +8,6 @@ import ru.practicum.mainservice.user.dto.UserShortDto;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

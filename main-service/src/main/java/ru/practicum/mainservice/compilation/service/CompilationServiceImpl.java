@@ -42,7 +42,7 @@ public class CompilationServiceImpl implements CompilationService {
         Compilation compilation = CompilationMapper.toCompilation(newCompilationDto, eventSet);
         compilation = repository.save(compilation);
         CompilationDto compilationDto = CompilationMapper.toDto(compilation);
-        log.warn("New compilation id={}, title={} successfully add", compilation.getId(), compilation.getTitle());
+        log.info("New compilation id={}, title={} successfully add", compilation.getId(), compilation.getTitle());
         return compilationDto;
     }
 

@@ -87,26 +87,17 @@ public class RequestServiceImpl implements RequestService {
 
     private void checkTermsForNewRequest(User requester, Event event) {
         if (event.getInitiator().equals(requester)) {
-            log.warn("Initiator of event can't create participation requests. Request didn't created");
             throw new ValidationException("Initiator of event can't create participation requests. Request didn't " +
                     "created");
         }
         if (!event.getState().equals(State.PUBLISHED)) {
-            log.warn("Request can be created only for published status events. Request didn't created");
             throw new ValidationException("Request can be created only for published status events. Request didn't " +
                     "created");
         }
         if (event.getParticipantLimit() != 0 && event.getRequestsSet().stream()
                 .filter(request -> request.getStatus().equals(Status.CONFIRMED))
                 .collect(Collectors.toSet()).size() >= event.getParticipantLimit()) {
-            log.warn("Participants limit is full. Request didn't created");
             throw new ValidationException("Participants limit is full. Request didn't created");
-        }
-        if (event.getRequestsSet().stream()
-                .anyMatch(request -> request.getRequester().equals(requester))) {
-            log.warn("User id={} already made request to this event . Request didn't created", requester);
-            throw new ValidationException(String.format("User id=%s already made request to this event. " +
-                    "Request didn't created", requester));
         }
     }
 }

@@ -3,7 +3,6 @@ package ru.practicum.mainservice.event.service;
 import ru.practicum.mainservice.event.dto.*;
 import ru.practicum.mainservice.event.model.EventSearchSort;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
-import ru.practicum.mainservice.request.model.Status;
 
 import java.util.List;
 
@@ -33,6 +32,7 @@ public interface EventService {
 
     EventFullDto getById(Long eventId);
 
-    ParticipationRequestDto changeStatusOfParticipationRequest(Long userId, Long eventId, Long requestId,
-                                                               Status status);
+    ParticipationRequestDto confirmParticipationRequest(Long userId, Long eventId, Long requestId);
+
+    ParticipationRequestDto rejectParticipationRequest(Long userId, Long eventId, Long requestId);
 }

@@ -1,5 +1,6 @@
 package ru.practicum.mainservice.exceptions;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
@@ -13,11 +14,13 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
+@Slf4j
 public class ErrorHandler {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handlerNotFoundException(final NotFoundException e) {
+        log.warn(e.getMessage());
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.NOT_FOUND.getReasonPhrase())
@@ -29,6 +32,7 @@ public class ErrorHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handlerMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
+        log.warn(e.getMessage());
         return ErrorResponse.builder()
                 .errors(e.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList()))
                 .message(e.getMessage())
@@ -41,6 +45,7 @@ public class ErrorHandler {
     @ExceptionHandler(ValidationException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ErrorResponse handlerValidationException(final ValidationException e) {
+        log.warn(e.getMessage());
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.FORBIDDEN.getReasonPhrase())
@@ -52,6 +57,7 @@ public class ErrorHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorResponse handlerConstraintViolationException(final ConstraintViolationException e) {
+        log.warn(e.getMessage());
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.CONFLICT.getReasonPhrase())
@@ -63,6 +69,7 @@ public class ErrorHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleIllegalArgumentException(final IllegalArgumentException e) {
+        log.warn(e.getMessage());
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.BAD_REQUEST.getReasonPhrase())
@@ -74,6 +81,7 @@ public class ErrorHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleMissingParams(final MissingServletRequestParameterException e) {
+        log.warn(e.getMessage());
         return ErrorResponse.builder()
                 .message(e.getMessage())
                 .reason(HttpStatus.BAD_REQUEST.getReasonPhrase())
