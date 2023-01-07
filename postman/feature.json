@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "a101ae4d-403d-49e0-8c2c-adcaad137c3e",
-		"name": "feature",
+		"_postman_id": "725305c8-62c9-4fb6-aaf6-c69539adbcd0",
+		"name": "feature Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "22462895"
 	},
@@ -18,7 +18,7 @@
 							"});\r",
 							"pm.test(\"Test create user1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(46);\r",
 							"    pm.expect(jsonData.email, '\"email\" field').to.eql('ivan.petrov@email.ru');\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('User1');\r",
 							"});"
@@ -66,7 +66,7 @@
 							"});\r",
 							"pm.test(\"Test create user2\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(47);\r",
 							"    pm.expect(jsonData.email, '\"email\" field').to.eql('ivan.petrov2@email.ru');\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('User2');\r",
 							"});"
@@ -114,7 +114,7 @@
 							"});\r",
 							"pm.test(\"Test create user3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(48);\r",
 							"    pm.expect(jsonData.email, '\"email\" field').to.eql('ivan.petrov3@email.ru');\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('User3');\r",
 							"});"
@@ -162,7 +162,7 @@
 							"});\r",
 							"pm.test(\"Test create user4\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(49);\r",
 							"    pm.expect(jsonData.email, '\"email\" field').to.eql('ivan.petrov4@email.ru');\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('User4');\r",
 							"});"
@@ -210,7 +210,7 @@
 							"});\r",
 							"pm.test(\"Test create category1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(43);\r",
 							"    pm.expect(jsonData.name, '\"name\" field').to.eql('Category 1');\r",
 							"});"
 						],
@@ -257,9 +257,9 @@
 							"});\r",
 							"pm.test(\"Test create event1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(26);\r",
 							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
-							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(43);\r",
 							"    pm.expect(jsonData.description, '\"description\" field').to.eql('Event 1 description.');\r",
 							"    pm.expect(jsonData.eventDate, '\"eventDate\" field').to.eql('2024-12-31 15:00:00');\r",
 							"    pm.expect(jsonData.location.lat, '\"lat\" field').to.eql(55.75416);\r",
@@ -279,7 +279,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"annotation\": \"Event 1 annotaton. And edditional text, and additional text.\",\n  \"category\": 1,\n  \"description\": \"Event 1 description.\",\n  \"eventDate\": \"2024-12-31 15:00:00\",\n  \"location\": {\n    \"lat\": 55.75416,\n    \"lon\": 37.62\n  },\n  \"title\": \"Event 1 title\",\n  \"paid\": false,\n  \"participantLimit\": 1,\n  \"requestModeration\": false\n}",
+					"raw": "{\n  \"annotation\": \"Event 1 annotaton. And edditional text, and additional text.\",\n  \"category\": 43,\n  \"description\": \"Event 1 description.\",\n  \"eventDate\": \"2024-12-31 15:00:00\",\n  \"location\": {\n    \"lat\": 55.75416,\n    \"lon\": 37.62\n  },\n  \"title\": \"Event 1 title\",\n  \"paid\": false,\n  \"participantLimit\": 1,\n  \"requestModeration\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -301,7 +301,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "1"
+							"value": "46"
 						}
 					]
 				}
@@ -320,9 +320,9 @@
 							"});\r",
 							"pm.test(\"Test create event2\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(27);\r",
 							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('Event 2 annotaton. And edditional text, and additional text.');\r",
-							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(43);\r",
 							"    pm.expect(jsonData.description, '\"description\" field').to.eql('Event 2 description.');\r",
 							"    pm.expect(jsonData.eventDate, '\"eventDate\" field').to.eql('2024-11-30 15:10:05');\r",
 							"    pm.expect(jsonData.location.lat, '\"lat\" field').to.eql(10.754167);\r",
@@ -342,7 +342,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"annotation\": \"Event 2 annotaton. And edditional text, and additional text.\",\n  \"category\": 1,\n  \"description\": \"Event 2 description.\",\n  \"eventDate\": \"2024-11-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 2 title\",\n  \"paid\": false,\n  \"participantLimit\": 2,\n  \"requestModeration\": false\n}",
+					"raw": "{\n  \"annotation\": \"Event 2 annotaton. And edditional text, and additional text.\",\n  \"category\": 43,\n  \"description\": \"Event 2 description.\",\n  \"eventDate\": \"2024-11-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 2 title\",\n  \"paid\": false,\n  \"participantLimit\": 2,\n  \"requestModeration\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -364,7 +364,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "2"
+							"value": "47"
 						}
 					]
 				}
@@ -383,9 +383,9 @@
 							"});\r",
 							"pm.test(\"Test create event3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(28);\r",
 							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
-							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(43);\r",
 							"    pm.expect(jsonData.description, '\"description\" field').to.eql('Event 3 description.');\r",
 							"    pm.expect(jsonData.eventDate, '\"eventDate\" field').to.eql('2024-11-30 15:10:05');\r",
 							"    pm.expect(jsonData.location.lat, '\"lat\" field').to.eql(10.754167);\r",
@@ -405,7 +405,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"annotation\": \"Event 3 annotaton. And edditional text, and additional text.\",\n  \"category\": 1,\n  \"description\": \"Event 3 description.\",\n  \"eventDate\": \"2024-11-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 3 title\",\n  \"paid\": false,\n  \"participantLimit\": 3,\n  \"requestModeration\": false\n}",
+					"raw": "{\n  \"annotation\": \"Event 3 annotaton. And edditional text, and additional text.\",\n  \"category\": 43,\n  \"description\": \"Event 3 description.\",\n  \"eventDate\": \"2024-11-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 3 title\",\n  \"paid\": false,\n  \"participantLimit\": 3,\n  \"requestModeration\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -427,7 +427,7 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "3"
+							"value": "48"
 						}
 					]
 				}
@@ -446,9 +446,9 @@
 							"});\r",
 							"pm.test(\"Test create event4\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(29);\r",
 							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('Event 4 annotaton. And edditional text, and additional text.');\r",
-							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(43);\r",
 							"    pm.expect(jsonData.description, '\"description\" field').to.eql('Event 4 description.');\r",
 							"    pm.expect(jsonData.eventDate, '\"eventDate\" field').to.eql('2024-07-31 15:10:05');\r",
 							"    pm.expect(jsonData.location.lat, '\"lat\" field').to.eql(10.754167);\r",
@@ -468,7 +468,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"annotation\": \"Event 4 annotaton. And edditional text, and additional text.\",\n  \"category\": 1,\n  \"description\": \"Event 4 description.\",\n  \"eventDate\": \"2024-07-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 4 title\",\n  \"paid\": false,\n  \"participantLimit\": 4,\n  \"requestModeration\": false\n}",
+					"raw": "{\n  \"annotation\": \"Event 4 annotaton. And edditional text, and additional text.\",\n  \"category\": 43,\n  \"description\": \"Event 4 description.\",\n  \"eventDate\": \"2024-07-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 4 title\",\n  \"paid\": false,\n  \"participantLimit\": 4,\n  \"requestModeration\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -490,51 +490,8 @@
 					"variable": [
 						{
 							"key": "userId",
-							"value": "4"
+							"value": "49"
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Create comment from user1 TO OWN event1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test(\"Status code is 409\", function () {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([400, 403]);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"event\": 1,\n  \"text\": \"Commnet from user2 to event1\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/users/1/comments",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"users",
-						"1",
-						"comments"
 					]
 				}
 			},
@@ -563,7 +520,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/public/comments/1?from=0&size=10",
+					"raw": "http://localhost:8080/public/comments/26?from=0&size=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -572,7 +529,7 @@
 					"path": [
 						"public",
 						"comments",
-						"1"
+						"26"
 					],
 					"query": [
 						{
@@ -583,6 +540,49 @@
 							"key": "size",
 							"value": "10"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment from user1 TO OWN event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 403]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 26,\n  \"text\": \"Commnet from user2 to event1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/46/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"46",
+						"comments"
 					]
 				}
 			},
@@ -600,11 +600,8 @@
 							"});\r",
 							"pm.test(\"Test create comment (for publish) from user2 to event1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.id, '\"id\" field').not.be.null;\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=1 for publish from user2 to event1');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -618,7 +615,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 1,\n  \"text\": \"Comment id=1 for publish from user2 to event1\"\n}",
+					"raw": "{\n  \"event\": 26,\n  \"text\": \"Comment id=1 for publish from user2 to event1\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -626,7 +623,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/2/comments",
+					"raw": "http://localhost:8080/users/47/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -634,7 +631,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"2",
+						"47",
 						"comments"
 					]
 				}
@@ -654,10 +651,7 @@
 							"pm.test(\"Test create comment (for publish) from user3 to event1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User3');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=2 for publish from user3 to event1');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -671,7 +665,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 1,\n  \"text\": \"Comment id=2 for publish from user3 to event1\"\n}",
+					"raw": "{\n  \"event\": 26,\n  \"text\": \"Comment id=2 for publish from user3 to event1\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -679,7 +673,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/3/comments",
+					"raw": "http://localhost:8080/users/48/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -687,7 +681,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"3",
+						"48",
 						"comments"
 					]
 				}
@@ -707,10 +701,7 @@
 							"pm.test(\"Test create comment (for publish) from user4 to event1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=3 for publish from user4 to event1.');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -724,7 +715,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 1,\n  \"text\": \"Comment id=3 for publish from user4 to event1.\"\n}",
+					"raw": "{\n  \"event\": 26,\n  \"text\": \"Comment id=3 for publish from user4 to event1.\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -732,7 +723,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/4/comments",
+					"raw": "http://localhost:8080/users/49/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -740,7 +731,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"4",
+						"49",
 						"comments"
 					]
 				}
@@ -819,10 +810,6 @@
 							"pm.test(\"Test publish comment from user2 to event1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=1 for publish from user2 to event1');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('CONFIRMED');\r",
 							"});"
@@ -864,10 +851,6 @@
 							"pm.test(\"Test publish comment from user3 to event1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User3');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=2 for publish from user3 to event1');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('CONFIRMED');\r",
 							"});"
@@ -909,10 +892,6 @@
 							"pm.test(\"Test publish comment from user4 to event1\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=3 for publish from user4 to event1.');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('CONFIRMED');\r",
 							"});"
@@ -964,7 +943,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/public/comments/1?from=0&size=10",
+					"raw": "http://localhost:8080/public/comments/26?from=0&size=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -973,7 +952,7 @@
 					"path": [
 						"public",
 						"comments",
-						"1"
+						"26"
 					],
 					"query": [
 						{
@@ -1097,10 +1076,7 @@
 							"pm.test(\"Test create comment (for panding) from user1 to event2\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User1');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 2 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=4 for pending from user4 to event2');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -1114,7 +1090,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 2,\n  \"text\": \"Comment id=4 for pending from user4 to event2\"\n}",
+					"raw": "{\n  \"event\": 27,\n  \"text\": \"Comment id=4 for pending from user4 to event2\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1122,7 +1098,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/1/comments",
+					"raw": "http://localhost:8080/users/46/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1130,7 +1106,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"1",
+						"46",
 						"comments"
 					]
 				}
@@ -1150,10 +1126,7 @@
 							"pm.test(\"Test create comment (for panding) from user3 to event2\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(5);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User3');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 2 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=5 for pending from user3 to event2');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -1167,7 +1140,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 2,\n  \"text\": \"Comment id=5 for pending from user3 to event2\"\n}",
+					"raw": "{\n  \"event\": 27,\n  \"text\": \"Comment id=5 for pending from user3 to event2\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1175,7 +1148,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/3/comments",
+					"raw": "http://localhost:8080/users/48/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1183,7 +1156,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"3",
+						"48",
 						"comments"
 					]
 				}
@@ -1203,10 +1176,8 @@
 							"pm.test(\"Test create comment (for panding) from user4 to event2\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(6);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 2 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(49);\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=6 for pending from user4 to event2');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -1220,7 +1191,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 2,\n  \"text\": \"Comment id=6 for pending from user4 to event2\"\n}",
+					"raw": "{\n  \"event\": 27,\n  \"text\": \"Comment id=6 for pending from user4 to event2\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1228,7 +1199,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/4/comments",
+					"raw": "http://localhost:8080/users/49/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1236,7 +1207,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"4",
+						"49",
 						"comments"
 					]
 				}
@@ -1299,10 +1270,7 @@
 							"pm.test(\"Test create comment (for reject) from user1 to event3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(7);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User1');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=7 for reject from user1 to event3');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -1316,7 +1284,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 3,\n  \"text\": \"Comment id=7 for reject from user1 to event3\"\n}",
+					"raw": "{\n  \"event\": 28,\n  \"text\": \"Comment id=7 for reject from user1 to event3\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1324,7 +1292,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/1/comments",
+					"raw": "http://localhost:8080/users/46/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1332,7 +1300,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"1",
+						"46",
 						"comments"
 					]
 				}
@@ -1352,10 +1320,7 @@
 							"pm.test(\"Test create comment (for reject) from user2 to event3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(8);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=8 for reject from user2 to event3');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -1369,7 +1334,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 3,\n  \"text\": \"Comment id=8 for reject from user2 to event3\"\n}",
+					"raw": "{\n  \"event\": 28,\n  \"text\": \"Comment id=8 for reject from user2 to event3\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1377,7 +1342,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/2/comments",
+					"raw": "http://localhost:8080/users/47/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1385,7 +1350,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"2",
+						"47",
 						"comments"
 					]
 				}
@@ -1405,10 +1370,7 @@
 							"pm.test(\"Test create comment (for reject) from user4 to event3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(9);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=9 for reject from user4 to event3');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -1422,7 +1384,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 3,\n  \"text\": \"Comment id=9 for reject from user4 to event3\"\n}",
+					"raw": "{\n  \"event\": 28,\n  \"text\": \"Comment id=9 for reject from user4 to event3\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1430,7 +1392,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/4/comments",
+					"raw": "http://localhost:8080/users/49/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1438,7 +1400,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"4",
+						"49",
 						"comments"
 					]
 				}
@@ -1458,10 +1420,7 @@
 							"pm.test(\"Test reject comment from user1 to event3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(7);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User1');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=7 for reject from user1 to event3');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');\r",
 							"});"
@@ -1503,10 +1462,7 @@
 							"pm.test(\"Test reject comment from user2 to event3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(8);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=8 for reject from user2 to event3');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');\r",
 							"});"
@@ -1548,10 +1504,7 @@
 							"pm.test(\"Test reject comment from user4 to event3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(9);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=9 for reject from user4 to event3');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');\r",
 							"});"
@@ -1636,10 +1589,7 @@
 							"pm.test(\"Test create comment (for delete) from user1 to event4\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(10);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(4);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 4 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=10 for delete from user2 to event4');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -1653,7 +1603,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"event\": 4,\n  \"text\": \"Comment id=10 for delete from user2 to event4\"\n}",
+					"raw": "{\n  \"event\": 29,\n  \"text\": \"Comment id=10 for delete from user2 to event4\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1661,7 +1611,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/2/comments",
+					"raw": "http://localhost:8080/users/47/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1669,7 +1619,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"2",
+						"47",
 						"comments"
 					]
 				}
@@ -1699,7 +1649,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/2/comments?from=0&size=10",
+					"raw": "http://localhost:8080/users/47/comments?from=0&size=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1707,7 +1657,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"2",
+						"47",
 						"comments"
 					],
 					"query": [
@@ -1743,7 +1693,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/2/comments?commentId=10",
+					"raw": "http://localhost:8080/users/47/comments?commentId=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1751,7 +1701,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"2",
+						"47",
 						"comments"
 					],
 					"query": [
@@ -1787,7 +1737,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/2/comments?from=0&size=10",
+					"raw": "http://localhost:8080/users/47/comments?from=0&size=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1795,7 +1745,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"2",
+						"47",
 						"comments"
 					],
 					"query": [
@@ -1825,10 +1775,7 @@
 							"pm.test(\"Test update comment from user1 to own event3\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"    pm.expect(jsonData.id, '\"id\" field').to.eql(7);\r",
-							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(1);\r",
-							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User1');\r",
-							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
-							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.created, '\"created\" field').not.be.null;\r",
 							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Updated comment id=7 for reject from user1 to event3.');\r",
 							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
 							"});"
@@ -1850,7 +1797,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/1/comments",
+					"raw": "http://localhost:8080/users/46/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1858,7 +1805,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"1",
+						"46",
 						"comments"
 					]
 				}
@@ -1893,7 +1840,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/1/comments",
+					"raw": "http://localhost:8080/users/46/comments",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -1901,7 +1848,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"1",
+						"46",
 						"comments"
 					]
 				}
@@ -2177,7 +2124,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/admin/comments?events=1",
+					"raw": "http://localhost:8080/admin/comments?events=26",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -2190,7 +2137,7 @@
 					"query": [
 						{
 							"key": "events",
-							"value": "1"
+							"value": "26"
 						}
 					]
 				}
@@ -2198,7 +2145,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search user 0",
+			"name": "Admin search by user 0",
 			"event": [
 				{
 					"listen": "test",
@@ -2241,7 +2188,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search user1",
+			"name": "Admin search by user1",
 			"event": [
 				{
 					"listen": "test",
@@ -2263,7 +2210,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/admin/comments?users=1",
+					"raw": "http://localhost:8080/admin/comments?users=46",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -2276,7 +2223,7 @@
 					"query": [
 						{
 							"key": "users",
-							"value": "1"
+							"value": "46"
 						}
 					]
 				}
@@ -2284,7 +2231,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search user1 and event2",
+			"name": "Admin search by user1 and event2",
 			"event": [
 				{
 					"listen": "test",
@@ -2306,7 +2253,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/admin/comments?users=1&events=2",
+					"raw": "http://localhost:8080/admin/comments?users=46&events=27",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -2319,11 +2266,11 @@
 					"query": [
 						{
 							"key": "users",
-							"value": "1"
+							"value": "46"
 						},
 						{
 							"key": "events",
-							"value": "2"
+							"value": "27"
 						}
 					]
 				}
@@ -2331,7 +2278,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search INCORRECT status",
+			"name": "Admin search by INCORRECT status",
 			"event": [
 				{
 					"listen": "test",
@@ -2370,7 +2317,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search INCORRECT rangeStart",
+			"name": "Admin search by INCORRECT rangeStart",
 			"event": [
 				{
 					"listen": "test",
@@ -2409,7 +2356,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search rangeStart (in future)",
+			"name": "Admin search by rangeStart (in future)",
 			"event": [
 				{
 					"listen": "test",
@@ -2452,7 +2399,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search rangeStart (actual)",
+			"name": "Admin search by rangeStart (actual)",
 			"event": [
 				{
 					"listen": "test",
@@ -2495,7 +2442,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search rangeEnd (in past)",
+			"name": "Admin search by rangeEnd (in past)",
 			"event": [
 				{
 					"listen": "test",
@@ -2538,7 +2485,7 @@
 			"response": []
 		},
 		{
-			"name": "Admin search rangeEnd (actual)",
+			"name": "Admin search by rangeEnd (actual)",
 			"event": [
 				{
 					"listen": "test",
