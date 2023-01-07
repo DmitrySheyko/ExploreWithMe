@@ -16,5 +16,5 @@ public class UpdateCommentDto {
     private Long id;
 
     @NotBlank
-    private String Text;
+    private String text;
 }

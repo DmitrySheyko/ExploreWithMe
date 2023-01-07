@@ -47,7 +47,7 @@ public class CommentPrivateController {
     // Удалить свой comment.
     @DeleteMapping
     public String delete(@PathVariable(value = "userId") Long userId,
-                         @RequestParam(value = "commentId") Long CommentId) {
-        return service.delete(userId, CommentId);
+                         @RequestParam(value = "commentId") Long commentId) {
+        return service.delete(userId, commentId);
     }
 }
