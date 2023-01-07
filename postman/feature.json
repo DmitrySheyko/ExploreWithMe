@@ -1,0 +1,2584 @@
+{
+	"info": {
+		"_postman_id": "a101ae4d-403d-49e0-8c2c-adcaad137c3e",
+		"name": "feature",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22462895"
+	},
+	"item": [
+		{
+			"name": "Create user1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create user1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.email, '\"email\" field').to.eql('ivan.petrov@email.ru');\r",
+							"    pm.expect(jsonData.name, '\"name\" field').to.eql('User1');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"ivan.petrov@email.ru\",\n  \"name\": \"User1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create user2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.email, '\"email\" field').to.eql('ivan.petrov2@email.ru');\r",
+							"    pm.expect(jsonData.name, '\"name\" field').to.eql('User2');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"ivan.petrov2@email.ru\",\n  \"name\": \"User2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create user3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.email, '\"email\" field').to.eql('ivan.petrov3@email.ru');\r",
+							"    pm.expect(jsonData.name, '\"name\" field').to.eql('User3');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"ivan.petrov3@email.ru\",\n  \"name\": \"User3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create user4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.email, '\"email\" field').to.eql('ivan.petrov4@email.ru');\r",
+							"    pm.expect(jsonData.name, '\"name\" field').to.eql('User4');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"ivan.petrov4@email.ru\",\r\n  \"name\": \"User4\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create category1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create category1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.name, '\"name\" field').to.eql('Category 1');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Category 1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create event1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.description, '\"description\" field').to.eql('Event 1 description.');\r",
+							"    pm.expect(jsonData.eventDate, '\"eventDate\" field').to.eql('2024-12-31 15:00:00');\r",
+							"    pm.expect(jsonData.location.lat, '\"lat\" field').to.eql(55.75416);\r",
+							"    pm.expect(jsonData.location.lon, '\"lon\" field').to.eql(37.62);\r",
+							"    pm.expect(jsonData.title, '\"title\" field').to.eql('Event 1 title');\r",
+							"    pm.expect(jsonData.paid, '\"paid\" field').to.eql(false);\r",
+							"    pm.expect(jsonData.participantLimit, '\"participantLimit\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.requestModeration, '\"requestModeration\" field').to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"annotation\": \"Event 1 annotaton. And edditional text, and additional text.\",\n  \"category\": 1,\n  \"description\": \"Event 1 description.\",\n  \"eventDate\": \"2024-12-31 15:00:00\",\n  \"location\": {\n    \"lat\": 55.75416,\n    \"lon\": 37.62\n  },\n  \"title\": \"Event 1 title\",\n  \"paid\": false,\n  \"participantLimit\": 1,\n  \"requestModeration\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/:userId/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						":userId",
+						"events"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create event2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create event2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('Event 2 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.description, '\"description\" field').to.eql('Event 2 description.');\r",
+							"    pm.expect(jsonData.eventDate, '\"eventDate\" field').to.eql('2024-11-30 15:10:05');\r",
+							"    pm.expect(jsonData.location.lat, '\"lat\" field').to.eql(10.754167);\r",
+							"    pm.expect(jsonData.location.lon, '\"lon\" field').to.eql(10.62);\r",
+							"    pm.expect(jsonData.title, '\"title\" field').to.eql('Event 2 title');\r",
+							"    pm.expect(jsonData.paid, '\"paid\" field').to.eql(false);\r",
+							"    pm.expect(jsonData.participantLimit, '\"participantLimit\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.requestModeration, '\"requestModeration\" field').to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"annotation\": \"Event 2 annotaton. And edditional text, and additional text.\",\n  \"category\": 1,\n  \"description\": \"Event 2 description.\",\n  \"eventDate\": \"2024-11-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 2 title\",\n  \"paid\": false,\n  \"participantLimit\": 2,\n  \"requestModeration\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/:userId/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						":userId",
+						"events"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create event3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.description, '\"description\" field').to.eql('Event 3 description.');\r",
+							"    pm.expect(jsonData.eventDate, '\"eventDate\" field').to.eql('2024-11-30 15:10:05');\r",
+							"    pm.expect(jsonData.location.lat, '\"lat\" field').to.eql(10.754167);\r",
+							"    pm.expect(jsonData.location.lon, '\"lon\" field').to.eql(10.62);\r",
+							"    pm.expect(jsonData.title, '\"title\" field').to.eql('Event 3 title');\r",
+							"    pm.expect(jsonData.paid, '\"paid\" field').to.eql(false);\r",
+							"    pm.expect(jsonData.participantLimit, '\"participantLimit\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.requestModeration, '\"requestModeration\" field').to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"annotation\": \"Event 3 annotaton. And edditional text, and additional text.\",\n  \"category\": 1,\n  \"description\": \"Event 3 description.\",\n  \"eventDate\": \"2024-11-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 3 title\",\n  \"paid\": false,\n  \"participantLimit\": 3,\n  \"requestModeration\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/:userId/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						":userId",
+						"events"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create event4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create event4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.annotation, '\"annotation\" field').to.eql('Event 4 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.category.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.description, '\"description\" field').to.eql('Event 4 description.');\r",
+							"    pm.expect(jsonData.eventDate, '\"eventDate\" field').to.eql('2024-07-31 15:10:05');\r",
+							"    pm.expect(jsonData.location.lat, '\"lat\" field').to.eql(10.754167);\r",
+							"    pm.expect(jsonData.location.lon, '\"lon\" field').to.eql(10.62);\r",
+							"    pm.expect(jsonData.title, '\"title\" field').to.eql('Event 4 title');\r",
+							"    pm.expect(jsonData.paid, '\"paid\" field').to.eql(false);\r",
+							"    pm.expect(jsonData.participantLimit, '\"participantLimit\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.requestModeration, '\"requestModeration\" field').to.eql(false);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"annotation\": \"Event 4 annotaton. And edditional text, and additional text.\",\n  \"category\": 1,\n  \"description\": \"Event 4 description.\",\n  \"eventDate\": \"2024-07-31 15:10:05\",\n  \"location\": {\n    \"lat\": 10.754167,\n    \"lon\": 10.62\n  },\n  \"title\": \"Event 4 title\",\n  \"paid\": false,\n  \"participantLimit\": 4,\n  \"requestModeration\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/:userId/events",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						":userId",
+						"events"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment from user1 TO OWN event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 403]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 1,\n  \"text\": \"Commnet from user2 to event1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/1/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Public get all publushed comments for even1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test public get all publushed comments for even1d\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/public/comments/1?from=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"public",
+						"comments",
+						"1"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for publish) from user2 to event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for publish) from user2 to event1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=1 for publish from user2 to event1');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 1,\n  \"text\": \"Comment id=1 for publish from user2 to event1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/2/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"2",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for publish) from user3 to event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for publish) from user3 to event1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User3');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=2 for publish from user3 to event1');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 1,\n  \"text\": \"Comment id=2 for publish from user3 to event1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/3/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"3",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for publish) from user4 to event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for publish) from user4 to event1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=3 for publish from user4 to event1.');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 1,\n  \"text\": \"Comment id=3 for publish from user4 to event1.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/4/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"4",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search for all comments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search for all comments\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "REJECTED",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "ID=1",
+							"disabled": true
+						},
+						{
+							"key": "users",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "users",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish comment from user2 to event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test publish comment from user2 to event1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=1 for publish from user2 to event1');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('CONFIRMED');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments/1/publish",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments",
+						"1",
+						"publish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish comment from user3 to event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test publish comment from user3 to event1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User3');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=2 for publish from user3 to event1');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('CONFIRMED');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments/2/publish",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments",
+						"2",
+						"publish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publish comment from user4 to event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test publish comment from user4 to event1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 1 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=3 for publish from user4 to event1.');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('CONFIRMED');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments/3/publish",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments",
+						"3",
+						"publish"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Public get all publushed comments for event 1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test public get all publushed comments for event 1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/public/comments/1?from=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"public",
+						"comments",
+						"1"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Public get all publushed comments for event 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test public get all publushed comments for event 2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/public/comments/2?from=0&size=10&event=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"public",
+						"comments",
+						"2"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "event",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search status CONFIRMED",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search status PENDING\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?status=CONFIRMED",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "CONFIRMED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for panding) from user1 to event2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for panding) from user1 to event2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User1');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 2 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=4 for pending from user4 to event2');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 2,\n  \"text\": \"Comment id=4 for pending from user4 to event2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/1/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for panding) from user3 to event2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for panding) from user3 to event2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(5);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User3');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 2 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=5 for pending from user3 to event2');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 2,\n  \"text\": \"Comment id=5 for pending from user3 to event2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/3/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"3",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for panding) from user4 to event2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for panding) from user4 to event2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(6);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 2 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=6 for pending from user4 to event2');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 2,\n  \"text\": \"Comment id=6 for pending from user4 to event2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/4/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"4",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search status PENDING",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search status PENDING\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?status=PENDING",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "PENDING"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for reject) from user1 to event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for reject) from user1 to event3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(7);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User1');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=7 for reject from user1 to event3');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 3,\n  \"text\": \"Comment id=7 for reject from user1 to event3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/1/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for reject) from user2 to event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for reject) from user2 to event3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(8);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=8 for reject from user2 to event3');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 3,\n  \"text\": \"Comment id=8 for reject from user2 to event3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/2/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"2",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for reject) from user4 to event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for reject) from user4 to event3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(9);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=9 for reject from user4 to event3');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 3,\n  \"text\": \"Comment id=9 for reject from user4 to event3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/4/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"4",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reject comment from user1 to event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test reject comment from user1 to event3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(7);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User1');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=7 for reject from user1 to event3');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments/7/reject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments",
+						"7",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reject comment from user2 to event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test reject comment from user2 to event3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(8);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=8 for reject from user2 to event3');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments/8/reject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments",
+						"8",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reject comment from user4 to event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test reject comment from user4 to event3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(9);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User4');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=9 for reject from user4 to event3');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('REJECTED');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments/9/reject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments",
+						"9",
+						"reject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search status REJECTED",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search status REJECTED\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?status=REJECTED",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "REJECTED"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create comment (for delete) from user1 to event4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test create comment (for delete) from user1 to event4\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(10);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(2);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User2');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(4);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 4 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Comment id=10 for delete from user2 to event4');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"event\": 4,\n  \"text\": \"Comment id=10 for delete from user2 to event4\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/2/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"2",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Private get all comments of user 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test private get all comments of user 2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/2/comments?from=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"2",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete comment from user1 to event4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/2/comments?commentId=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"2",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "commentId",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Private get all comments of user 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test private get all comments of user 2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/2/comments?from=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"2",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update comment from user1 to own event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200,201]);\r",
+							"});\r",
+							"pm.test(\"Test update comment from user1 to own event3\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(7);\r",
+							"    pm.expect(jsonData.user.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.user.name, '\"name\" field').to.eql('User1');\r",
+							"    pm.expect(jsonData.event.id, '\"id\" field').to.eql(3);\r",
+							"    pm.expect(jsonData.event.annotation, '\"annotation\" field').to.eql('Event 3 annotaton. And edditional text, and additional text.');\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql('Updated comment id=7 for reject from user1 to event3.');\r",
+							"    pm.expect(jsonData.status, '\"status\" field').to.eql('PENDING');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 7,\n  \"text\": \"Updated comment id=7 for reject from user1 to event3.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/1/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update comment from user1 to NOT OWN event3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 404]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": 8,\n  \"text\": \"Updated comment id=8 for reject from user1 to event3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/1/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search status PENDING",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search status PENDING\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(4);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?status=PENDING",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "PENDING"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search for all comments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search for all comments\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(9);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "REJECTED",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "ID=1",
+							"disabled": true
+						},
+						{
+							"key": "users",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "users",
+							"value": "2",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search by INCORRECT text",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search by INCORRECT text\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?text=INCORRECT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "INCORRECT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search by text",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search by text\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?text=CoMMent iD=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "REJECTED",
+							"disabled": true
+						},
+						{
+							"key": "users",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "users",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "text",
+							"value": "CoMMent iD=2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search by event 0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search by event 0\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?events=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "events",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search by event1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search by event1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(3);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?events=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "events",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search user 0",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search user 0\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?users=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "users",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search user1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search user1\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?users=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "users",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search user1 and event2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search user1 and event2\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?users=1&events=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "users",
+							"value": "1"
+						},
+						{
+							"key": "events",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search INCORRECT status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 403]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?status=INCORRECT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "INCORRECT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search INCORRECT rangeStart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 409\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400, 403]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?rangeStart=INCORRECT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "rangeStart",
+							"value": "INCORRECT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search rangeStart (in future)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search rangeStart (in future)\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?rangeStart=2024-01-01 00:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "rangeStart",
+							"value": "2024-01-01 00:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search rangeStart (actual)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search rangeStart (actual)\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(9);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?rangeStart=2023-01-01 00:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "rangeStart",
+							"value": "2023-01-01 00:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search rangeEnd (in past)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search rangeEnd (in past)\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(0);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?rangeEnd=2021-01-01 00:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "rangeEnd",
+							"value": "2021-01-01 00:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin search rangeEnd (actual)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200]);\r",
+							"});\r",
+							"pm.test(\"Test admin search rangeEnd (actual)\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.length, 'comments count in total').to.eql(9);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/admin/comments?rangeEnd=2024-01-01 00:00:00",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments"
+					],
+					"query": [
+						{
+							"key": "rangeEnd",
+							"value": "2024-01-01 00:00:00"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
