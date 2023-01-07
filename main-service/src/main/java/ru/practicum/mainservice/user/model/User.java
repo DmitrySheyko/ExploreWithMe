@@ -1,6 +1,7 @@
 package ru.practicum.mainservice.user.model;
 
 import lombok.*;
+import ru.practicum.mainservice.comment.model.Comment;
 import ru.practicum.mainservice.request.model.Request;
 
 import javax.persistence.*;
@@ -27,4 +28,7 @@ public class User {
 
     @OneToMany(mappedBy = "requester")
     private List<Request> requestsSet = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> commentsList = new ArrayList<>();
 }
