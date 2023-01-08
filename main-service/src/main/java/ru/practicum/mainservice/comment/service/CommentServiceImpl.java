@@ -139,14 +139,11 @@ public class CommentServiceImpl implements CommentService {
     public List<CommentDto> getAllPublishedByEventId(Long eventId, int from, int size) {
         int page = from / size;
         Pageable pageable = PageRequest.of(page, size);
-        System.out.println(11);
         Page<Comment> commentsPage = repository.findAllByEventIdAndStatusOrderByCreatedDesc(eventId,
                 Status.CONFIRMED, pageable);
-        System.out.println(22);
         List<CommentDto> commentDtoSet = commentsPage.stream()
                 .map(CommentMapper::toDto)
                 .collect(Collectors.toList());
-        System.out.println(33);
         log.info("Published comments set for event id={} successfully received", eventId);
         return commentDtoSet;
     }
