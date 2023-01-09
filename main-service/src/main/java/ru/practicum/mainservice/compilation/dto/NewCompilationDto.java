@@ -16,6 +16,6 @@ public class NewCompilationDto {
 
     private boolean pinned;
 
-    @NotBlank
+    @NotBlank (message = "Compilation title shouldn't be blank")
     private String title;
 }

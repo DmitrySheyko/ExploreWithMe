@@ -26,13 +26,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class CompilationServiceImpl implements CompilationService {
     private final EventRepository eventRepository;
     private final CompilationRepository repository;
 
     @Override
-    @Transactional
     public CompilationDto add(NewCompilationDto newCompilationDto) {
         Set<Event> eventSet;
         if (newCompilationDto.getEvents() == null || newCompilationDto.getEvents().isEmpty()) {
@@ -47,14 +47,12 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
-    @Transactional
     public String deleteCompilation(Long compilationId) {
         repository.deleteById(compilationId);
         return String.format("Successfully deleted compilation id=%s", compilationId);
     }
 
     @Override
-    @Transactional
     public String deleteEventFromCompilation(Long compilationId, Long eventId) {
         Compilation compilation = repository.findById(compilationId)
                 .orElseThrow(() -> new NotFoundException(String.format("Compilation id=%s not found", compilationId)));
@@ -71,7 +69,6 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
-    @Transactional
     public String addEventToCompilation(Long compilationId, Long eventId) {
         Compilation compilation = repository.findById(compilationId)
                 .orElseThrow(() -> new NotFoundException(String.format("Compilation id=%s not found", compilationId)));
@@ -90,7 +87,6 @@ public class CompilationServiceImpl implements CompilationService {
     }
 
     @Override
-    @Transactional
     public String changePinnedForCompilation(Long compilationId, boolean isPinned) {
         Compilation compilation = repository.findById(compilationId)
                 .orElseThrow(() -> new NotFoundException(String.format("Compilation id=%s not found", compilationId)));

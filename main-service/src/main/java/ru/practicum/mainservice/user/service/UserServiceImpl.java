@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository repository;
 
     @Override
-    @Transactional
     public UserDto add(UserDto userDto) {
         User user = UserMapper.toEntity(userDto);
         user = repository.save(user);
@@ -43,7 +43,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
     public String deleteById(Long userId) {
         repository.deleteById(userId);
         log.info("User id={} successfully deleted", userId);

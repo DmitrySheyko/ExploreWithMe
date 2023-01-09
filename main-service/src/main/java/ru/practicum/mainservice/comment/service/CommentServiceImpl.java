@@ -24,11 +24,11 @@ import ru.practicum.mainservice.user.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository repository;
@@ -36,7 +36,6 @@ public class CommentServiceImpl implements CommentService {
     private final EventRepository eventRepository;
 
     @Override
-    @Transactional
     public CommentDto add(Long userId, NewCommentDto newCommentDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException((String.format("User id=%s was not found.", userId))));
@@ -59,12 +58,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public CommentDto update(Long userId, UpdateCommentDto commentDto) {
         Comment comment = repository.findByIdAndUserId(commentDto.getId(), userId)
                 .orElseThrow(() -> new NotFoundException((String.format("Comment id=%s by user id=%s was not found.",
                         commentDto.getId(), userId))));
-        comment.setText(Optional.ofNullable(commentDto.getText()).orElse(comment.getText()));
+        comment.setText(commentDto.getText());
         comment.setCreated(LocalDateTime.now());
         comment.setStatus(Status.PENDING);
         comment = repository.save(comment);
@@ -92,7 +90,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public String delete(Long userId, Long commentId) {
         Comment comment = repository.findByIdAndUserId(commentId, userId)
                 .orElseThrow(() -> new NotFoundException((String.format("Comment id=%s by user id=%s was not found.",
@@ -103,7 +100,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public CommentDto publish(Long commentId) {
         Comment comment = repository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException((String.format("Comment id=%s was not found.", commentId))));
@@ -119,7 +115,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    @Transactional
     public CommentDto reject(Long commentId) {
         Comment comment = repository.findById(commentId)
                 .orElseThrow(() -> new NotFoundException((String.format("Comment id=%s was not found.", commentId))));

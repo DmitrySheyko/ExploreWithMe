@@ -11,6 +11,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class NewCategoryDto {
 
-    @NotBlank
+    @NotBlank(message = " Category name shouldn't be blank")
     private String name;
 }

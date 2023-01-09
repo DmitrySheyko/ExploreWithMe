@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS events
     state                INT                         NOT NULL,
     title                VARCHAR(120)                NOT NULL,
     CONSTRAINT pk_events_id PRIMARY KEY (id),
-    CONSTRAINT fk_events_category FOREIGN KEY (category_id) REFERENCES categories (id),
-    CONSTRAINT fk_events_initiator_id FOREIGN KEY (initiator_id) REFERENCES users (id),
-    CONSTRAINT fk_events_locations_id FOREIGN KEY (location_id) REFERENCES locations (id)
+    CONSTRAINT fk_events_category FOREIGN KEY (category_id) REFERENCES categories (id) ON DELETE NO ACTION,
+    CONSTRAINT fk_events_initiator_id FOREIGN KEY (initiator_id) REFERENCES users (id) ON DELETE NO ACTION,
+    CONSTRAINT fk_events_locations_id FOREIGN KEY (location_id) REFERENCES locations (id) ON DELETE NO ACTION
 );
 
 
@@ -55,8 +55,8 @@ CREATE TABLE IF NOT EXISTS requests
     requester_id BIGINT                      NOT NULL,
     status       INT                         NOT NULL,
     CONSTRAINT pk_requests_id PRIMARY KEY (id),
-    CONSTRAINT fk_event_id FOREIGN KEY (event_id) REFERENCES events (id),
-    CONSTRAINT fk_requester_id FOREIGN KEY (requester_id) REFERENCES users (id)
+    CONSTRAINT fk_event_id FOREIGN KEY (event_id) REFERENCES events (id) ON DELETE CASCADE,
+    CONSTRAINT fk_requester_id FOREIGN KEY (requester_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS compilations
@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS events_compilations
 (
     event_id       BIGINT NOT NULL,
     compilation_id BIGINT NOT NULL,
-    CONSTRAINT fk_events_compilations_event_id FOREIGN KEY (event_id) REFERENCES events (id),
-    CONSTRAINT fk_events_compilations_compilation_id FOREIGN KEY (compilation_id) REFERENCES compilations (id)
+    CONSTRAINT fk_events_compilations_event_id FOREIGN KEY (event_id) REFERENCES events (id) ON DELETE CASCADE,
+    CONSTRAINT fk_events_compilations_compilation_id FOREIGN KEY (compilation_id) REFERENCES compilations (id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS comments
@@ -84,6 +84,6 @@ CREATE TABLE IF NOT EXISTS comments
     created         TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     status          VARCHAR                     NOT NULL,
     CONSTRAINT pk_comments_id PRIMARY KEY (id),
-    CONSTRAINT fk_comments_user_id FOREIGN KEY (user_id) REFERENCES users (id),
-    CONSTRAINT fk_comments_event_id FOREIGN KEY (event_id) REFERENCES events (id)
+    CONSTRAINT fk_comments_user_id FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE NO ACTION,
+    CONSTRAINT fk_comments_event_id FOREIGN KEY (event_id) REFERENCES events (id) ON DELETE CASCADE
 );
