@@ -3,6 +3,7 @@ package ru.practicum.mainservice.event.model;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import ru.practicum.mainservice.category.model.Category;
+import ru.practicum.mainservice.comment.model.Comment;
 import ru.practicum.mainservice.compilation.model.Compilation;
 import ru.practicum.mainservice.location.model.Location;
 import ru.practicum.mainservice.request.model.Request;
@@ -79,4 +80,7 @@ public class Event {
 
     @ManyToMany(mappedBy = "events")
     List<Compilation> compilations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "event")
+    private List<Comment> commentList = new ArrayList<>();
 }

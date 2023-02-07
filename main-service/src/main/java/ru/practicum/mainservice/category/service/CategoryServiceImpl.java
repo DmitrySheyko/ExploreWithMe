@@ -25,7 +25,6 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository repository;
 
     @Override
-    @Transactional
     public CategoryDto add(NewCategoryDto newCategoryDto) {
         Category category = CategoryMapper.toEntity(newCategoryDto);
         category = repository.save(category);
@@ -35,7 +34,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
     public CategoryDto update(CategoryDto categoryDto) {
         Long categoryId = categoryDto.getId();
         Category category = repository.findById(categoryId)
@@ -71,7 +69,6 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    @Transactional
     public String delete(Long categoryId) {
         repository.deleteById(categoryId);
         return String.format("Successfully deleted category id=%s", categoryId);

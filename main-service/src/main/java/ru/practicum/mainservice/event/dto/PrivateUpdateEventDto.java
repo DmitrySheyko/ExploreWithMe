@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class PrivateUpdateEventDto {
 
-    @Length(min = 20, max = 2000)
+    @Length(min = 20, max = 2000, message = "Annotation length shouldn't be min=20, max=2000")
     private String annotation;
 
     private Long category;
@@ -21,13 +21,13 @@ public class PrivateUpdateEventDto {
 
     private String eventDate;
 
-    @NotNull
+    @NotNull(message = "eventId shouldn't be null")
     private Long eventId;
 
     private Boolean paid;
 
     private Integer participantLimit;
 
-    @Length(min = 3, max = 120)
+    @Length(min = 3, max = 120, message = "Title length shouldn't be min=3, max=120")
     private String title;
 }

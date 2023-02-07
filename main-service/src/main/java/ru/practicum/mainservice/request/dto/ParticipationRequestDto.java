@@ -14,15 +14,15 @@ public class ParticipationRequestDto {
 
     private String created;
 
-    @NotNull
+    @NotNull(message = "Event id of request shouldn't be null")
     private Long event;
 
-    @NotNull
+    @NotNull(message = "Id of request shouldn't be null")
     private long id;
 
-    @NotNull
+    @NotNull(message = "Requester id shouldn't be null")
     private Long requester;
 
-    @NotNull
+    @NotNull(message = "Status of request shouldn't be null")
     private Status status;
 }

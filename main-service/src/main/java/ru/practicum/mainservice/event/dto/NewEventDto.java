@@ -16,31 +16,31 @@ import javax.validation.constraints.PositiveOrZero;
 @NoArgsConstructor
 public class NewEventDto {
 
-    @NotBlank
-    @Length(min = 20, max = 2000)
+    @NotBlank(message = "Event annotation shouldn't be blank")
+    @Length(min = 20, max = 2000, message = "Event annotation length min=20, max= 1000")
     private String annotation;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "Event category id shouldn't be null")
+    @Positive(message = "Event category id should be positive")
     private Long category;
 
-    @NotBlank
+    @NotBlank(message = "Event description shouldn't be blank")
     private String description;
 
-    @NotBlank
+    @NotBlank(message = "EventDate shouldn't be blank")
     private String eventDate;
 
-    @NotNull
+    @NotNull(message = "Event location shouldn't be null")
     private Location location;
 
     private Boolean paid;
 
-    @PositiveOrZero
+    @PositiveOrZero(message = "Event participantLimit should be positive or zero")
     private Integer participantLimit;
 
     private Boolean requestModeration;
 
-    @NotBlank
-    @Length(min = 3, max = 120)
+    @NotBlank(message = "Event title shouldn't be blank")
+    @Length(min = 3, max = 120, message = "Event title length shouldn't be min=3, max=120")
     private String title;
 }

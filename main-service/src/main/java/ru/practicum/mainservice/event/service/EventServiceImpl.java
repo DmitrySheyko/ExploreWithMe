@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
     private final EventRepository repository;
@@ -46,7 +47,6 @@ public class EventServiceImpl implements EventService {
     private static final Long TIME_LAG_FOR_PUBLISH_NEW_EVENT = 2L;
 
     @Override
-    @Transactional
     public EventFullDto update(AdminUpdateEventDto eventDto) {
         Event oldEvent = repository.findById(eventDto.getEventId())
                 .orElseThrow(() -> new NotFoundException((String.format("Event id=%s was not found.", eventDto.getEventId()))));
@@ -69,7 +69,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public EventFullDto publish(Long eventId) {
         Event event = repository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException((String.format("Event id=%s was not found.", eventId))));
@@ -86,7 +85,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public EventFullDto reject(Long eventId) {
         Event event = repository.findById(eventId)
                 .orElseThrow(() -> new NotFoundException((String.format("Event id=%s was not found.", eventId))));
@@ -131,7 +129,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public EventFullDto add(Long userId, NewEventDto newEventDto) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException((String.format("User with id=%s was not found.", userId))));
@@ -152,7 +149,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public EventFullDto update(Long userId, PrivateUpdateEventDto eventDto) {
         Event oldEvent = repository.findByIdAndInitiatorId(eventDto.getEventId(), userId)
                 .orElseThrow(() -> new NotFoundException(String.format("Event id=%s with initiator id=%s not found",
@@ -197,7 +193,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public EventFullDto cancelEvent(Long userId, Long eventId) {
         Event event = repository.findByIdAndInitiatorId(eventId, userId)
                 .orElseThrow(() -> new NotFoundException(String.format("Event id=%s with initiator id=%s not found",
@@ -228,7 +223,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public List<EventShortDto> publicSearch(EventPublicSearchDto searchDto, int from, int size, EventSearchSort sort) {
         int page = from / size;
         Pageable pageable = PageRequest.of(page, size, Sort.by("eventDate"));
@@ -271,7 +265,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public ParticipationRequestDto confirmParticipationRequest(Long userId, Long eventId, Long requestId) {
         Event event = repository.findByIdAndInitiatorId(eventId, userId)
                 .orElseThrow(() -> new NotFoundException(String.format("Event id=%s with initiator id=%s not found",
@@ -313,7 +306,6 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    @Transactional
     public ParticipationRequestDto rejectParticipationRequest(Long userId, Long eventId, Long requestId) {
         repository.findByIdAndInitiatorId(eventId, userId)
                 .orElseThrow(() -> new NotFoundException(String.format("Event id=%s with initiator id=%s not found",

@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@Transactional
 @RequiredArgsConstructor
 public class RequestServiceImpl implements RequestService {
     private final RequestRepository repository;
@@ -30,7 +31,6 @@ public class RequestServiceImpl implements RequestService {
     private final EventRepository eventRepository;
 
     @Override
-    @Transactional
     public ParticipationRequestDto add(Long userId, Long eventId) {
         User requester = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException((String.format("User with id=%s was not found.", userId))));
@@ -58,7 +58,6 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    @Transactional
     public ParticipationRequestDto cancel(Long userId, Long requestId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException((String.format("User with id=%s was not found.", userId))));
@@ -73,7 +72,6 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    @Transactional
     public List<ParticipationRequestDto> getAllByUserId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException((String.format("User with id=%s was not found.", userId))));
