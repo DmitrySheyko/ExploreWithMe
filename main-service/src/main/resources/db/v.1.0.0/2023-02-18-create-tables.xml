@@ -1,0 +1,205 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="2023-02-18-create-table-users" author="DmitrySheyko">
+        <createTable tableName="users">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement columnDataType="bigint"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="users"/>
+        <addUniqueConstraint tableName="users" columnNames="email" constraintName="unique_users_name"/>
+    </changeSet>
+
+    <changeSet id="2023-02-18-create-table-categories" author="DmitrySheyko">
+        <createTable tableName="categories">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement columnDataType="bigint"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="categories"/>
+        <addUniqueConstraint tableName="categories" constraintName="unique_categories_name" columnNames="name"/>
+    </changeSet>
+
+    <changeSet id="2023-02-18-create-table-locations" author="DmitrySheyko">
+        <createTable tableName="locations">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="lat" type="real">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lon" type="real">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement columnDataType="bigint"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="locations"/>
+    </changeSet>
+
+    <changeSet id="2023-02-18-create-table-events" author="DmitrySheyko">
+        <createTable tableName="events">
+            <column name="id" type="bigint">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="annotation" type="varchar(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_events_category_id" references="categories(id)"/>
+            </column>
+            <column name="created_on" type="timestamp without timezone">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(7000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="event_date" type="timestamp without timezone">
+                <constraints nullable="false"/>
+            </column>
+            <column name="initiator_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_events_initiator_id" references="users(id)"/>
+            </column>
+            <column name="location_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_events_location_id" references="locations(id)"/>
+            </column>
+            <column name="is_paid" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="participant_limit" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="published_on" type="timestamp without timezone">
+                <constraints nullable="true"/>
+            </column>
+            <column name="is_request_moderated" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="state" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(120)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement columnDataType="bigint"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="events"/>
+    </changeSet>
+
+    <changeSet id="2023-02-18-create-table-requests" author="DmitrySheyko">
+        <createTable tableName="requests">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="created" type="timestamp without time zone">
+                <constraints nullable="true"/>
+            </column>
+            <column name="event_id" type=" bigint">
+                <constraints nullable="false" foreignKeyName="fk_requests_event_id" references="events(id)"/>
+            </column>
+            <column name="requester_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_requests_requester_id" references="users(id)"/>
+            </column>
+            <column name="status" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement columnDataType="bigint"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="requests"/>
+    </changeSet>
+
+    <changeSet id="2023-02-18-create-table-compilations" author="DmitrySheyko">
+        <createTable tableName="compilations">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="is_pinned" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement columnDataType="bigint"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="compilations"/>
+    </changeSet>
+
+    <changeSet id="2023-02-18-create-table-events_compilations" author="DmitrySheyko">
+        <createTable tableName="events_compilations">
+            <column name="event_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_events_compilations_event_id" references="events(id)"/>
+            </column>
+            <column name="compilation_id" type="bigint">
+                <constraints nullable="false"
+                             foreignKeyName="fk_events_compilations_compilation_id" references="compilations(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2013-02-18-create-table-comments" author="DmitrySheyko">
+        <createTable tableName="comments">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_comments_user_id" references="users(id)"/>
+            </column>
+            <column name="event_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_comments_event_id" references="events(id)"/>
+            </column>
+            <column name="text_of_comment" type="varchar(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="timestamp without timezone">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement columnDataType="bigint"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="comments"/>
+    </changeSet>
+
+</databaseChangeLog>
