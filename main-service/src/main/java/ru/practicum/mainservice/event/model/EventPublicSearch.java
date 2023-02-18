@@ -1,10 +1,16 @@
-package ru.practicum.mainservice.event.dto;
+package ru.practicum.mainservice.event.model;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
 
+/**
+ * Class of {@link EventPublicSearch} entity.
+ * Used for get information about {@link Event} search requests from users with public role.
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

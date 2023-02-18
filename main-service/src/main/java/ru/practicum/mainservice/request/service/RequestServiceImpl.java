@@ -21,6 +21,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation service class for {@link Request} entity
+ * Implements interface {@link RequestService}
+ *
+ * @author DmitrySheyko
+ */
 @Service
 @Slf4j
 @Transactional

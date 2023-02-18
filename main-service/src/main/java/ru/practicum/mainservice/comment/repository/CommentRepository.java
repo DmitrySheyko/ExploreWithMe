@@ -9,6 +9,11 @@ import ru.practicum.mainservice.request.model.Status;
 
 import java.util.Optional;
 
+/**
+ * Interface of JpaRepository for {@link Comment} entity.
+ *
+ * @author DmitrySheyko
+ */
 public interface CommentRepository extends JpaRepository<Comment, Long>, QuerydslPredicateExecutor<Comment> {
     Optional<Comment> findByUserIdAndEventId(Long userId, Long eventId);
 

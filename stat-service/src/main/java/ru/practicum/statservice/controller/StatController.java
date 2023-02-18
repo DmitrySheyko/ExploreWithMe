@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.statservice.dto.NewEndPointHitDto;
 import ru.practicum.statservice.dto.StatRequestDto;
+import ru.practicum.statservice.model.EndPointHit;
 import ru.practicum.statservice.model.StatsResponse;
 import ru.practicum.statservice.service.StatService;
 
@@ -12,6 +13,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class of controller for {@link EndPointHit} and {@link StatsResponse} entity.
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequiredArgsConstructor
 public class StatController {

@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class of error handlers
+ *
+ * @author DmitrySheyko
+ */
 @RestControllerAdvice
 @Slf4j
 public class ErrorHandler {

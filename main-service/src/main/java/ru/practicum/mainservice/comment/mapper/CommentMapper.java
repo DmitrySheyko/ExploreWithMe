@@ -1,7 +1,7 @@
 package ru.practicum.mainservice.comment.mapper;
 
 import org.springframework.stereotype.Component;
-import ru.practicum.mainservice.comment.dto.CommentAdminSearch;
+import ru.practicum.mainservice.comment.model.CommentAdminSearch;
 import ru.practicum.mainservice.comment.dto.CommentAdminSearchDto;
 import ru.practicum.mainservice.comment.dto.CommentDto;
 import ru.practicum.mainservice.comment.model.Comment;
@@ -13,6 +13,11 @@ import ru.practicum.mainservice.user.model.User;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Mapper class for {@link Comment} entity.
+ *
+ * @author DmitrySheyko
+ */
 @Component
 public class CommentMapper {
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

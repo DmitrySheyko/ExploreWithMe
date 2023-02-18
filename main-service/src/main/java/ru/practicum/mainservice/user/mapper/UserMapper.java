@@ -5,6 +5,11 @@ import ru.practicum.mainservice.user.dto.UserDto;
 import ru.practicum.mainservice.user.dto.UserShortDto;
 import ru.practicum.mainservice.user.model.User;
 
+/**
+ * Mapper class for {@link User} entity
+ *
+ * @author DmitrySheyko
+ */
 @Component
 public class UserMapper {
     public static UserDto toDto(User user) {

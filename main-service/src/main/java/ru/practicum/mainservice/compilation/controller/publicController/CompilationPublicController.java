@@ -3,11 +3,17 @@ package ru.practicum.mainservice.compilation.controller.publicController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.compilation.dto.CompilationDto;
+import ru.practicum.mainservice.compilation.model.Compilation;
 import ru.practicum.mainservice.compilation.service.CompilationService;
 
 import javax.validation.constraints.Min;
 import java.util.List;
 
+/**
+ * Class of controller for {@link Compilation} entity for users with Public role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/compilations")
 @RequiredArgsConstructor

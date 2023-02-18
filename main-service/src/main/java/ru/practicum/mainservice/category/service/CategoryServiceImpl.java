@@ -18,6 +18,12 @@ import ru.practicum.mainservice.exceptions.NotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for {@link Category} entity.
+ * Implements interface {@link CategoryService}
+ *
+ * @author DmitrySheyko
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor

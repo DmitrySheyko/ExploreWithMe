@@ -1,8 +1,15 @@
 package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
+import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.location.model.Location;
 
+/**
+ * Class of dto for {@link Event} entity.
+ * For updating {@link Event} by requests from users with admin role
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

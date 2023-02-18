@@ -2,8 +2,15 @@ package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
 import ru.practicum.mainservice.category.dto.CategoryDto;
+import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.user.dto.UserShortDto;
 
+/**
+ * Class of short version dto for {@link Event} entity.
+ * For return information about {@link Event}
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

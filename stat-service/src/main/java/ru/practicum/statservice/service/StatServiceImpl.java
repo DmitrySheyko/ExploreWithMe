@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ru.practicum.statservice.dto.NewEndPointHitDto;
 import ru.practicum.statservice.dto.StatRequestDto;
-import ru.practicum.statservice.dto.StatsRequest;
+import ru.practicum.statservice.model.StatsRequest;
 import ru.practicum.statservice.mapper.StatMapper;
 import ru.practicum.statservice.model.EndPointHit;
 import ru.practicum.statservice.model.StatsResponse;
@@ -14,6 +14,12 @@ import ru.practicum.statservice.repository.StatRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Class of service for {@link EndPointHit} and {@link StatsResponse} entities.
+ * implements interface {@link StatService}
+ *
+ * @author DmitrySheyko
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor

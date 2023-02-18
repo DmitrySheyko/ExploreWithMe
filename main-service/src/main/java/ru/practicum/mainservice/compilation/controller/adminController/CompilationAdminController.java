@@ -4,10 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.compilation.dto.CompilationDto;
 import ru.practicum.mainservice.compilation.dto.NewCompilationDto;
+import ru.practicum.mainservice.compilation.model.Compilation;
 import ru.practicum.mainservice.compilation.service.CompilationService;
 
 import javax.validation.Valid;
 
+/**
+ * Class of controller for {@link Compilation} entity for users with Admin role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("admin/compilations")

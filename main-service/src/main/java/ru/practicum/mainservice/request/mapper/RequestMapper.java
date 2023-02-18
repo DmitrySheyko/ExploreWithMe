@@ -7,6 +7,11 @@ import ru.practicum.mainservice.request.model.Request;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Mapper class for {@link Request} entity
+ *
+ * @author DmitrySheyko
+ */
 @Component
 public class RequestMapper {
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

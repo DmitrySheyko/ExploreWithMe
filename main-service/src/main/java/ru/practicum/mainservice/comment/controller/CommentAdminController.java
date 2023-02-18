@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.comment.dto.CommentAdminSearchDto;
 import ru.practicum.mainservice.comment.dto.CommentDto;
+import ru.practicum.mainservice.comment.model.Comment;
 import ru.practicum.mainservice.comment.service.CommentServiceImpl;
 import ru.practicum.mainservice.request.model.Status;
 
@@ -11,6 +12,11 @@ import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Class of controller for {@link Comment} entity for users with Admin role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/admin/comments")
 @RequiredArgsConstructor

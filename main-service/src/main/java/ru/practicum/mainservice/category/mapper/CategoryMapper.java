@@ -5,6 +5,11 @@ import ru.practicum.mainservice.category.dto.CategoryDto;
 import ru.practicum.mainservice.category.dto.NewCategoryDto;
 import ru.practicum.mainservice.category.model.Category;
 
+/**
+ * Mapper class for {@link Category} entity.
+ *
+ * @author DmitrySheyko
+ */
 @Component
 public class CategoryMapper {
 

@@ -5,6 +5,11 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Class of {@link EndPointHit} entity.
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

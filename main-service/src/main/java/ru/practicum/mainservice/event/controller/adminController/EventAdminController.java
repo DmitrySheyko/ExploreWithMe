@@ -5,12 +5,18 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.event.dto.AdminUpdateEventDto;
 import ru.practicum.mainservice.event.dto.EventAdminSearchDto;
 import ru.practicum.mainservice.event.dto.EventFullDto;
+import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.service.EventService;
 
 import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Class of controller for {@link Event} entity for users with Admin role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/admin/events")
 @RequiredArgsConstructor

@@ -16,6 +16,12 @@ import ru.practicum.mainservice.user.repository.UserRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of service class for {@link User} entity
+ * Implements interface {@link UserService}
+ *
+ * @author DmitrySheyko
+ */
 @Service
 @Slf4j
 @Transactional

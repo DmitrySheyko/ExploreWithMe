@@ -8,6 +8,11 @@ import ru.practicum.mainservice.user.model.User;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Interface of JpaRepository for {@link Request} entity
+ *
+ * @author DmitrySheyko
+ */
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
     List<Request> findAllByRequesterOrderById(User userId);

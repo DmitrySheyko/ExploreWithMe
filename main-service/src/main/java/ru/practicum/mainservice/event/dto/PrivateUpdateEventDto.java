@@ -2,9 +2,16 @@ package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
+import ru.practicum.mainservice.event.model.Event;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Class of dto for {@link Event} entity.
+ * For updating {@link Event} by requests from users with user role
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

@@ -8,6 +8,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Class of {@link ErrorResponse} entity.
+ * Required for sending information about exceptions in {@link ErrorHandler}
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

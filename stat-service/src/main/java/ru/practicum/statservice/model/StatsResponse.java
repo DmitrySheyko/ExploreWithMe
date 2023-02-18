@@ -2,6 +2,12 @@ package ru.practicum.statservice.model;
 
 import lombok.*;
 
+/**
+ * Class of {@link StatsResponse} entity.
+ * Used for returning statistic information from stat-server.
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

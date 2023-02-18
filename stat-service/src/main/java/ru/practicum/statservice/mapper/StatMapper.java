@@ -3,12 +3,17 @@ package ru.practicum.statservice.mapper;
 import org.springframework.stereotype.Component;
 import ru.practicum.statservice.dto.NewEndPointHitDto;
 import ru.practicum.statservice.dto.StatRequestDto;
-import ru.practicum.statservice.dto.StatsRequest;
+import ru.practicum.statservice.model.StatsRequest;
 import ru.practicum.statservice.model.EndPointHit;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Mapper class for {@link EndPointHit}
+ *
+ * @author DmitrySheyko
+ */
 @Component
 public class StatMapper {
     private static final DateTimeFormatter DATE_TIME_PATTERN = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

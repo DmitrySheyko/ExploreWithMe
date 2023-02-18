@@ -7,6 +7,11 @@ import ru.practicum.mainservice.user.model.User;
 
 import java.util.List;
 
+/**
+ * Interface of JpaRepository for {@link User} entity
+ *
+ * @author DmitrySheyko
+ */
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Page<User> findAllByIdIn(List<Long> ids, Pageable pageable);

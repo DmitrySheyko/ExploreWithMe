@@ -3,11 +3,17 @@ package ru.practicum.mainservice.comment.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.comment.dto.CommentDto;
+import ru.practicum.mainservice.comment.model.Comment;
 import ru.practicum.mainservice.comment.service.CommentServiceImpl;
 
 import javax.validation.constraints.Min;
 import java.util.List;
 
+/**
+ * Class of controller for {@link Comment} entity for users with public role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/public/comments")
 @RequiredArgsConstructor

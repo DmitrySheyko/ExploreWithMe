@@ -7,13 +7,19 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class of {@link Compilation} entity.
+ *
+ * @author DmitrySheyko
+ */
+@Entity
+@Table(name = "compilations")
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "compilations")
 public class Compilation {
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -26,6 +32,7 @@ public class Compilation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     Long id;
 
     @Column(name = "is_pinned")

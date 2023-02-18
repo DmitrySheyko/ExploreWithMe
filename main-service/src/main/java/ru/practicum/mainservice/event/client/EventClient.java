@@ -15,6 +15,12 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class of {@link EventClient}
+ * Used for sending http request  to the stat-server and getting answers from it
+ *
+ * @author DmitrySheyko
+ */
 @Component
 @Slf4j
 public class EventClient {

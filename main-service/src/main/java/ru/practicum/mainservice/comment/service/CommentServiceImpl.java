@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.mainservice.comment.dto.*;
+import ru.practicum.mainservice.comment.model.CommentAdminSearch;
 import ru.practicum.mainservice.comment.model.QComment;
 import ru.practicum.mainservice.comment.repository.CommentRepository;
 import ru.practicum.mainservice.comment.mapper.CommentMapper;
@@ -26,6 +27,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for {@link Comment} entity.
+ * Implements interface {@link CommentService}
+ *
+ * @author DmitrySheyko
+ */
 @Service
 @Slf4j
 @Transactional

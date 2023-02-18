@@ -2,6 +2,7 @@ package ru.practicum.mainservice.event.dto;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
+import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.location.model.Location;
 
 import javax.validation.constraints.NotBlank;
@@ -9,6 +10,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 
+/**
+ * Class of dto for {@link Event} entity.
+ * Used for creating new {@link Event} entity.
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

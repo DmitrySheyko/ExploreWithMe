@@ -3,11 +3,17 @@ package ru.practicum.mainservice.category.controller.publicController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.category.dto.CategoryDto;
+import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.category.service.CategoryService;
 
 import javax.validation.constraints.Min;
 import java.util.List;
 
+/**
+ * Class of controller for {@link Category} entity for users with Public role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/categories")
 @RequiredArgsConstructor

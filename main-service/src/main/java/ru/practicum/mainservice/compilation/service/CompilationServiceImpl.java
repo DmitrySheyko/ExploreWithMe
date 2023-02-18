@@ -24,6 +24,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Class of service class for {@link Compilation} entity.
+ * Implements {@link CompilationService} interface.
+ *
+ * @author DmitrySheyko
+ */
 @Service
 @Slf4j
 @Transactional

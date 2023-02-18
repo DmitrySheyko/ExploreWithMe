@@ -3,9 +3,11 @@ package ru.practicum.mainservice.event.controller.publicController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.event.client.EventClient;
+import ru.practicum.mainservice.event.dto.EventAdminSearch;
 import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.dto.EventPublicSearchDto;
 import ru.practicum.mainservice.event.dto.EventShortDto;
+import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.EventSearchSort;
 import ru.practicum.mainservice.event.service.EventService;
 
@@ -15,6 +17,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Class of dto for {@link EventAdminSearch} entity.
+ * For searching {@link Event} by requests from users with public role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor

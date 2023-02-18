@@ -11,6 +11,11 @@ import ru.practicum.mainservice.event.model.Event;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Mapper class for {@link Compilation} entity.
+ *
+ * @author DmitrySheyko
+ */
 @Component
 @RequiredArgsConstructor
 public class CompilationMapper {

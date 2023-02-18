@@ -6,6 +6,7 @@ import ru.practicum.mainservice.event.dto.EventFullDto;
 import ru.practicum.mainservice.event.dto.EventShortDto;
 import ru.practicum.mainservice.event.dto.NewEventDto;
 import ru.practicum.mainservice.event.dto.PrivateUpdateEventDto;
+import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.service.EventService;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
 
@@ -13,6 +14,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
 
+/**
+ * Class of controller for {@link Event} entity for users with User role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/users/{userId}/events")
 @RequiredArgsConstructor

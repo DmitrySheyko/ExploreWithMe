@@ -12,6 +12,11 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Interface of JpaRepository for {@link Event} entity.
+ *
+ * @author DmitrySheyko
+ */
 public interface EventRepository extends JpaRepository<Event, Long>, QuerydslPredicateExecutor<Event> {
 
     Page<Event> findAllByInitiatorId(Long initiatorId, Pageable pageable);

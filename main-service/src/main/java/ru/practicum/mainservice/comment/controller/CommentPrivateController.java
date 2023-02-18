@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.comment.dto.CommentDto;
 import ru.practicum.mainservice.comment.dto.NewCommentDto;
 import ru.practicum.mainservice.comment.dto.UpdateCommentDto;
+import ru.practicum.mainservice.comment.model.Comment;
 import ru.practicum.mainservice.comment.service.CommentService;
 import ru.practicum.mainservice.request.model.Status;
 
@@ -12,6 +13,11 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
 
+/**
+ * Class of controller for {@link Comment} entity for users with user role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/users/{userId}/comments")
 @RequiredArgsConstructor

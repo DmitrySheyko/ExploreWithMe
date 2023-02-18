@@ -4,10 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.category.dto.CategoryDto;
 import ru.practicum.mainservice.category.dto.NewCategoryDto;
+import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.category.service.CategoryService;
 
 import javax.validation.Valid;
 
+/**
+ * Class of controller for {@link Category} entity for users with Admin role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/admin/categories")
 @RequiredArgsConstructor

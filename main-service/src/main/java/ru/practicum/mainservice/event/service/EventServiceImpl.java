@@ -13,6 +13,7 @@ import ru.practicum.mainservice.category.repository.CategoryRepository;
 import ru.practicum.mainservice.event.dto.*;
 import ru.practicum.mainservice.event.eventMapper.EventMapper;
 import ru.practicum.mainservice.event.model.Event;
+import ru.practicum.mainservice.event.model.EventPublicSearch;
 import ru.practicum.mainservice.event.model.EventSearchSort;
 import ru.practicum.mainservice.event.model.State;
 import ru.practicum.mainservice.event.repository.EventRepository;
@@ -33,6 +34,12 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for {@link Event} entity.
+ * Implements interface {@link EventService}
+ *
+ * @author DmitrySheyko
+ */
 @Service
 @Slf4j
 @Transactional

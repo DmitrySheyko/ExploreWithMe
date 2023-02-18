@@ -1,7 +1,14 @@
 package ru.practicum.statservice.dto;
 
 import lombok.*;
+import ru.practicum.statservice.model.EndPointHit;
 
+/**
+ * Class of dto for {@link EndPointHit} entity.
+ * Used for getting information for creation new {@link EndPointHit}.
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

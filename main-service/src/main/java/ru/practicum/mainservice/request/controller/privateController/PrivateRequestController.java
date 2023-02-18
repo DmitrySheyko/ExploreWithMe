@@ -3,10 +3,16 @@ package ru.practicum.mainservice.request.controller.privateController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
+import ru.practicum.mainservice.request.model.Request;
 import ru.practicum.mainservice.request.service.RequestService;
 
 import java.util.List;
 
+/**
+ * Class of controller for {@link Request} entity for users with User role
+ *
+ * @author DmitrySheyko
+ */
 @RestController
 @RequestMapping("/users/{userId}/requests")
 @RequiredArgsConstructor

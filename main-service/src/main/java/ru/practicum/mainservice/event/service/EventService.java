@@ -1,11 +1,17 @@
 package ru.practicum.mainservice.event.service;
 
 import ru.practicum.mainservice.event.dto.*;
+import ru.practicum.mainservice.event.model.Event;
 import ru.practicum.mainservice.event.model.EventSearchSort;
 import ru.practicum.mainservice.request.dto.ParticipationRequestDto;
 
 import java.util.List;
 
+/**
+ * Interface of service class for {@link Event} entity.
+ *
+ * @author DmitrySheyko
+ */
 public interface EventService {
 
     EventFullDto update(AdminUpdateEventDto eventDto);

@@ -7,13 +7,19 @@ import ru.practicum.mainservice.user.model.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * Class of {@link Request} entity
+ *
+ * @author DmitrySheyko
+ */
+@Entity
+@Table(name = "requests")
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "requests")
 public class Request {
 
     @Column(name = "created")
@@ -25,6 +31,7 @@ public class Request {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private long id;
 
     @ManyToOne

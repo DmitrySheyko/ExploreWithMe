@@ -1,10 +1,16 @@
 package ru.practicum.mainservice.request.dto;
 
 import lombok.*;
+import ru.practicum.mainservice.request.model.Request;
 import ru.practicum.mainservice.request.model.Status;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * Class of dto for {@link Request}
+ *
+ * @author DmitrySheyko
+ */
 @Getter
 @Setter
 @Builder

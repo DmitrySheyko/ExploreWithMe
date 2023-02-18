@@ -8,6 +8,11 @@ import ru.practicum.statservice.model.StatsResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Interface of JpaRepository for {@link EndPointHit} and {@link StatsResponse} entities.
+ *
+ * @author DmitrySheyko
+ */
 public interface StatRepository extends JpaRepository<EndPointHit, Long> {
 
     @Query("SELECT new ru.practicum.statservice.model.StatsResponse(e.app, e.uri, COUNT(e.ip)) " +

@@ -7,6 +7,7 @@ import ru.practicum.mainservice.category.model.Category;
 import ru.practicum.mainservice.event.client.EventClient;
 import ru.practicum.mainservice.event.dto.*;
 import ru.practicum.mainservice.event.model.Event;
+import ru.practicum.mainservice.event.model.EventPublicSearch;
 import ru.practicum.mainservice.event.model.State;
 import ru.practicum.mainservice.location.model.Location;
 import ru.practicum.mainservice.request.model.Request;
@@ -19,6 +20,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * Mapper class for {@link Event} entity.
+ *
+ * @author DmitrySheyko
+ */
 @Component
 @RequiredArgsConstructor
 public class EventMapper {

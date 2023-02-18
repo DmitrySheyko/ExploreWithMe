@@ -14,13 +14,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class of {@link Event} entity.
+ *
+ * @author DmitrySheyko
+ */
+@Entity
+@Table(name = "events")
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "events")
 public class Event {
 
     @Column(name = "annotation")
@@ -43,6 +49,7 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Long id;
 
     @OneToOne
