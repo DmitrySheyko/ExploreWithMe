@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="2023-03-06-create-table-endpointhits" author="DmitrySheyko">
+        <createTable tableName="endpointhits">
+            <column name="id" type="bigint">
+                <constraints primaryKey="false"/>
+            </column>
+            <column name="app" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uri" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ip" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="request_time" type="timestamp without timezone">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addAutoIncrement columnDataType="bigint"
+                          columnName="id"
+                          incrementBy="1"
+                          schemaName="public"
+                          startWith="1"
+                          tableName="endpointhits"/>
+    </changeSet>
+
+</databaseChangeLog>
