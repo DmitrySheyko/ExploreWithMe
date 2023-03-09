@@ -13,6 +13,14 @@ Application – afisha of interesting events.
 - main-database: based onPostgreSql;
 - stat-database: based onPostgreSql.
 
+## Stack
+- Java 11;
+- Spring boot, Srping web, Spring Data, Spring Validation, Hibernate;
+- PostgresSQL.
+
+### Запуск:
+Для запуска необходимо запустить метод Main класса FilmorateApplication.java
+
 ## Lounch of project
 1) Build project: _mvn clean package;_
 2) Lounch project by docker-compose: _docker compose up_
