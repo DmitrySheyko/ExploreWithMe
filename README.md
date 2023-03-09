@@ -17,7 +17,8 @@ Application – afisha of interesting events.
 - Java 11;
 - Spring boot, Srping web, Spring Data, Spring Validation, Hibernate;
 - Lombock;
-- PostgresSQL and H2:
+- PostgresSQL and H2;
+- Liquibase;
 - Docker, Docker-compose.
 
 ### Запуск:
