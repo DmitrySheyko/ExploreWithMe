@@ -16,7 +16,7 @@ Application – afisha of interesting events.
 ## Stack
 - Java 11;
 - Spring boot, Srping web, Spring Data, Spring Validation, Hibernate;
-- PostgresSQL.
+- PostgresSQL and H2.
 
 ### Запуск:
 Для запуска необходимо запустить метод Main класса FilmorateApplication.java
