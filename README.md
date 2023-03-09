@@ -18,7 +18,7 @@ Application – afisha of interesting events.
 - Spring boot, Srping web, Spring Data, Spring Validation, Hibernate;
 - Lombock;
 - PostgresSQL and H2:
-- Docker, Docker-compose
+- Docker, Docker-compose.
 
 ### Запуск:
 Для запуска необходимо запустить метод Main класса FilmorateApplication.java
